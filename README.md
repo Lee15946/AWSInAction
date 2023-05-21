@@ -1,5 +1,11 @@
 EC2
 Reserved, Spot, on-Demand,Dedicated host
+EC2 instance user data
+EC2 instance user data is the data that you specified in the form of a bootstrap script or configuration parameters while launching your instance.'
+
+EC2 instance metadata
+EC2 instance metadata is data about your instance that you can use to manage the instance.
+
 Route 53
 Edge location
 CloudFront
@@ -21,6 +27,9 @@ NACL
 IAM
 - IAM Credential report
 - IAM Access Advisor
+- AWS IAM Identity Center
+  - Simplify access management to multiple AWS accounts as well as facilitate single sign-on access to its AWS accounts
+  - SSO,SAML
 
 Lambda
 ECS
@@ -33,13 +42,12 @@ CloudWatch
 
 Config
 
-CloudTrail
-**Think account-specific activity and audit; think CloudTrail.**
-Management Event, Data event, Insight Event 
+
+
 
 
 Amazon Elastic Transcoder
-transcode
+Amazon Elastic Transcoder lets you convert media files that you have stored in Amazon S3 into media files in the formats required by consumer playback devices
 
 Macie
 PII data detect
@@ -80,6 +88,7 @@ Amazon VPC, AWS Trusted Advisor, AWS Service Quotas (formerly called AWS Service
 
 
 Amazon athena
+Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL
 
 AWS CloudHSM
 
@@ -88,7 +97,8 @@ AWS Wavelength ： 5G
 AWS Direct connect
 AWS LocalZone
 
-Amazon EMR
+Amazon EMR 
+Elastic map reduce
 
 AWS Batch
 
@@ -105,6 +115,7 @@ Global Accelerator
 Amazon MQ
 
 Amazon Kinesis data stream
+Amazon Kinesis Data Streams enables you to build custom applications that process or analyze streaming data for specialized needs.
 
 AWS Storage Gateway
 File,tape,volume
@@ -118,6 +129,7 @@ real-time personalized recommendations
 Amazon Comprehend
 **natural-language processing (NLP) service**
 uses machine learning to find insights and relationships in a text
+Amazon Comprehend is a natural language processing (NLP) service that uses machine learning to find meaning and insights in text
 
 
 Amazon Lex
@@ -132,10 +144,14 @@ AWS Cost and Usage Reports (AWS CUR)
 **Just remember that only S3 and DynamoDB support VPC Endpoint Gateway.**
 Others are VPC endpoint interface
 
-AWS Glue
+### AWS Glue
+AWS Glue is a fully managed extract, transform, and load (ETL) service that makes it easy for customers to prepare and load their data for analytics. 
+
 Discover, prepare, and combine data for analytics, machine learning, and application development
 
-Basic/Developer/Business/Enterprise
+Basic/Developer/Business/Enterprise 
+
+Customers with a Developer, Business or Enterprise support plan have access to best practice guidance.
 
 Enterprise: TAM, AWS Concierge service
 
@@ -152,6 +168,14 @@ AWS Quick Starts - Template for CloudFormation
 
 CloudEndure Disaster Recovery
 
+
+Disaster Recovery
+- Multi site
+- Warm standBy
+- Pilot light
+- Backup and Restore
+
+
 AWS codeStar
 Code Commit,Code build, Code Deploy, Code pipeline integrated, Cloud9
 
@@ -159,6 +183,7 @@ Amazon WorkSpace
 Amazon WorkSpaces is a managed, secure Desktop-as-a-Service (DaaS) solution
 
 AWS Sumerian
+3D and AR
 
 
 ### AWS Notes
@@ -204,7 +229,7 @@ AWS Sumerian
 启动实例，连接实例，使用实例
 - on-demand
 - compute saving plan
-- Compute Savings Plans、EC2 Instance Savings Plans 和 Amazon SageMaker Savings Plan
+  - Compute Savings Plans、EC2 Instance Savings Plans 和 Amazon SageMaker Savings Plan
 - dedicated instance
 - dedicated host
 
@@ -227,7 +252,8 @@ Wavelength zones, 5G
 Edge location 
 
 AWS CloudFront 
-AWS OutPosts 
+AWS OutPosts  
+AWS Outposts is a fully managed service that offers the same AWS infrastructure, AWS services, APIs, and tools to virtually any data center, co-location space, or on-premises facility for a truly consistent hybrid experience.
 AWS EdgeLocation
 
 
@@ -235,7 +261,6 @@ AWS Management Console
 AWS CLI
 AWS SDK
 
-AWS CloudTrail
 
 
 ### 联网
@@ -260,7 +285,6 @@ Security Group :
 DNS: domain
 Amazon Route53 100% 可用性
 
-
 ### 存储和数据库
 - EBS
 - S3
@@ -272,6 +296,12 @@ Category:
   - Instance store
   - EBS Elastic Block storage, single AZ level
     - EBS SnapShot, incremental backup
+    - Charged by 
+      - Volume type (based on performance), 
+      - Storage volume in GB per month provisioned, 
+      - Number of IOPS provisioned per month, 
+      - Storage consumed by snapshots, 
+      - Outbound data transfer.
 
 - Object storage: 
   - Simple storage service (11 9 Durability) Regional but global accessible
@@ -280,10 +310,13 @@ Category:
     - Access policy
     - Storage class
       - S3 standard, at least 3 AZs
+        - Amazon S3 Object Lock
+        - Amazon S3 Storage Lens
       - S3 IA (Infrequent access) less storage fee, more retrieve fee
       - S3 IA Single Zone, less storage fee
       - S3 Intelligent Tier, a littler monitoring and automation fee
       - S3 Glacier, retrieve objects minutes to hours
+        - Amazon S3 Glacier Vault Lock
       - S3 Glacier Deep Archive in 12 hours 
 - File storage
   - EFS (NFS,SMB), Elastic file system, store in multi AZs
@@ -308,7 +341,8 @@ Category:
   - Amazon RedShift (Data lake)
   - Amazon DocumentDB (Based on MongoDB)
   - Amazon Neptune (Graph QL)
-  - Amazon QLDB
+  - Amazon QLDB:
+    Amazon QLDB is a fully managed ledger database that provides a transparent, immutable, and cryptographically verifiable transaction log ‎owned by a central trusted authority
   - Amazon Managed Blockchain
   - Amazon ElasticCache (Redis,Memcache)
   - Amazon DynamoDB Accelerator
@@ -324,33 +358,50 @@ Category:
     - IAM group
     - IAM policy (JSON) Effect&Action
     - MFA (Multi-Factor Authentication)
+    - IAM access advisor
+    - IAM Credential report
   - AWS Organisation
     - OU (Organisation unit)
     - SCP (Service control policy)
   - AWS Artifact
   - AWS customer compliance center
   - AWS WAF (Reject rule Distributed Denial-of-Service (DDoS))
+    - CloudFront,APIGateway,ALB, AppSync
+    - AWS WAF gives you control over how traffic reaches your applications by enabling you to create security rules that block common attack patterns, such as SQL injection or cross-site scripting, and rules that filter out specific traffic patterns you define.
   - AWS Shield
+    - Standard (free)
+    - Advance: Amazon Elastic Compute Cloud, Elastic Load Balancing (ELB), Amazon CloudFront, Amazon Route 53, AWS Global Accelerator.
   - AWS Inspector (Security assess)
   - AWS KMS (Key management service)
   - AWS GuardDuty (account threat detected)
     - VPC flowLog
     - DNS
     - CloudTrail insights
+  - AWS Detective
+    - VPC flowLog
+    - CloudTrail insights
+    - GuardDuty findings
 
 - Monitoring and Analyze
   - CloudWatch (metrics, threshold, alert) (on-cloud and on-prem)
   - CloudTrail (Audit API Request)
     - Event: What, Who, When, How
+    - Management Event
+    - Data event (Additional Fee)
+    - Insight Event (Additional Fee)
+    - **Think account-specific activity and audit; think CloudTrail.**
   - Amazon Trusted Advisor
     - cost optimisation
     - service limit
     - performance
     - security
     - fault tolerance
+  - AWS X-Ray
+    - AWS X-Ray helps developers analyze and debug production, distributed applications, such as those built using a microservices architecture
 
 - Pricing
   - Pricing calculator
+    - server, storage, network, IT labor.
   - Billing
   - AWS cost explorer
   - AWS Consolidated billing
@@ -388,7 +439,106 @@ Category:
     - Operational Excellence
     - Security
     - Reliability
+      - Foundations
+        - Amazon VPC, AWS Trusted Advisor, AWS Service Quotas
+      - Management
+        - CloudTrail, CloudWatch, Config
     - Performance Efficiency
     - Cost optimisation
     - Sustainability
+  - AWS Well-Architected Tool
   - AWS cloud practitioner
+
+Reservations support:
+Amazon EC2 Reserved Instances, Amazon DynamoDB Reserved Capacity,Amazon ElasticCache Reserved Nodes, Amazon RDS RIs, Amazon Redshift Reserved Nodes
+
+AWS Compute Optimizer:
+Amazon EC2 instances, Amazon EC2 Auto Scaling groups, Amazon EBS volumes, AWS Lambda functions
+
+
+Main cost:
+Compute, Storage, Outbound data transfer
+
+AWS Systems Manager: 
+on-prem and on-cloud, centrally operational work
+
+### Six advantages of cloud computing
+- Trade Capital Expense for Variable Expense
+- Massive economies of scale
+- Stop guessing capacity
+- Increase speed and agility
+- Stop spending money running and maintaining data centers
+- Go global in minutes
+
+
+AWS Systems Manager Session Manager
+AWS SSM Session Manager is a fully-managed service that provides you with an interactive browser-based shell and CLI experience
+
+Global Accelerator
+
+AWS IAM, Amazon CloudFront, Route 53 and WAF are some of the global services.
+
+
+Elastic Load Balancer
+- Application Load Balancer
+  - HTTP and HTTPS
+- Network Load Balancer
+  - TCP
+  - UDP
+  - TLS
+- Gateway Load Balance
+Network Load Balancer
+Network Load Balancer is best suited for load balancing of Transmission Control Protocol (TCP), User Datagram Protocol (UDP) and Transport Layer Security (TLS) traffic where extreme performance is required. 
+
+
+AWS Security Token Service (AWS STS)
+AWS Security Token Service (AWS STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access Management (IAM) users or for users that you authenticate (federated users).
+
+
+AWS OpsWorks:
+AWS OpsWorks is a configuration management service that provides managed instances of Chef and Puppet
+
+AWS Fault Injection Simulator
+AWS Fault Injection Simulator is a fully managed service for running fault injection experiments on AWS that makes it easier to improve an application’s performance, observability, and resiliency. 
+
+
+AWS CodeGuru (Code review)
+Amazon CodeGuru is a developer tool that provides intelligent recommendations to improve code quality and identify an application’s most expensive lines of code
+
+
+IAM access advisor 
+Access advisor shows the service permissions granted to a user and when those services were last accessed.
+
+
+AWS CodeArtifact, CodeGuru,CodePipeline,CodeCommit,CodeStart,CodeBuild,CodeDeploy,Cloud9
+
+AWS IoT Core
+AWS IoT Core lets you connect IoT devices to the AWS cloud without the need to provision or manage servers
+
+
+Amazon Connect
+Amazon Connect is an easy to use omnichannel cloud contact center that helps you provide superior customer service at a lower cost.
+
+AWS Control Tower
+AWS Control Tower provides the easiest way to set up and govern a new, secure, multi-account AWS environment based on best practices established through AWS’ experience working with thousands of enterprises as they move to the cloud
+
+Amazon API Gateway 
+Amazon API Gateway is a fully managed service that makes it easy for developers to create, publish, maintain, monitor, and secure APIs at any scale.RESTful APIs and WebSocket APIs
+
+
+Amazon SageMaker
+Amazon SageMaker is a fully managed service that provides every developer and data scientist with the ability to build, train, and deploy machine learning (ML) models quickly.
+
+Amazon Forecast
+Amazon Forecast is a fully managed service that uses machine learning to deliver highly accurate forecasts.
+
+AWS OpsHub - AWS OpsHub is a graphical user interface you can use to manage your AWS Snowball devices, enabling you to rapidly deploy edge computing workloads and simplify data migration to the cloud
+
+Amazon AppStream 2.0 - Amazon AppStream 2.0 is a fully managed non-persistent application and desktop streaming service. You centrally manage your desktop applications on AppStream 2.0 and securely deliver them to any computer
+
+AWS Device Farm
+AWS Device Farm is an application testing service that lets you improve the quality of your web and mobile apps by testing them across an extensive range of desktop browsers and real mobile devices; without having to provision and manage any testing infrastructure.
+
+
+Credential Reports
+
