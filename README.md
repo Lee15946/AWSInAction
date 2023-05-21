@@ -459,6 +459,7 @@ Amazon EC2 instances, Amazon EC2 Auto Scaling groups, Amazon EBS volumes, AWS La
 Main cost:
 Compute, Storage, Outbound data transfer
 
+
 AWS Systems Manager: 
 on-prem and on-cloud, centrally operational work
 
@@ -469,6 +470,7 @@ on-prem and on-cloud, centrally operational work
 - Increase speed and agility
 - Stop spending money running and maintaining data centers
 - Go global in minutes
+- 
 
 
 AWS Systems Manager Session Manager
