@@ -6,6 +6,89 @@ EC2 instance user data is the data that you specified in the form of a bootstrap
 EC2 instance metadata
 EC2 instance metadata is data about your instance that you can use to manage the instance.
 
+EC2 Instance Type:
+- General Purpose M,T,A
+- Compute Optimized C
+- Memory Optimized R,X,Z
+- Storage Optimized I,G,H
+
+EC2 Instances Purchasing options:
+- On-Demand Instances
+- Reserved (1&3 years)
+  - Reserved Instances
+  - Convertible Reserved instances
+- Saving Plans
+- Spot Instances
+- Dedicated Hosts
+- Dedicated Instances
+- Capacity Reservation
+
+Security Group
+Only contain **allow** rules
+All outbound traffic is **authorised** by default
+All inbound traffic is **blocked** by default
+
+
+EBS volume
+It's a network drive
+It's locked to an AZ
+Have a provisioned capacity
+- EBS snapshot
+  - EBS snapshot archive tier
+  - EBS recycle bin
+
+
+
+Amazon FSx
+3rd party high-performance file system on AWS
+- FSx for Lustre
+- FSx for Windows File Server
+- FSx for NetApp ONTAP
+
+Scalability
+- Vertical scalability (scale up/down)
+- Horizontal scalability (scale out/in)
+
+High availability
+- at least 2 AZ
+
+
+ELB (Elastic load balancer)
+- Application load balancer (HTTP/HTTPS)
+  - static URL 
+- Network LB (TCP/UDP) layer 4
+  - High performance
+- Gateway LB layer 3
+  - Route traffic to firewalls
+  - intrusion detection
+
+Auto Scaling Group
+- scale out
+- scale in
+- minimum and maximum
+- register new instance to LB
+- replace unhealthy instances
+- strategies
+  - Manual scaling
+  - Dynamic scaling
+    - Simple/step scaling
+    - Target tracking scaling
+    - Scheduled scaling
+    - Predictive scaling
+
+
+AMI
+Amazon machine image 
+
+EC2 Image Builder
+Used to automate the creation of VM or container images
+- Automate the creation, maintain, validate and test EC2 AMIs 
+- Can be run on a schedule
+- Free service
+
+EC2 Instance Store 
+EFS - Elastic File System
+
 Route 53
 Edge location
 CloudFront
@@ -464,13 +547,20 @@ AWS Systems Manager:
 on-prem and on-cloud, centrally operational work
 
 ### Six advantages of cloud computing
-- Trade Capital Expense for Variable Expense
+- Trade Capital Expense for Variable/Operational Expense
 - Massive economies of scale
 - Stop guessing capacity
 - Increase speed and agility
 - Stop spending money running and maintaining data centers
 - Go global in minutes
-- 
+
+
+### Five characteristics of cloud computing
+- On-demand self-service
+- Broad network access
+- Resource pooling
+- Rapid elasticity
+- Measured service
 
 
 AWS Systems Manager Session Manager
@@ -529,6 +619,7 @@ Amazon API Gateway is a fully managed service that makes it easy for developers 
 
 
 Amazon SageMaker
+
 Amazon SageMaker is a fully managed service that provides every developer and data scientist with the ability to build, train, and deploy machine learning (ML) models quickly.
 
 Amazon Forecast
