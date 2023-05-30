@@ -168,7 +168,6 @@ Bridge between on-premise data and cloud data in S3
 - Tape Gateway
 
 ### AWS RDS
-
 - Relational Database Service
     - Postgres
     - MySQL
@@ -176,8 +175,91 @@ Bridge between on-premise data and cloud data in S3
     - Oracle
     - MicrosoftSQL Server
     - Aurora (AWS Proprietary database)
-      - Cost more, more efficient
-      - cloud optimized
+        - Cost more, more efficient
+        - cloud optimized
+
+#### RDS Deployments
+- Read Replicas
+    - Scale the read workload of your DB
+    - Can create up to 15 Read Replicas
+    - Data is only written to the main DB
+- Multi-AZ
+    - Failover in case of AZ outage
+    - Data is only written to the main DB
+    - Can only have 1 other AZ as failover
+- Multi-Region (Read Replicas)
+    - Disaster Recovery
+    - Local performance
+    - Replication cost
+
+### AWS ElasticCache
+- Manged Redis or Memcached
+- In-memory database
+
+### DynamoDB
+- Fully Managed Highly available with replication across 3 AZ
+- NoSQL database
+- Flexible schema
+- Serverless
+- low latency
+#### DynamoDB Accelerator - DAX
+- In-memory cache
+### DynamoDB Global Tables
+- low latency in multiple-regions
+- Active-Active replication (read/write to any AWS region)
+
+### Redshift
+- Based on PostgresSQL, not used for OLTP
+- It's OLAP - online analytical processing (analytics and data warehousing)
+- Columnar storage of data
+
+### Amazon EMR
+- Elastic MapReduce
+- Hadoop Clusters (Big Data)
+
+### Amazon Athena
+- Serverless query service to perform analytics against S3 objects
+- Standard SQL to query files
+
+### Amazon QuickSight
+- Serverless machine learning-powered business intelligence service to create interactive dashboards
+- Fast, automatically scalable, embeddable, with per-session pricing
+
+### DocumentDB
+- Same as MongoDB
+- store,query and index JSON data
+
+### Neptune
+- Fully managed **graph** DB
+
+### Amazon QLDB
+- Quantum Ledger Database
+- A ledger is a book Recording financial transactions
+- Immutable system
+- Used to review history of all changes to your application data
+
+### Amazon Managed BlockChain
+- Without the need for a trusted, central authority
+- Decentralise
+
+### AWS Glue
+- Managed ETL (Extract, Transform and Load) service
+- Serverless
+- Prepare and transform data for analytics
+- Glue Data catalog: catalog of datasets, can be used by Athena,Redshift,EMR
+
+### DMS - Database Migration Service
+- Quickly and securely migrate database to AWS, resilient, self healing
+- The source database remains available during the migration
+- Supports
+  - Homogeneous
+  - Heterogeneous
+
+
+
+
+
+
 
 AMI
 Amazon machine image
