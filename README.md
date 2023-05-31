@@ -255,11 +255,112 @@ Bridge between on-premise data and cloud data in S3
   - Homogeneous
   - Heterogeneous
 
+## Other Compute
 
+### ECS - Elastic Container Service
+- You must provision & maintain the infrastructure (the EC2 instances)
+### Fargate
+- No need to provision
+- Serverless
+### ECR
+- Elastic Container Registry
+- Store Docker images
 
+### AWS Lambda
+- Easy pricing
+  - Pay per request and compute time
+- Event-Driven
+- Easy monitoring through AWS cloudwatch
 
+### Amazon API Gateway
+- Fully managed service to create, publish, maintain, monitor, and secure APIs
+- Serverless and scalable
+- Restful and Websockets
 
+### AWS Batch
+- Managed batch processing at any scale
+- Dynamically launch EC2 instances or Spot Instances
+- Batch jobs are defined as Docker images and run on ECS
 
+### Amazon LightSail
+- High availability but no auto-scaling, limited AWS integrations
+
+## Deployments and Managing Infrastructure at Scale
+
+### CloudFormation
+- Infrastructure as code
+- JSON?YAML
+
+### AWS Cloud Development Kit (CDK)
+- Program to define cloud infrastructure
+
+### AWS Elastic Beanstalk
+- Paas
+- Full control over the configuration
+- Free, but you pay for the underlying services
+- Three architecture models
+  - Single instance deployment
+  - LB + ASG
+  - ASG only
+- Health agent pushed metrics to CloudWatch
+- Checks for app health, published health events
+
+### AWS CodeDeploy
+- deploy application automatically
+- Work with EC2 instances
+- Work with on-premise servers
+
+### AWS CodeCommit
+- Git-based repositories
+
+### AWS CodeBuild
+- Code building service in the cloud
+- Compile source code, run tests, and produces packages that are ready to be deployed
+- Only pay for the build time
+
+### AWS CodePipeline
+- Orchestrate different steps
+- Fast delivery and rapid update
+
+### AWS CodeArtifact
+- Software packages
+- Retrieve dependencies straight from CodeArtifact
+
+### AWS CodeStar
+- Quick way to get started for development tools
+- Can edit the code using AWS Cloud9
+
+### AWS Cloud9
+- Cloud IDE
+- Web browser
+
+### AWS System Manager (SSM)
+- Helps you manage your EC2 and On-premises systems at scale
+- Another Hybrid service
+- Get operational insights about the state of your infrastructure
+- Most important features are
+  - Patching automation for enhanced compliance
+  - Run commands across an entire fleet of servers
+  - Store parameter configuration with the SSM Parameter Store
+- SSM Session Manager
+  - Start a secure shell on your EC2 and on-premises servers
+  - No SSH access, bastion hosts or SSH keys needed
+  - No port 22 needed
+  - Send session log data to S3 or CloudWatch Logs
+
+### AWS OpsWorks
+- Chef & Puppet help you perform server configuration automatically or repetitive actions
+- Managed Chef & Puppet
+- Alternative to AWS SSM
+
+## Global Infrastructure
+
+### Global Application
+- Deployed in multiple geographies
+- On AWS this cloud be Regions/Edge Locations
+- Decreased Latency
+- Disaster Recovery
+- Attack protection
 
 AMI
 Amazon machine image
