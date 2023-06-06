@@ -7,14 +7,13 @@ while launching your instance.'
 EC2 instance metadata
 EC2 instance metadata is data about your instance that you can use to manage the instance.
 
-EC2 Instance Type:
-
+#### EC2 Instance Type:
 - General Purpose M,T,A
 - Compute Optimized C
 - Memory Optimized R,X,Z
 - Storage Optimized I,G,H
 
-EC2 Instances Purchasing options:
+#### EC2 Instances Purchasing options:
 
 - On-Demand Instances
 - Reserved (1&3 years)
@@ -26,23 +25,21 @@ EC2 Instances Purchasing options:
 - Dedicated Instances
 - Capacity Reservation
 
-Security Group
-Only contain **allow** rules
-All outbound traffic is **authorised** by default
-All inbound traffic is **blocked** by default
+### Security Group
+- Only contain **allow** rules
+- All outbound traffic is **authorised** by default
+- All inbound traffic is **blocked** by default
 
-EBS volume
+### EBS volume
 It's a network drive
 It's locked to an AZ
 Have a provisioned capacity
-
 - EBS snapshot
     - EBS snapshot archive tier
     - EBS recycle bin
 
-Amazon FSx
+### Amazon FSx
 3rd party high-performance file system on AWS
-
 - FSx for Lustre
 - FSx for Windows File Server
 - FSx for NetApp ONTAP
@@ -56,8 +53,7 @@ High availability
 
 - at least 2 AZ
 
-ELB (Elastic load balancer)
-
+### ELB (Elastic load balancer)
 - Application load balancer (HTTP/HTTPS)
     - static URL
 - Network LB (TCP/UDP) layer 4
@@ -66,8 +62,7 @@ ELB (Elastic load balancer)
     - Route traffic to firewalls
     - intrusion detection
 
-Auto Scaling Group
-
+### Auto Scaling Group
 - scale out
 - scale in
 - minimum and maximum
@@ -204,7 +199,7 @@ Bridge between on-premise data and cloud data in S3
 - low latency
 #### DynamoDB Accelerator - DAX
 - In-memory cache
-### DynamoDB Global Tables
+#### DynamoDB Global Tables
 - low latency in multiple-regions
 - Active-Active replication (read/write to any AWS region)
 
@@ -361,6 +356,317 @@ Bridge between on-premise data and cloud data in S3
 - Decreased Latency
 - Disaster Recovery
 - Attack protection
+
+### Route 53
+- Managed DNS (Domain Name System)
+- Routing polices
+  - Simple routing policy
+  - Weighted routing policy (Health check)
+  - Latency routing policy
+  - Failover routing policy (Disaster recovery)
+ 
+### CloudFront
+- CDN (Content Delivery Network)
+- Improve read performance, content is cached at the edge
+- DDoS protection, integration with Shield, WAF
+- Origins
+  - S3 bucket
+  - Customer Origin (HTTP)
+- Great for static content
+
+### S3 Transfer Acceleration
+- Increase transfer speed by transferring file to AWS edge location which will forward the data to the S3 bucket in the target region
+
+### AWS Global Accelerator
+- Improve global application **availability** and **performance** using the AWS global network
+- 2 Anycast static IP are created for your application
+
+### AWS Outposts
+- AWS will set up and manage "Outposts Racks" within your on-premises infrastructure and you can start leveraging AWS services on-premises 
+
+### AWS WaveLength
+- Wavelength zones are infrastructure deployments embedded within the telecommunications providers' datacenters at the edge of the 5G networks
+- Brings AWS services to the edge of the 5G networks
+
+### AWS Local ZOnes
+- Places AWS compute, storage, database, and othrer selected AWS services closer to end users to tun latency-sensitive applications
+- Extend your VPC to more locations
+
+### Global Applications Architecture
+- Single Region, Single AZ
+- Single Region, Multi AZ
+- Multi Region, Active-Passive
+- Multi Region, Active-Active
+
+## Cloud Integration
+
+### SQS
+- Simple Queue Service
+- Default retention of messages: 4 days, maximum of 14 days
+
+### Amazon Kinesis
+- real-time big data streaming
+- Kinesis Data Streams
+- Kinesis Data Analytics
+- Kinesis Data Firehose
+- Kinesis Video Streams
+
+### SNS
+- Simple Notification Service
+
+### Amazon MQ
+- MQTT,AMQP
+- Managed message broker service for RabbitMQ and ActiveMQ
+
+
+## Cloud Monitoring
+### CloudWatch Metrics
+- CloudWatch provides metrics for every service in AWS
+- Metric is a variable to monitor
+- Metrics have timestamps
+- Create CloudWatch dashboard for metrics
+- Important Metrics
+  - EC2 instances: CPU Utilization, Status check, Network
+    - Default metrics every 5 minutes
+    - Option for Detailed Monitoring(charged): metrics every 1 minute
+  - EBS volumes: Disk Read/Writes
+  - S3 buckets: BucketSizeBytes, NumberOfObjects, AllRequests
+  - Billing: Total Estimated Charge 
+  - Service Limits: how much you've been using a service API
+### CloudWatch Alarm
+- Alarms are used to trigger notifications for any metric
+- Alarm actions:
+  - Auto scaling
+  - EC2 Actions
+  - SNS notification
+- Various options
+- Can choose the period on which to evaluate an alarm
+- Alarm status: OK, INSUFFICIENT_DATA, ALARM
+- Billing Alarm can only be set in **US East-1**
+
+### CloudWatch Logs
+- Can collect logs from
+  - Elastic Beanstalk
+  - ECS
+  - AWS lambda
+  - CloudTrail based on filter
+  - CloudWatch log agents: on EC2 machines or on-premises servers
+  - Route53: Log DNS queries
+- Enables real-time monitoring of logs
+- Adjustable CloudWatch Logs retention
+
+### Amazon EventBridge (formerly CloudWatch Events)
+- Schedule: Cron jobs
+- Event Pattern
+- Schema Registry
+- Archive events
+- Ability to replay archived events
+
+### AWS CloudTrail
+- Provide governance, compliance, and audit for your AWS account
+- Enabled by default
+- Get history of events/API calls made within your AWS account by:
+  - Console
+  - SDK
+  - CLI
+  - AWS Services
+- Can put logs to CloudWatch Logs or S3
+- A trail can be applied to All Regions (default) or a single region
+- CloudTrail Insights: automated analysis of your CloudTrail Events
+
+### AWS X-Ray
+- TroubleShooting performance
+- Understand dependencies in a microservice architecture
+- Pinpoint service issues
+- Review request behavior
+- Find errors and exceptions
+
+### CodeGuru
+- ML-powered service for automated code reviews and application performance recommendations
+- Provide two functionalities
+  - CodeGuru Reviewer
+  - CodeGuru Profiler
+
+### AWS Health Dashboard
+- Service History
+  - all regions, all services health
+  - RSS feed can subscribe
+  - Previously called AWS service health dashboard
+- Your Account
+  - Previously called AWS Personal Health Dashboard
+  - Provides alerts and remediation guidance when AWS is experiencing events that may impact you
+  - Can aggregate data from an entire AWS Organization
+
+## VPC & Network
+### IP Address in AWS
+- IPv4 - Internet Protocol version 4
+  - Public IPv4
+  - EC2 instance get a new public IP address every time you stop then restart it
+  - Private IPv4
+  - Fixed for EC2 instances even start/stop
+- Elastic IP - allows you to attach a fixed public IPv4 address to EC2 instance
+  - Ongoing cost if not attached to EC2 instance of if the EC2 instance is stopped
+- IPv6
+
+### VPC & Subnets Primer
+- VPC - Virtual Private Cloud
+- Subnet
+  - Public subnet
+  - Private subnet
+- Route Tables
+- Internet Gateway, public subnet have a route to the internet gateway
+- NAT Gateways (AWS-managed) & NAT Instances (self-managed) allow your instances in your Private Subnets to access internet
+
+### NACL & Security Groups
+- NACL (Network ACL)
+  - A firewall which controls traffic from and to subnet
+  - Can have ALLOW and DENY rules
+  - Are attached at the Subnet level
+  - Rules only include IP addresses
+  - Stateless
+- Security Groups
+  - A firewall that controls traffic to and from an ENI/ an EC2 instance
+  - Rules include IP addresses and other security groups
+  - Stateful
+
+### VPC Flow Logs
+- Capture information about IP traffic going into your interfaces:
+  - VPC Flow Logs
+  - Subnet Flow Logs
+  - Elastic Network Interface Flow Logs
+
+### VPC Peering
+- Connect two VPC, privately using AWS' network
+- Behave as if they were in the same network
+- Not transitive
+
+### VPC Endpoints
+- Allow you to connect to AWS service suing a private network
+- Enhanced security and lower latency
+- VPC Endpoint Gateway: S3 & DynamoDB
+- VPC Endpoint Interface: the rest
+
+### AWS PrivateLink (VPC Endpoint Services)
+- Most secure/scalable way to expose a service to 1000s VPCs
+- Requires a network load balancer (Service VPC) and ENI (Customer VPC)
+
+### Site to Site VPN & Direct Connect
+- Site to Site VPN
+  - Connect an on-premises VPN to AWS
+  - The connection is automatically encrypted
+  - Goes over public internet
+  - Customer Gateway and Virtual Private Gateway
+- Direct Connect
+  - Establish a physical connection between on-premises and AWS
+  - The connection is private, secure, and fast
+  - Goes over a private network
+  - Take at least a month to establish
+
+### AWS Client VPN
+- Connect from your compute using OpenVPN to your private network in AWS and on-premises
+
+### Transit Gateway
+- For having transitive peering between thousands of VPC and on-premises, hub and spoke connection
+- One single Gateway to provide this functionality
+- Works with Direct Connect Gateway, VPN connections
+
+## Security and Compliance
+### AWS Shared Responsibility model
+- AWS - Security of the Cloud
+  - Protecting infrastructure
+  - Managed service like S3, DynamoDB
+- Customer responsibility - Security in the cloud
+  - For EC2, customer is responsible for management of the guest OS, firewall & network configuration, IAM
+  - Encrypting data
+- Shared control
+  - Patch Management, Configuration Management, Awareness & Training
+
+### DDos protection
+- Distributed Denial-of-Service
+- AWS Shield Standard
+- AWS shield Advanced
+- AWS WAF: Filter specific requests based on rules
+- CloudFront and Route53
+  - Availability protection using global edge network
+  - Combined with AWS Shield
+- Be ready to scale - leverage AWS Auto Scaling
+
+### AWS Shield
+- AWS Shield Standard
+  - Free service
+  - Provides protection from attacks such as SYN/UDP Floods, Reflection attacks and other layer 3/4
+- AWS Shield Advanced
+  - Optional DDos mitigation service
+  - EC2, ELB, CloudFront, Global Accelerator, Route 53
+
+### AWS WAF (Web Application Firewall)
+- Layer 7 HTTP
+- ALB, API Gateway, CloudFront
+- Define Web ACL
+  - IP address, HTTP headers
+  - SQL injection and Cross-Site Scripting (XSS)
+  - Size constraints, geo-match (block countries)
+  - Rate-based rules - for DDos protection
+
+### Penetration test on AWS
+- 8 services without prior approval
+  - Amazon CE2, NAT Gateways, ELB
+  - RDS
+  - CLoudFront
+  - Aurora
+  - API Gateway
+  - Lambda
+  - Lightsail
+  - Elastic Beanstalk
+- Prohibited services
+  - DNS zone walking
+  - Dos
+  - flooding
+
+### AWS KMS (Key Management Service)
+- Data at rest / transit
+- AWS manages the encryption keys for us
+- Encryption opt on:
+  - EBS
+  - S3
+  - Redshift
+  - RDS
+  - EFS
+- Encryption automatically enabled
+  - CloudTrail logs
+  - S3 Glacier
+  - Storage Gateway
+
+### CloudHSM
+- AWS provisions encryption hardware
+- Hardware Security Module
+- Tamper resistant
+
+### CMK (Customer Master Keys)
+- Customer Managed CMK
+  - Create, manager and used by the customer
+  - Rotation policy
+  - bring-your-own-key
+- AWS managed CMK
+  - Create, manager and used on the customer's behalf by AWS
+  - S3, EBS, Redshift
+- AWS owned CMK
+  - AWS own and manages to use in multiple accounts
+- CloudHSM keys (customer keystore)
+  - Generated from your own CloudHSM hardware device
+  - Cryptographic operations are performed within the CloudHSM cluster
+
+### AWS ACM
+- SSL/TLC Certificates
+- HTTPS
+- TLS
+- Free of charge renewal
+### AWS Secrets Manager
+
+### AWS Artifact
+
+
+
 
 AMI
 Amazon machine image
