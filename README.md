@@ -155,7 +155,6 @@ migrate data into and out of AWS
     - A software to manage your Snow Family Device
 
 ### AWS Storage Gateway
-
 Bridge between on-premise data and cloud data in S3
 
 - File Gateway
@@ -659,14 +658,566 @@ Bridge between on-premise data and cloud data in S3
 ### AWS ACM
 - SSL/TLC Certificates
 - HTTPS
-- TLS
-- Free of charge renewal
+- Free charge for public TLS certificates
+- Automatic TLS certificate renewal
+- Integration with
+  - ELB
+  - CLoudFront
+  - API on API gateway
+
 ### AWS Secrets Manager
+- Storing secrets
+- Rotation of secrets
+- Integration with Amazon RDS
+- Secrets are encrypted using KMS
+- Mostly meant for RDS integration
 
 ### AWS Artifact
+- Portal that provides customers with on-demand access to AWS compliance documentation and AWS agreements
+- Artifact Reports
+- Artifact Agreements
+- Can be used to support internal audit or compliance
+
+### AWS GuardDuty
+- Intelligent Threat discovery to protect your AWS account
+- Use ML, anomaly detection, 3rd party data
+- Input data:
+  - CloudTrail Events Logs
+  - VPC Flow Logs
+  - DNS Logs
+  - Optional Features
+- Can set up EventBridge rules to be notified in case of findings, to SNS/Lambda
+- Can protect against CryptoCurrency  attacks
+
+### Amazon Inspector
+- Automated Security Assessments
+- For EC2 instance
+  - Leveraging the AWS System Manager agent
+- For Container images push to Amazon ECR
+- For Lambda functions
+- Reporting & Integration with AWS Security HUb, AWS EventBridge
+
+### AWS Config
+- Auditing and recording compliance of your AWS resources
+- Record configurations and changes over time
+- Store in S3
+
+### AWS Macie
+- ML and pattern matching to discover and protect sensitive data (such as PII)
+
+### AWS Security Hub
+- Central security tool to manage security across several AWS accounts and automate security checks
+- Dashboard integrated
+- Need to enable AWS config
+
+### AWS Detective
+- Analyzes, investigates and quickly identifies the root cause of security issues or suspicious activities (using ML and graphs)
+- Collect from VPC flow logs, CLoudTrail, and GuardDuty
+- Visualizations
+
+### AWS Abuse
+- Report suspected AWS resources used for abusive or illegal purposes
+- Abusive & prohibited behaviors are:
+  - Spam
+  - Port Scanning
+  - DDos
+  - Intrusion attempts
+  - Hosting objectionable or copyrighted content
+  - Distributing malware
+
+### Root user privileges
+- Account owner
+- Complete access to all AWS services and resources
+- Actions can be performed
+  - **Change account settings**
+  - View certain tax invoices
+  - **Close your AWS account**
+  - Restore IAM user permissions
+  - **Change or cancel AWS support plan**
+  - **Register as a seller in the Reserved Instance Marketplace**
+  - Configure and S3 to enable MFA
+  - Edit or delete S3 bucket policy that includes an invalid VPC ID or VPC endpoint ID
+  - Sing up fpr GovCloud
+
+### IAM Access Analyzer
+- Find out which resources are shared externally
+- Define Zone of Trust
+
+## Machine Learning
+
+### Amazon Rekognition
+- Find objects, people, text, scenes in images and videos using ML
+- Use cases:
+  - Labeling
+  - Content Moderation
+  - Text Detection
+  - Face Detection and Analysis
+  - Face Search and Verification
+  - Celebrity Recognition
 
 
+### AWS Transcribe
+- Automatically convert speech to text
+- Use ASR (automatic speech recognition)
+- Automatically remove PII using Redaction
 
+### Amazon Polly
+- Turn text into lifelike speech using deep learning
+- Allowing you to create applications that talk
+
+### AWS Translate
+- Natural and accurate language translation
+
+### AWS Lex & Connect
+- Lex
+  - ASR to convert speech to text
+  - Natural Language understanding to recognize the intent of text, callers
+  - Helps build chatbots, call center bots
+- Amazon connect
+  - Virtual contact center
+  - Integrate with other CRM systems or AWS
+
+### AWS Comprehend
+- For Natural Language Procession - NLP
+- Fully managed and serverless service
+- Use machine learning to find insights and relationships in text
+
+### AWS Sagemaker
+- Fully managed service to build ML models
+
+### AWS Forecast
+- Use ML to deliver highly accurate forecast
+
+### AWS Kendra
+- Fully managed document service powered by ML
+- Natural language search capabilities
+- Incremental learning
+- Manually fine-tune search results
+
+### AWS Personalize
+- Fully Managed ML-service to build apps with real-time personalized recommendations
+
+### AWS Textract
+- Automatically extracts text, handwriting, and data from any scanned documents using AI and ML
+- Extract data from forms and tables
+
+## Account management, billing & support
+### AWS Organizations
+- Global service
+- Allow to manage multiple AWS accounts
+- The main account is master account
+- Cost benefits:
+  - Consolidate billing
+  - Pricing benefits from aggregated usage
+  - pooling of Reserved EC2 instances for optimal savings
+- API is available to automate AWS account creation
+- Restrict account privileges using Service Control Polices
+  - Whitelist or blacklist IAM actions
+  - Applied at the OU or Account level
+  - Not apply to Master Account
+  - The SCP does not affect service-linked roles
+  - SCP must have an explicit Allow (not allow anything by default)
+- Using tagging standards for billing purposes
+
+### AWS Organization - Consolidated Billing
+- Combine usage - Share volume pricing, reserved instances and saving plan discounts
+- One bill
+- Reserved instances discount can be turned off
+
+### AWS Control Tower
+- Easy way to set up and govern a secure and compliant multi-account AWS environment based on best practices
+- Benefits
+  - Automate setup environments
+  - Automate ongoing policy management using guardrails
+  - Detect policy violations and remediate them
+  - Monitor compliance through an interactive dashboard
+- Runs on top of AWS Organizations
+
+### AWS Service Catalog
+- Quick self-service portal to launch a set of authorized products pre-defined by admins
+
+### Pricing Model in AWS
+- Pay as you go
+- Save when you reserve
+- Pay less by using more
+- Pay less as AWS grows
+
+#### Compute pricing -EC2
+- Number of instances
+- Instance configuration
+- ELB running and amount of data processed
+- Detailed monitoring
+- On-demand instances
+  - Minimum of 60s
+  - Pay per second (Linux/Windows) or per hour (other)
+- Reserved instances
+  - 75% discount
+  - 1 or 3 year commitment
+  - All upfront, partial upfront, no upfront
+- Spot instances
+  - 90% discount
+  - Bid for unused capacity
+- Saving plans
+
+
+**todo**
+
+### Savings Plan
+- Commit a certain $ amount per hour for 1 or 3 years
+- Easiest way to setup long-term commitments on AWS
+- EC2 Saving plan
+  - 72% discount
+  - Commit to usage of individual instance families in a region
+- Compute savings plan
+  - 66% discount
+  - Family, Region, size, OS, tenancy, compute options
+  - EC2, Fargate, Lambda
+- Machine Learning Savings plan
+  - SageMaker
+
+### AWS Compute Optimizer
+- Reduce costs and improve performance by recommending optimal AWS resources for your workloads
+- Use ML to analyze your resources' configurations and their utilization CloudWatch metrics
+- Support
+  - EC2
+  - ASG
+  - EBS
+  - Lambda
+
+### AWS Billing and Costing Tools
+- Estimate costs in the cloud
+  - Pricing Calculator
+- Tracking costs in the cloud
+  - Billing Dashboard
+  - Cost Allocation Tags
+  - Cost and Usage reports
+  - Cost Explorer
+- Monitoring against costs plans
+  - Billing Alarms
+  - Budgets
+
+
+#### AWS Pricing Calculator
+- Estimate the cost for your solution architecture
+
+#### AWS Billing Dashboard
+- AWS Free tier dashboard
+
+#### Cost Allocation Tags
+- Track cost on a detailed level
+- AWS generated tags:
+  - Automatically applied to the resource you create
+  - Start with Prefix aws
+- User-defined tags
+  - Defined by the user
+  - Start with Prefix user
+-  Tag can be used to create Resource Groups
+
+### Cost and Usage Reports
+- The most comprehensive set of AWS cost and usage data available
+
+### Cost Explorer
+- Visualize, understand and manage your AWS costs and usage over time
+- Choose an optimal Savings Plan
+- Forecast usage up to 12 months
+- Monthly cost
+
+
+### Billing Alarms in CloudWatch
+- Billing data metric is stored in CloudWatch us-east-1
+- Actual cost
+
+### AWS Budgets
+- Create budget and send alarms when costs exceeds the budgets
+- 4 type:
+  - Usage
+  - Cost
+  - Reservation
+  - Saving Plans
+
+### AWS Cost Anomaly Detection
+- Continuously monitor your cost and usage using ML to detect unusual spends
+
+### AWS Service Quotas
+- Notify you when you are close to a service quota value threshold
+- Create CloudWatch Alarms on the Service Quota console
+
+### Trusted Advisor
+- High level AWS account assessment
+- 5 categories
+  - Cost optimization
+  - Performance
+  - Security
+  - Fault tolerance
+  - Service limits
+- Support plans
+  - 7 core checks - Basic/Developer plan
+    - S3 Bucket permissions
+    - Security Group - Specific Ports Unrestricted
+    - IAM use
+    - EBS public snapshot
+    - RDS public snapshot
+    - Service limits
+    - MFA on Root account
+  - Full check - Business/Enterprise
+    - Set CloudWatch alarm
+    - Programmatic Access using AWS Support API
+
+### AWS Support Plan
+- Basic Support
+  - Free
+  - 24x7 access to customer service, documentation, white papers, and support forums
+  - 7 core check in Trusted Advisor
+  - AWS Personal Health Dashboard
+- Developer Plan
+  - Business hours email access to Cloud Support Associates
+  - Unlimited cases / one primary contact
+  - Case severity / response time
+    - General guidance < 24 business hours
+    - System impaired < 12 business hours
+- Business Plan
+  - 24x7 phone,email, and chat access to Cloud Support Engineers
+  - Unlimited cases / Unlimited contacts
+  - Access to Infrastructure Event Management for additional fee
+  - Case severity / response time
+    - General guidance < 24 business hours
+    - System impaired < 12 business hours
+    - **Production system impaired < 4 hours**
+    - **Production system down < 1 hour**
+- Enterprise On-Ramp
+  - Access to pool of Technical Account Managers (TAM)
+  - Concierge Support Team (billing and account best practices)
+  - Infrastructure Event Management, Well-Architected & Operations Reviews
+  - Case severity / response time
+    - ...
+    - **Production system impaired < 4 hours**
+    - **Production system down < 1 hour**
+- Enterprise
+  - Designated TAM
+  - Concierge Support Team
+  - Infrastructure Event Management, Well-Architected & Operations Reviews
+  - Case severity / response time
+    - ...
+    - **Production system impaired < 4 hours**
+    - **Production system down < 1 hour**
+    - **Business-critical system down < 15 minutes**
+
+## Advanced Identity
+
+### AWS STS (Security Token Service)
+- Enable you to create temporary, limited-privileges credential to access your AWS resources
+- Short-term credentials, you configure expiration period
+- Use cases
+  - Identity federation
+  - IAM Roles for cross/same account access
+  - IAM Roles for Amazon EC2
+
+### AWS Cognito
+- Identity for your Web and Mobile application users
+- Instead of creating them in IAM user
+
+### AWS Directory Services
+- AWS Managed Microsoft AD
+- AD Connector
+- Simple AD
+
+### AWS IAM Identify Center
+- One login (single sign-on) for all your
+
+## Other AWS Services
+
+### AWS WorkSpaces
+- Managed Desktop as a Service (DaaS)  solution to easily provision Windows or Linux desktops
+- Multi Regions
+
+### AWS AppStream 2.0
+- Desktop Application Streaming Service
+- The application is delivered from within a web browser
+
+### AWS IoT Core
+- AWS IoT Core allows you to easily connect IoT devices to the AWS cloud
+- Serverless, secure, scalable
+
+### AWS Elastic Transcoder
+- Convert media files stored in S3 into media files in the formats required by consumer playback devices
+
+### AWS AppSync
+- Store and sync data across mobile and web apps in real-time
+- Make use of GraphQL
+
+### AWS Amplify
+- A set of tools and services that helps you develop and deploy scalable full stack web and mobile applications
+
+### AWS Device Farm
+- Fully-manage service that tests your web and mobile apps against desktop browsers, real mobile devices and tablets
+
+### AWS Backup
+- Fully-managed service to centrally manage and automate backups across services
+
+### Disaster Recovery Strategies
+- Backup and restore
+- Pilot Light
+- Warm stand by
+- Multi site / Hot-Site
+
+### AWS Elastic Disaster Recovery
+- CloudEndure Disaster Recovery
+- Quickly and easily recover your physical, virtual and cloud-based servers into AWS
+- Continuous block-level replication for your servers
+
+### AWS DataSync
+- Move large amount data from on-premises to AWS 
+
+### AWS Application Discovery Service
+- Plan migration projects by gathering information about on-premises data centers
+- Server utilization data and dependency mapping are important for migrations
+  - Agentless Discovery
+  - Agent-based Discovery
+- Resulting data can be viewed within AWS Migration Hub
+
+### AWS Application Migration Service
+- Lift and shift (rehost)
+- Convert your physical, virtual and cloud-based servers to run natively on AWS
+
+### AWS Fault injection simulator (FIS)
+- a fully managed service for running fault injection experiments on AWS workloads
+- Chaos Engineering
+
+### AWS Step Functions
+- Build Serverless visual workflow to orchestrate your Lambda functions
+- Parallel, conditions, sequence, timeouts, error handling
+
+### AWS Ground Station
+- Fully managed service that lets you control satellite communications process data, and scale your satellite operations
+
+### AWS Pinpoint
+- Scalable 2way (outbound/inbound) **marketing** communications service
+
+## AWS Architecting & Ecosystem
+
+### AWS Cloud Best practices principle
+### Well Architected Framework 6 pillars
+- Operational Excellence
+- Security
+- Reliability
+- Performance Efficiency
+- Cost Optimization
+- Sustainability
+
+#### Operational Excellence
+- Design principles
+  - Perform operations as code
+  - Annotate documentation
+  - Make frequent, small, reversible changes
+  - Refine operations procedures frequently
+  - Anticipate failure
+  - Learn from all operational failures
+
+### Security
+- Design principles
+  - Implement a strong  identity foundation
+  - Enable traceability
+  - Apply security at all layers
+  - Automate security best practices
+  - Protect data in transit and at rest
+  - Keep people away from data
+
+### Reliability
+- Design principles
+  - Test recovery procedures
+  - Automatically recover from failure
+  - Scale horizontally to increase aggregate system availability
+  - Stop guessing capacity
+  - Manage change in automation
+
+### Performance Efficiency
+- Design principles
+  - Democratize advanced technologies
+  - Go global in minutes
+  - Use serverless architectures
+  - Experiment more often
+  - Mechanical sympathy
+
+### Cost Optimization
+- Design principles
+  - Adopt a consumption mode
+  - Measure overall efficiency
+  - Stop spending money on data center operations
+  - Analyze and attribute expenditure
+  - Use managed and application leve services to reduce cost of ownership
+
+### Sustainability
+- Design principles
+  - Understand your impact
+  - Establish sustainability goals
+  - Maximize utilization
+  - Anticipate and adopt new, more efficient hardware and software offerings
+  - Use managed services
+  - Reduce the downstream impact of your cloud workloads
+
+
+### AWS Well-Architected Tool
+- Review your architectures against the 6 pillars and adopt architectural best practices
+
+### AWS Cloud Adoption Framework (CSF)
+- Capabilities
+  - Business
+  - People
+  - Governance
+  - Platform
+  - Security
+  - Operations
+- Transformation Domains
+  - Technology
+  - Process
+  - Organization
+  - Product
+
+### AWS Right Sizing
+- Start small
+- Lowest possible cost
+  - Before a cloud Migration
+  - continuously after the cloud onboarding process
+- Cloud Watch, Cost Explorer, Trusted Advisor
+
+### AWS Ecosystem
+- AWS Blogs
+- AWs Forums (community)
+- AWS Whitepapers & Guides
+- AWS Partner Solutions (Quick Start)
+  - CloudFormation, Template
+- AWS Solutions
+  - Vetted Technology Solutions for the AWS cloud
+- AWS Marketplace
+  - Custom AMI
+  - CloudFormation templates
+  - Saas
+  - Containers
+- AWS Training
+  - Digital
+  - Classroom
+- AWS Professional Services & Partner Network
+  - APN Technology Partners
+  - Consulting
+  - Training
+  - Competency Program
+  - Navigate Program
+
+### AWS Knowledge center
+- Contains the most frequent & common questions and requests
+
+### AWS IQ
+- Quickly find professional help for your AWS projects
+- Engage and pay 3rd party experts for on-demand project work
+
+### AWS re:Post
+- AWS managed Q&A service, replaces of AWS Forums
+
+### AWS managed service (AMS)
+- Provide infrastructure and application support on AWS
+- Team of AWS experts who manage and operate your infrastructure for security, reliability and availability
+
+###
 
 AMI
 Amazon machine image
