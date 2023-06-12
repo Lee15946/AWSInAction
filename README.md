@@ -1,4 +1,5 @@
-EC2
+## AWS In Action
+### EC2
 Reserved, Spot, on-Demand,Dedicated host
 EC2 instance user data
 EC2 instance user data is the data that you specified in the form of a bootstrap script or configuration parameters
@@ -206,6 +207,7 @@ Bridge between on-premise data and cloud data in S3
 - Based on PostgresSQL, not used for OLTP
 - It's OLAP - online analytical processing (analytics and data warehousing)
 - Columnar storage of data
+- Single AZ deployed
 
 ### Amazon EMR
 - Elastic MapReduce
@@ -600,7 +602,7 @@ Bridge between on-premise data and cloud data in S3
 
 ### AWS WAF (Web Application Firewall)
 - Layer 7 HTTP
-- ALB, API Gateway, CloudFront
+- ALB, API Gateway, CloudFront, AppSync
 - Define Web ACL
   - IP address, HTTP headers
   - SQL injection and Cross-Site Scripting (XSS)
@@ -1216,8 +1218,11 @@ Bridge between on-premise data and cloud data in S3
 ### AWS managed service (AMS)
 - Provide infrastructure and application support on AWS
 - Team of AWS experts who manage and operate your infrastructure for security, reliability and availability
+ 
+### Cloud Foundations
+-Guided path to help customers deploy, configure, and secure their new workloads while ensuring they are ready for on-going operations in the cloud
 
-###
+
 
 AMI
 Amazon machine image
