@@ -1,5 +1,7 @@
 ## AWS In Action
+
 ### EC2
+
 Reserved, Spot, on-Demand,Dedicated host
 EC2 instance user data
 EC2 instance user data is the data that you specified in the form of a bootstrap script or configuration parameters
@@ -9,6 +11,7 @@ EC2 instance metadata
 EC2 instance metadata is data about your instance that you can use to manage the instance.
 
 #### EC2 Instance Type:
+
 - General Purpose M,T,A
 - Compute Optimized C
 - Memory Optimized R,X,Z
@@ -27,20 +30,25 @@ EC2 instance metadata is data about your instance that you can use to manage the
 - Capacity Reservation
 
 ### Security Group
+
 - Only contain **allow** rules
 - All outbound traffic is **authorised** by default
 - All inbound traffic is **blocked** by default
 
 ### EBS volume
+
 It's a network drive
 It's locked to an AZ
 Have a provisioned capacity
+
 - EBS snapshot
     - EBS snapshot archive tier
     - EBS recycle bin
 
 ### Amazon FSx
+
 3rd party high-performance file system on AWS
+
 - FSx for Lustre
 - FSx for Windows File Server
 - FSx for NetApp ONTAP
@@ -55,6 +63,7 @@ High availability
 - at least 2 AZ
 
 ### ELB (Elastic load balancer)
+
 - Application load balancer (HTTP/HTTPS)
     - static URL
 - Network LB (TCP/UDP) layer 4
@@ -64,6 +73,7 @@ High availability
     - intrusion detection
 
 ### Auto Scaling Group
+
 - scale out
 - scale in
 - minimum and maximum
@@ -156,6 +166,7 @@ migrate data into and out of AWS
     - A software to manage your Snow Family Device
 
 ### AWS Storage Gateway
+
 Bridge between on-premise data and cloud data in S3
 
 - File Gateway
@@ -163,6 +174,7 @@ Bridge between on-premise data and cloud data in S3
 - Tape Gateway
 
 ### AWS RDS
+
 - Relational Database Service
     - Postgres
     - MySQL
@@ -174,6 +186,7 @@ Bridge between on-premise data and cloud data in S3
         - cloud optimized
 
 #### RDS Deployments
+
 - Read Replicas
     - Scale the read workload of your DB
     - Can create up to 15 Read Replicas
@@ -188,163 +201,200 @@ Bridge between on-premise data and cloud data in S3
     - Replication cost
 
 ### AWS ElasticCache
+
 - Manged Redis or Memcached
 - In-memory database
 
 ### DynamoDB
+
 - Fully Managed Highly available with replication across 3 AZ
 - NoSQL database
 - Flexible schema
 - Serverless
 - low latency
+
 #### DynamoDB Accelerator - DAX
+
 - In-memory cache
+
 #### DynamoDB Global Tables
+
 - low latency in multiple-regions
 - Active-Active replication (read/write to any AWS region)
 
 ### Redshift
+
 - Based on PostgresSQL, not used for OLTP
 - It's OLAP - online analytical processing (analytics and data warehousing)
 - Columnar storage of data
 - Single AZ deployed
 
 ### Amazon EMR
+
 - Elastic MapReduce
 - Hadoop Clusters (Big Data)
 
 ### Amazon Athena
+
 - Serverless query service to perform analytics against S3 objects
 - Standard SQL to query files
 
 ### Amazon QuickSight
+
 - Serverless machine learning-powered business intelligence service to create interactive dashboards
 - Fast, automatically scalable, embeddable, with per-session pricing
 
 ### DocumentDB
+
 - Same as MongoDB
 - store,query and index JSON data
 
 ### Neptune
+
 - Fully managed **graph** DB
 
 ### Amazon QLDB
+
 - Quantum Ledger Database
 - A ledger is a book Recording financial transactions
 - Immutable system
 - Used to review history of all changes to your application data
 
 ### Amazon Managed BlockChain
+
 - Without the need for a trusted, central authority
 - Decentralise
 
 ### AWS Glue
+
 - Managed ETL (Extract, Transform and Load) service
 - Serverless
 - Prepare and transform data for analytics
 - Glue Data catalog: catalog of datasets, can be used by Athena,Redshift,EMR
 
 ### DMS - Database Migration Service
+
 - Quickly and securely migrate database to AWS, resilient, self healing
 - The source database remains available during the migration
 - Supports
-  - Homogeneous
-  - Heterogeneous
+    - Homogeneous
+    - Heterogeneous
 
 ## Other Compute
 
 ### ECS - Elastic Container Service
+
 - You must provision & maintain the infrastructure (the EC2 instances)
+
 ### Fargate
+
 - No need to provision
 - Serverless
+
 ### ECR
+
 - Elastic Container Registry
 - Store Docker images
 
 ### AWS Lambda
+
 - Easy pricing
-  - Pay per request and compute time
+    - Pay per request and compute time
 - Event-Driven
 - Easy monitoring through AWS cloudwatch
 
 ### Amazon API Gateway
+
 - Fully managed service to create, publish, maintain, monitor, and secure APIs
 - Serverless and scalable
 - Restful and Websockets
 
 ### AWS Batch
+
 - Managed batch processing at any scale
 - Dynamically launch EC2 instances or Spot Instances
 - Batch jobs are defined as Docker images and run on ECS
 
 ### Amazon LightSail
+
 - High availability but no auto-scaling, limited AWS integrations
 
 ## Deployments and Managing Infrastructure at Scale
 
 ### CloudFormation
+
 - Infrastructure as code
 - JSON?YAML
 
 ### AWS Cloud Development Kit (CDK)
+
 - Program to define cloud infrastructure
 
 ### AWS Elastic Beanstalk
+
 - Paas
 - Full control over the configuration
 - Free, but you pay for the underlying services
 - Three architecture models
-  - Single instance deployment
-  - LB + ASG
-  - ASG only
+    - Single instance deployment
+    - LB + ASG
+    - ASG only
 - Health agent pushed metrics to CloudWatch
 - Checks for app health, published health events
 
 ### AWS CodeDeploy
+
 - deploy application automatically
 - Work with EC2 instances
 - Work with on-premise servers
 
 ### AWS CodeCommit
+
 - Git-based repositories
 
 ### AWS CodeBuild
+
 - Code building service in the cloud
 - Compile source code, run tests, and produces packages that are ready to be deployed
 - Only pay for the build time
 
 ### AWS CodePipeline
+
 - Orchestrate different steps
 - Fast delivery and rapid update
 
 ### AWS CodeArtifact
+
 - Software packages
 - Retrieve dependencies straight from CodeArtifact
 
 ### AWS CodeStar
+
 - Quick way to get started for development tools
 - Can edit the code using AWS Cloud9
 
 ### AWS Cloud9
+
 - Cloud IDE
 - Web browser
 
 ### AWS System Manager (SSM)
+
 - Helps you manage your EC2 and On-premises systems at scale
 - Another Hybrid service
 - Get operational insights about the state of your infrastructure
 - Most important features are
-  - Patching automation for enhanced compliance
-  - Run commands across an entire fleet of servers
-  - Store parameter configuration with the SSM Parameter Store
+    - Patching automation for enhanced compliance
+    - Run commands across an entire fleet of servers
+    - Store parameter configuration with the SSM Parameter Store
 - SSM Session Manager
-  - Start a secure shell on your EC2 and on-premises servers
-  - No SSH access, bastion hosts or SSH keys needed
-  - No port 22 needed
-  - Send session log data to S3 or CloudWatch Logs
+    - Start a secure shell on your EC2 and on-premises servers
+    - No SSH access, bastion hosts or SSH keys needed
+    - No port 22 needed
+    - Send session log data to S3 or CloudWatch Logs
 
 ### AWS OpsWorks
+
 - Chef & Puppet help you perform server configuration automatically or repetitive actions
 - Managed Chef & Puppet
 - Alternative to AWS SSM
@@ -352,6 +402,7 @@ Bridge between on-premise data and cloud data in S3
 ## Global Infrastructure
 
 ### Global Application
+
 - Deployed in multiple geographies
 - On AWS this cloud be Regions/Edge Locations
 - Decreased Latency
@@ -359,41 +410,53 @@ Bridge between on-premise data and cloud data in S3
 - Attack protection
 
 ### Route 53
+
 - Managed DNS (Domain Name System)
 - Routing polices
-  - Simple routing policy
-  - Weighted routing policy (Health check)
-  - Latency routing policy
-  - Failover routing policy (Disaster recovery)
- 
+    - Simple routing policy
+    - Weighted routing policy (Health check)
+    - Latency routing policy
+    - Failover routing policy (Disaster recovery)
+
 ### CloudFront
+
 - CDN (Content Delivery Network)
 - Improve read performance, content is cached at the edge
 - DDoS protection, integration with Shield, WAF
 - Origins
-  - S3 bucket
-  - Customer Origin (HTTP)
+    - S3 bucket
+    - Customer Origin (HTTP)
 - Great for static content
 
 ### S3 Transfer Acceleration
-- Increase transfer speed by transferring file to AWS edge location which will forward the data to the S3 bucket in the target region
+
+- Increase transfer speed by transferring file to AWS edge location which will forward the data to the S3 bucket in the
+  target region
 
 ### AWS Global Accelerator
+
 - Improve global application **availability** and **performance** using the AWS global network
 - 2 Anycast static IP are created for your application
 
 ### AWS Outposts
-- AWS will set up and manage "Outposts Racks" within your on-premises infrastructure and you can start leveraging AWS services on-premises 
+
+- AWS will set up and manage "Outposts Racks" within your on-premises infrastructure and you can start leveraging AWS
+  services on-premises
 
 ### AWS WaveLength
-- Wavelength zones are infrastructure deployments embedded within the telecommunications providers' datacenters at the edge of the 5G networks
+
+- Wavelength zones are infrastructure deployments embedded within the telecommunications providers' datacenters at the
+  edge of the 5G networks
 - Brings AWS services to the edge of the 5G networks
 
 ### AWS Local ZOnes
-- Places AWS compute, storage, database, and othrer selected AWS services closer to end users to tun latency-sensitive applications
+
+- Places AWS compute, storage, database, and othrer selected AWS services closer to end users to tun latency-sensitive
+  applications
 - Extend your VPC to more locations
 
 ### Global Applications Architecture
+
 - Single Region, Single AZ
 - Single Region, Multi AZ
 - Multi Region, Active-Passive
@@ -402,10 +465,12 @@ Bridge between on-premise data and cloud data in S3
 ## Cloud Integration
 
 ### SQS
+
 - Simple Queue Service
 - Default retention of messages: 4 days, maximum of 14 days
 
 ### Amazon Kinesis
+
 - real-time big data streaming
 - Kinesis Data Streams
 - Kinesis Data Analytics
@@ -413,50 +478,57 @@ Bridge between on-premise data and cloud data in S3
 - Kinesis Video Streams
 
 ### SNS
+
 - Simple Notification Service
 
 ### Amazon MQ
+
 - MQTT,AMQP
 - Managed message broker service for RabbitMQ and ActiveMQ
 
-
 ## Cloud Monitoring
+
 ### CloudWatch Metrics
+
 - CloudWatch provides metrics for every service in AWS
 - Metric is a variable to monitor
 - Metrics have timestamps
 - Create CloudWatch dashboard for metrics
 - Important Metrics
-  - EC2 instances: CPU Utilization, Status check, Network
-    - Default metrics every 5 minutes
-    - Option for Detailed Monitoring(charged): metrics every 1 minute
-  - EBS volumes: Disk Read/Writes
-  - S3 buckets: BucketSizeBytes, NumberOfObjects, AllRequests
-  - Billing: Total Estimated Charge 
-  - Service Limits: how much you've been using a service API
+    - EC2 instances: CPU Utilization, Status check, Network
+        - Default metrics every 5 minutes
+        - Option for Detailed Monitoring(charged): metrics every 1 minute
+    - EBS volumes: Disk Read/Writes
+    - S3 buckets: BucketSizeBytes, NumberOfObjects, AllRequests
+    - Billing: Total Estimated Charge
+    - Service Limits: how much you've been using a service API
+
 ### CloudWatch Alarm
+
 - Alarms are used to trigger notifications for any metric
 - Alarm actions:
-  - Auto scaling
-  - EC2 Actions
-  - SNS notification
+    - Auto scaling
+    - EC2 Actions
+    - SNS notification
 - Various options
 - Can choose the period on which to evaluate an alarm
 - Alarm status: OK, INSUFFICIENT_DATA, ALARM
 - Billing Alarm can only be set in **US East-1**
 
 ### CloudWatch Logs
+
 - Can collect logs from
-  - Elastic Beanstalk
-  - ECS
-  - AWS lambda
-  - CloudTrail based on filter
-  - CloudWatch log agents: on EC2 machines or on-premises servers
-  - Route53: Log DNS queries
+    - Elastic Beanstalk
+    - ECS
+    - AWS lambda
+    - CloudTrail based on filter
+    - CloudWatch log agents: on EC2 machines or on-premises servers
+    - Route53: Log DNS queries
 - Enables real-time monitoring of logs
 - Adjustable CloudWatch Logs retention
 
 ### Amazon EventBridge (formerly CloudWatch Events)
+
 - Schedule: Cron jobs
 - Event Pattern
 - Schema Registry
@@ -464,18 +536,20 @@ Bridge between on-premise data and cloud data in S3
 - Ability to replay archived events
 
 ### AWS CloudTrail
+
 - Provide governance, compliance, and audit for your AWS account
 - Enabled by default
 - Get history of events/API calls made within your AWS account by:
-  - Console
-  - SDK
-  - CLI
-  - AWS Services
+    - Console
+    - SDK
+    - CLI
+    - AWS Services
 - Can put logs to CloudWatch Logs or S3
 - A trail can be applied to All Regions (default) or a single region
 - CloudTrail Insights: automated analysis of your CloudTrail Events
 
 ### AWS X-Ray
+
 - TroubleShooting performance
 - Understand dependencies in a microservice architecture
 - Pinpoint service issues
@@ -483,191 +557,216 @@ Bridge between on-premise data and cloud data in S3
 - Find errors and exceptions
 
 ### CodeGuru
+
 - ML-powered service for automated code reviews and application performance recommendations
 - Provide two functionalities
-  - CodeGuru Reviewer
-  - CodeGuru Profiler
+    - CodeGuru Reviewer
+    - CodeGuru Profiler
 
 ### AWS Health Dashboard
+
 - Service History
-  - all regions, all services health
-  - RSS feed can subscribe
-  - Previously called AWS service health dashboard
+    - all regions, all services health
+    - RSS feed can subscribe
+    - Previously called AWS service health dashboard
 - Your Account
-  - Previously called AWS Personal Health Dashboard
-  - Provides alerts and remediation guidance when AWS is experiencing events that may impact you
-  - Can aggregate data from an entire AWS Organization
+    - Previously called AWS Personal Health Dashboard
+    - Provides alerts and remediation guidance when AWS is experiencing events that may impact you
+    - Can aggregate data from an entire AWS Organization
 
 ## VPC & Network
+
 ### IP Address in AWS
+
 - IPv4 - Internet Protocol version 4
-  - Public IPv4
-  - EC2 instance get a new public IP address every time you stop then restart it
-  - Private IPv4
-  - Fixed for EC2 instances even start/stop
+    - Public IPv4
+    - EC2 instance get a new public IP address every time you stop then restart it
+    - Private IPv4
+    - Fixed for EC2 instances even start/stop
 - Elastic IP - allows you to attach a fixed public IPv4 address to EC2 instance
-  - Ongoing cost if not attached to EC2 instance of if the EC2 instance is stopped
+    - Ongoing cost if not attached to EC2 instance of if the EC2 instance is stopped
 - IPv6
 
 ### VPC & Subnets Primer
+
 - VPC - Virtual Private Cloud
 - Subnet
-  - Public subnet
-  - Private subnet
+    - Public subnet
+    - Private subnet
 - Route Tables
 - Internet Gateway, public subnet have a route to the internet gateway
-- NAT Gateways (AWS-managed) & NAT Instances (self-managed) allow your instances in your Private Subnets to access internet
+- NAT Gateways (AWS-managed) & NAT Instances (self-managed) allow your instances in your Private Subnets to access
+  internet
 
 ### NACL & Security Groups
+
 - NACL (Network ACL)
-  - A firewall which controls traffic from and to subnet
-  - Can have ALLOW and DENY rules
-  - Are attached at the Subnet level
-  - Rules only include IP addresses
-  - Stateless
+    - A firewall which controls traffic from and to subnet
+    - Can have ALLOW and DENY rules
+    - Are attached at the Subnet level
+    - Rules only include IP addresses
+    - Stateless
 - Security Groups
-  - A firewall that controls traffic to and from an ENI/ an EC2 instance
-  - Rules include IP addresses and other security groups
-  - Stateful
+    - A firewall that controls traffic to and from an ENI/ an EC2 instance
+    - Rules include IP addresses and other security groups
+    - Stateful
 
 ### VPC Flow Logs
+
 - Capture information about IP traffic going into your interfaces:
-  - VPC Flow Logs
-  - Subnet Flow Logs
-  - Elastic Network Interface Flow Logs
+    - VPC Flow Logs
+    - Subnet Flow Logs
+    - Elastic Network Interface Flow Logs
 
 ### VPC Peering
+
 - Connect two VPC, privately using AWS' network
 - Behave as if they were in the same network
 - Not transitive
 
 ### VPC Endpoints
+
 - Allow you to connect to AWS service suing a private network
 - Enhanced security and lower latency
 - VPC Endpoint Gateway: S3 & DynamoDB
 - VPC Endpoint Interface: the rest
 
 ### AWS PrivateLink (VPC Endpoint Services)
+
 - Most secure/scalable way to expose a service to 1000s VPCs
 - Requires a network load balancer (Service VPC) and ENI (Customer VPC)
 
 ### Site to Site VPN & Direct Connect
+
 - Site to Site VPN
-  - Connect an on-premises VPN to AWS
-  - The connection is automatically encrypted
-  - Goes over public internet
-  - Customer Gateway and Virtual Private Gateway
+    - Connect an on-premises VPN to AWS
+    - The connection is automatically encrypted
+    - Goes over public internet
+    - Customer Gateway and Virtual Private Gateway
 - Direct Connect
-  - Establish a physical connection between on-premises and AWS
-  - The connection is private, secure, and fast
-  - Goes over a private network
-  - Take at least a month to establish
+    - Establish a physical connection between on-premises and AWS
+    - The connection is private, secure, and fast
+    - Goes over a private network
+    - Take at least a month to establish
 
 ### AWS Client VPN
+
 - Connect from your compute using OpenVPN to your private network in AWS and on-premises
 
 ### Transit Gateway
+
 - For having transitive peering between thousands of VPC and on-premises, hub and spoke connection
 - One single Gateway to provide this functionality
 - Works with Direct Connect Gateway, VPN connections
 
 ## Security and Compliance
+
 ### AWS Shared Responsibility model
+
 - AWS - Security of the Cloud
-  - Protecting infrastructure
-  - Managed service like S3, DynamoDB
+    - Protecting infrastructure
+    - Managed service like S3, DynamoDB
 - Customer responsibility - Security in the cloud
-  - For EC2, customer is responsible for management of the guest OS, firewall & network configuration, IAM
-  - Encrypting data
+    - For EC2, customer is responsible for management of the guest OS, firewall & network configuration, IAM
+    - Encrypting data
 - Shared control
-  - Patch Management, Configuration Management, Awareness & Training
+    - Patch Management, Configuration Management, Awareness & Training
 
 ### DDos protection
+
 - Distributed Denial-of-Service
 - AWS Shield Standard
 - AWS shield Advanced
 - AWS WAF: Filter specific requests based on rules
 - CloudFront and Route53
-  - Availability protection using global edge network
-  - Combined with AWS Shield
+    - Availability protection using global edge network
+    - Combined with AWS Shield
 - Be ready to scale - leverage AWS Auto Scaling
 
 ### AWS Shield
+
 - AWS Shield Standard
-  - Free service
-  - Provides protection from attacks such as SYN/UDP Floods, Reflection attacks and other layer 3/4
+    - Free service
+    - Provides protection from attacks such as SYN/UDP Floods, Reflection attacks and other layer 3/4
 - AWS Shield Advanced
-  - Optional DDos mitigation service
-  - EC2, ELB, CloudFront, Global Accelerator, Route 53
+    - Optional DDos mitigation service
+    - EC2, ELB, CloudFront, Global Accelerator, Route 53
 
 ### AWS WAF (Web Application Firewall)
+
 - Layer 7 HTTP
 - ALB, API Gateway, CloudFront, AppSync
 - Define Web ACL
-  - IP address, HTTP headers
-  - SQL injection and Cross-Site Scripting (XSS)
-  - Size constraints, geo-match (block countries)
-  - Rate-based rules - for DDos protection
+    - IP address, HTTP headers
+    - SQL injection and Cross-Site Scripting (XSS)
+    - Size constraints, geo-match (block countries)
+    - Rate-based rules - for DDos protection
 
 ### Penetration test on AWS
+
 - 8 services without prior approval
-  - Amazon CE2, NAT Gateways, ELB
-  - RDS
-  - CLoudFront
-  - Aurora
-  - API Gateway
-  - Lambda
-  - Lightsail
-  - Elastic Beanstalk
+    - Amazon CE2, NAT Gateways, ELB
+    - RDS
+    - CLoudFront
+    - Aurora
+    - API Gateway
+    - Lambda
+    - Lightsail
+    - Elastic Beanstalk
 - Prohibited services
-  - DNS zone walking
-  - Dos
-  - flooding
+    - DNS zone walking
+    - Dos
+    - flooding
 
 ### AWS KMS (Key Management Service)
+
 - Data at rest / transit
 - AWS manages the encryption keys for us
 - Encryption opt on:
-  - EBS
-  - S3
-  - Redshift
-  - RDS
-  - EFS
+    - EBS
+    - S3
+    - Redshift
+    - RDS
+    - EFS
 - Encryption automatically enabled
-  - CloudTrail logs
-  - S3 Glacier
-  - Storage Gateway
+    - CloudTrail logs
+    - S3 Glacier
+    - Storage Gateway
 
 ### CloudHSM
+
 - AWS provisions encryption hardware
 - Hardware Security Module
 - Tamper resistant
 
 ### CMK (Customer Master Keys)
+
 - Customer Managed CMK
-  - Create, manager and used by the customer
-  - Rotation policy
-  - bring-your-own-key
+    - Create, manager and used by the customer
+    - Rotation policy
+    - bring-your-own-key
 - AWS managed CMK
-  - Create, manager and used on the customer's behalf by AWS
-  - S3, EBS, Redshift
+    - Create, manager and used on the customer's behalf by AWS
+    - S3, EBS, Redshift
 - AWS owned CMK
-  - AWS own and manages to use in multiple accounts
+    - AWS own and manages to use in multiple accounts
 - CloudHSM keys (customer keystore)
-  - Generated from your own CloudHSM hardware device
-  - Cryptographic operations are performed within the CloudHSM cluster
+    - Generated from your own CloudHSM hardware device
+    - Cryptographic operations are performed within the CloudHSM cluster
 
 ### AWS ACM
+
 - SSL/TLC Certificates
 - HTTPS
 - Free charge for public TLS certificates
 - Automatic TLS certificate renewal
 - Integration with
-  - ELB
-  - CLoudFront
-  - API on API gateway
+    - ELB
+    - CLoudFront
+    - API on API gateway
 
 ### AWS Secrets Manager
+
 - Storing secrets
 - Rotation of secrets
 - Integration with Amazon RDS
@@ -675,430 +774,492 @@ Bridge between on-premise data and cloud data in S3
 - Mostly meant for RDS integration
 
 ### AWS Artifact
+
 - Portal that provides customers with on-demand access to AWS compliance documentation and AWS agreements
 - Artifact Reports
 - Artifact Agreements
 - Can be used to support internal audit or compliance
 
 ### AWS GuardDuty
+
 - Intelligent Threat discovery to protect your AWS account
 - Use ML, anomaly detection, 3rd party data
 - Input data:
-  - CloudTrail Events Logs
-  - VPC Flow Logs
-  - DNS Logs
-  - Optional Features
+    - CloudTrail Events Logs
+    - VPC Flow Logs
+    - DNS Logs
+    - Optional Features
 - Can set up EventBridge rules to be notified in case of findings, to SNS/Lambda
-- Can protect against CryptoCurrency  attacks
+- Can protect against CryptoCurrency attacks
 
 ### Amazon Inspector
+
 - Automated Security Assessments
 - For EC2 instance
-  - Leveraging the AWS System Manager agent
+    - Leveraging the AWS System Manager agent
 - For Container images push to Amazon ECR
 - For Lambda functions
 - Reporting & Integration with AWS Security HUb, AWS EventBridge
 
 ### AWS Config
+
 - Auditing and recording compliance of your AWS resources
 - Record configurations and changes over time
 - Store in S3
 
 ### AWS Macie
+
 - ML and pattern matching to discover and protect sensitive data (such as PII)
 
 ### AWS Security Hub
+
 - Central security tool to manage security across several AWS accounts and automate security checks
 - Dashboard integrated
 - Need to enable AWS config
 
 ### AWS Detective
-- Analyzes, investigates and quickly identifies the root cause of security issues or suspicious activities (using ML and graphs)
+
+- Analyzes, investigates and quickly identifies the root cause of security issues or suspicious activities (using ML and
+  graphs)
 - Collect from VPC flow logs, CLoudTrail, and GuardDuty
 - Visualizations
 
 ### AWS Abuse
+
 - Report suspected AWS resources used for abusive or illegal purposes
 - Abusive & prohibited behaviors are:
-  - Spam
-  - Port Scanning
-  - DDos
-  - Intrusion attempts
-  - Hosting objectionable or copyrighted content
-  - Distributing malware
+    - Spam
+    - Port Scanning
+    - DDos
+    - Intrusion attempts
+    - Hosting objectionable or copyrighted content
+    - Distributing malware
 
 ### Root user privileges
+
 - Account owner
 - Complete access to all AWS services and resources
 - Actions can be performed
-  - **Change account settings**
-  - View certain tax invoices
-  - **Close your AWS account**
-  - Restore IAM user permissions
-  - **Change or cancel AWS support plan**
-  - **Register as a seller in the Reserved Instance Marketplace**
-  - Configure and S3 to enable MFA
-  - Edit or delete S3 bucket policy that includes an invalid VPC ID or VPC endpoint ID
-  - Sing up fpr GovCloud
+    - **Change account settings**
+    - View certain tax invoices
+    - **Close your AWS account**
+    - Restore IAM user permissions
+    - **Change or cancel AWS support plan**
+    - **Register as a seller in the Reserved Instance Marketplace**
+    - Configure and S3 to enable MFA
+    - Edit or delete S3 bucket policy that includes an invalid VPC ID or VPC endpoint ID
+    - Sing up fpr GovCloud
 
 ### IAM Access Analyzer
+
 - Find out which resources are shared externally
 - Define Zone of Trust
 
 ## Machine Learning
 
 ### Amazon Rekognition
+
 - Find objects, people, text, scenes in images and videos using ML
 - Use cases:
-  - Labeling
-  - Content Moderation
-  - Text Detection
-  - Face Detection and Analysis
-  - Face Search and Verification
-  - Celebrity Recognition
-
+    - Labeling
+    - Content Moderation
+    - Text Detection
+    - Face Detection and Analysis
+    - Face Search and Verification
+    - Celebrity Recognition
 
 ### AWS Transcribe
+
 - Automatically convert speech to text
 - Use ASR (automatic speech recognition)
 - Automatically remove PII using Redaction
 
 ### Amazon Polly
+
 - Turn text into lifelike speech using deep learning
 - Allowing you to create applications that talk
 
 ### AWS Translate
+
 - Natural and accurate language translation
 
 ### AWS Lex & Connect
+
 - Lex
-  - ASR to convert speech to text
-  - Natural Language understanding to recognize the intent of text, callers
-  - Helps build chatbots, call center bots
+    - ASR to convert speech to text
+    - Natural Language understanding to recognize the intent of text, callers
+    - Helps build chatbots, call center bots
 - Amazon connect
-  - Virtual contact center
-  - Integrate with other CRM systems or AWS
+    - Virtual contact center
+    - Integrate with other CRM systems or AWS
 
 ### AWS Comprehend
+
 - For Natural Language Procession - NLP
 - Fully managed and serverless service
 - Use machine learning to find insights and relationships in text
 
 ### AWS Sagemaker
+
 - Fully managed service to build ML models
 
 ### AWS Forecast
+
 - Use ML to deliver highly accurate forecast
 
 ### AWS Kendra
+
 - Fully managed document service powered by ML
 - Natural language search capabilities
 - Incremental learning
 - Manually fine-tune search results
 
 ### AWS Personalize
+
 - Fully Managed ML-service to build apps with real-time personalized recommendations
 
 ### AWS Textract
+
 - Automatically extracts text, handwriting, and data from any scanned documents using AI and ML
 - Extract data from forms and tables
 
 ## Account management, billing & support
+
 ### AWS Organizations
+
 - Global service
 - Allow to manage multiple AWS accounts
 - The main account is master account
 - Cost benefits:
-  - Consolidate billing
-  - Pricing benefits from aggregated usage
-  - pooling of Reserved EC2 instances for optimal savings
+    - Consolidate billing
+    - Pricing benefits from aggregated usage
+    - pooling of Reserved EC2 instances for optimal savings
 - API is available to automate AWS account creation
 - Restrict account privileges using Service Control Polices
-  - Whitelist or blacklist IAM actions
-  - Applied at the OU or Account level
-  - Not apply to Master Account
-  - The SCP does not affect service-linked roles
-  - SCP must have an explicit Allow (not allow anything by default)
+    - Whitelist or blacklist IAM actions
+    - Applied at the OU or Account level
+    - Not apply to Master Account
+    - The SCP does not affect service-linked roles
+    - SCP must have an explicit Allow (not allow anything by default)
 - Using tagging standards for billing purposes
 
 ### AWS Organization - Consolidated Billing
+
 - Combine usage - Share volume pricing, reserved instances and saving plan discounts
 - One bill
 - Reserved instances discount can be turned off
 
 ### AWS Control Tower
+
 - Easy way to set up and govern a secure and compliant multi-account AWS environment based on best practices
 - Benefits
-  - Automate setup environments
-  - Automate ongoing policy management using guardrails
-  - Detect policy violations and remediate them
-  - Monitor compliance through an interactive dashboard
+    - Automate setup environments
+    - Automate ongoing policy management using guardrails
+    - Detect policy violations and remediate them
+    - Monitor compliance through an interactive dashboard
 - Runs on top of AWS Organizations
 
 ### AWS Service Catalog
+
 - Quick self-service portal to launch a set of authorized products pre-defined by admins
 
 ### Pricing Model in AWS
+
 - Pay as you go
 - Save when you reserve
 - Pay less by using more
 - Pay less as AWS grows
 
 #### Compute pricing -EC2
+
 - Number of instances
 - Instance configuration
 - ELB running and amount of data processed
 - Detailed monitoring
 - On-demand instances
-  - Minimum of 60s
-  - Pay per second (Linux/Windows) or per hour (other)
+    - Minimum of 60s
+    - Pay per second (Linux/Windows) or per hour (other)
 - Reserved instances
-  - 75% discount
-  - 1 or 3 year commitment
-  - All upfront, partial upfront, no upfront
+    - 75% discount
+    - 1 or 3 year commitment
+    - All upfront, partial upfront, no upfront
 - Spot instances
-  - 90% discount
-  - Bid for unused capacity
+    - 90% discount
+    - Bid for unused capacity
 - Saving plans
-
 
 **todo**
 
 ### Savings Plan
+
 - Commit a certain $ amount per hour for 1 or 3 years
 - Easiest way to setup long-term commitments on AWS
 - EC2 Saving plan
-  - 72% discount
-  - Commit to usage of individual instance families in a region
+    - 72% discount
+    - Commit to usage of individual instance families in a region
 - Compute savings plan
-  - 66% discount
-  - Family, Region, size, OS, tenancy, compute options
-  - EC2, Fargate, Lambda
+    - 66% discount
+    - Family, Region, size, OS, tenancy, compute options
+    - EC2, Fargate, Lambda
 - Machine Learning Savings plan
-  - SageMaker
+    - SageMaker
 
 ### AWS Compute Optimizer
+
 - Reduce costs and improve performance by recommending optimal AWS resources for your workloads
 - Use ML to analyze your resources' configurations and their utilization CloudWatch metrics
 - Support
-  - EC2
-  - ASG
-  - EBS
-  - Lambda
+    - EC2
+    - ASG
+    - EBS
+    - Lambda
 
 ### AWS Billing and Costing Tools
-- Estimate costs in the cloud
-  - Pricing Calculator
-- Tracking costs in the cloud
-  - Billing Dashboard
-  - Cost Allocation Tags
-  - Cost and Usage reports
-  - Cost Explorer
-- Monitoring against costs plans
-  - Billing Alarms
-  - Budgets
 
+- Estimate costs in the cloud
+    - Pricing Calculator
+- Tracking costs in the cloud
+    - Billing Dashboard
+    - Cost Allocation Tags
+    - Cost and Usage reports
+    - Cost Explorer
+- Monitoring against costs plans
+    - Billing Alarms
+    - Budgets
 
 #### AWS Pricing Calculator
+
 - Estimate the cost for your solution architecture
 
 #### AWS Billing Dashboard
+
 - AWS Free tier dashboard
 
 #### Cost Allocation Tags
+
 - Track cost on a detailed level
 - AWS generated tags:
-  - Automatically applied to the resource you create
-  - Start with Prefix aws
+    - Automatically applied to the resource you create
+    - Start with Prefix aws
 - User-defined tags
-  - Defined by the user
-  - Start with Prefix user
--  Tag can be used to create Resource Groups
+    - Defined by the user
+    - Start with Prefix user
+- Tag can be used to create Resource Groups
 
 ### Cost and Usage Reports
+
 - The most comprehensive set of AWS cost and usage data available
 
 ### Cost Explorer
+
 - Visualize, understand and manage your AWS costs and usage over time
 - Choose an optimal Savings Plan
 - Forecast usage up to 12 months
 - Monthly cost
 
-
 ### Billing Alarms in CloudWatch
+
 - Billing data metric is stored in CloudWatch us-east-1
 - Actual cost
 
 ### AWS Budgets
+
 - Create budget and send alarms when costs exceeds the budgets
 - 4 type:
-  - Usage
-  - Cost
-  - Reservation
-  - Saving Plans
+    - Usage
+    - Cost
+    - Reservation
+    - Saving Plans
 
 ### AWS Cost Anomaly Detection
+
 - Continuously monitor your cost and usage using ML to detect unusual spends
 
 ### AWS Service Quotas
+
 - Notify you when you are close to a service quota value threshold
 - Create CloudWatch Alarms on the Service Quota console
 
 ### Trusted Advisor
+
 - High level AWS account assessment
 - 5 categories
-  - Cost optimization
-  - Performance
-  - Security
-  - Fault tolerance
-  - Service limits
-- Support plans
-  - 7 core checks - Basic/Developer plan
-    - S3 Bucket permissions
-    - Security Group - Specific Ports Unrestricted
-    - IAM use
-    - EBS public snapshot
-    - RDS public snapshot
+    - Cost optimization
+    - Performance
+    - Security
+    - Fault tolerance
     - Service limits
-    - MFA on Root account
-  - Full check - Business/Enterprise
-    - Set CloudWatch alarm
-    - Programmatic Access using AWS Support API
+- Support plans
+    - 7 core checks - Basic/Developer plan
+        - S3 Bucket permissions
+        - Security Group - Specific Ports Unrestricted
+        - IAM use
+        - EBS public snapshot
+        - RDS public snapshot
+        - Service limits
+        - MFA on Root account
+    - Full check - Business/Enterprise
+        - Set CloudWatch alarm
+        - Programmatic Access using AWS Support API
 
 ### AWS Support Plan
+
 - Basic Support
-  - Free
-  - 24x7 access to customer service, documentation, white papers, and support forums
-  - 7 core check in Trusted Advisor
-  - AWS Personal Health Dashboard
+    - Free
+    - 24x7 access to customer service, documentation, white papers, and support forums
+    - 7 core check in Trusted Advisor
+    - AWS Personal Health Dashboard
 - Developer Plan
-  - Business hours email access to Cloud Support Associates
-  - Unlimited cases / one primary contact
-  - Case severity / response time
-    - General guidance < 24 business hours
-    - System impaired < 12 business hours
+    - Business hours email access to Cloud Support Associates
+    - Unlimited cases / one primary contact
+    - Case severity / response time
+        - General guidance < 24 business hours
+        - System impaired < 12 business hours
 - Business Plan
-  - 24x7 phone,email, and chat access to Cloud Support Engineers
-  - Unlimited cases / Unlimited contacts
-  - Access to Infrastructure Event Management for additional fee
-  - Case severity / response time
-    - General guidance < 24 business hours
-    - System impaired < 12 business hours
-    - **Production system impaired < 4 hours**
-    - **Production system down < 1 hour**
+    - 24x7 phone,email, and chat access to Cloud Support Engineers
+    - Unlimited cases / Unlimited contacts
+    - Access to Infrastructure Event Management for additional fee
+    - Case severity / response time
+        - General guidance < 24 business hours
+        - System impaired < 12 business hours
+        - **Production system impaired < 4 hours**
+        - **Production system down < 1 hour**
 - Enterprise On-Ramp
-  - Access to pool of Technical Account Managers (TAM)
-  - Concierge Support Team (billing and account best practices)
-  - Infrastructure Event Management, Well-Architected & Operations Reviews
-  - Case severity / response time
-    - ...
-    - **Production system impaired < 4 hours**
-    - **Production system down < 1 hour**
+    - Access to pool of Technical Account Managers (TAM)
+    - Concierge Support Team (billing and account best practices)
+    - Infrastructure Event Management, Well-Architected & Operations Reviews
+    - Case severity / response time
+        - ...
+        - **Production system impaired < 4 hours**
+        - **Production system down < 1 hour**
 - Enterprise
-  - Designated TAM
-  - Concierge Support Team
-  - Infrastructure Event Management, Well-Architected & Operations Reviews
-  - Case severity / response time
-    - ...
-    - **Production system impaired < 4 hours**
-    - **Production system down < 1 hour**
-    - **Business-critical system down < 15 minutes**
+    - Designated TAM
+    - Concierge Support Team
+    - Infrastructure Event Management, Well-Architected & Operations Reviews
+    - Case severity / response time
+        - ...
+        - **Production system impaired < 4 hours**
+        - **Production system down < 1 hour**
+        - **Business-critical system down < 15 minutes**
 
 ## Advanced Identity
 
 ### AWS STS (Security Token Service)
+
 - Enable you to create temporary, limited-privileges credential to access your AWS resources
 - Short-term credentials, you configure expiration period
 - Use cases
-  - Identity federation
-  - IAM Roles for cross/same account access
-  - IAM Roles for Amazon EC2
+    - Identity federation
+    - IAM Roles for cross/same account access
+    - IAM Roles for Amazon EC2
 
 ### AWS Cognito
+
 - Identity for your Web and Mobile application users
 - Instead of creating them in IAM user
 
 ### AWS Directory Services
+
 - AWS Managed Microsoft AD
 - AD Connector
 - Simple AD
 
 ### AWS IAM Identify Center
+
 - One login (single sign-on) for all your
 
 ## Other AWS Services
 
 ### AWS WorkSpaces
+
 - Managed Desktop as a Service (DaaS)  solution to easily provision Windows or Linux desktops
 - Multi Regions
 
 ### AWS AppStream 2.0
+
 - Desktop Application Streaming Service
 - The application is delivered from within a web browser
 
 ### AWS IoT Core
+
 - AWS IoT Core allows you to easily connect IoT devices to the AWS cloud
 - Serverless, secure, scalable
 
 ### AWS Elastic Transcoder
+
 - Convert media files stored in S3 into media files in the formats required by consumer playback devices
 
 ### AWS AppSync
+
 - Store and sync data across mobile and web apps in real-time
 - Make use of GraphQL
 
 ### AWS Amplify
+
 - A set of tools and services that helps you develop and deploy scalable full stack web and mobile applications
 
 ### AWS Device Farm
+
 - Fully-manage service that tests your web and mobile apps against desktop browsers, real mobile devices and tablets
 
 ### AWS Backup
+
 - Fully-managed service to centrally manage and automate backups across services
 
 ### Disaster Recovery Strategies
+
 - Backup and restore
 - Pilot Light
 - Warm stand by
 - Multi site / Hot-Site
 
 ### AWS Elastic Disaster Recovery
+
 - CloudEndure Disaster Recovery
 - Quickly and easily recover your physical, virtual and cloud-based servers into AWS
 - Continuous block-level replication for your servers
 
 ### AWS DataSync
-- Move large amount data from on-premises to AWS 
+
+- Move large amount data from on-premises to AWS
 
 ### AWS Application Discovery Service
+
 - Plan migration projects by gathering information about on-premises data centers
 - Server utilization data and dependency mapping are important for migrations
-  - Agentless Discovery
-  - Agent-based Discovery
+    - Agentless Discovery
+    - Agent-based Discovery
 - Resulting data can be viewed within AWS Migration Hub
 
 ### AWS Application Migration Service
+
 - Lift and shift (rehost)
 - Convert your physical, virtual and cloud-based servers to run natively on AWS
 
 ### AWS Fault injection simulator (FIS)
+
 - a fully managed service for running fault injection experiments on AWS workloads
 - Chaos Engineering
 
 ### AWS Step Functions
+
 - Build Serverless visual workflow to orchestrate your Lambda functions
 - Parallel, conditions, sequence, timeouts, error handling
 
 ### AWS Ground Station
+
 - Fully managed service that lets you control satellite communications process data, and scale your satellite operations
 
 ### AWS Pinpoint
+
 - Scalable 2way (outbound/inbound) **marketing** communications service
 
 ## AWS Architecting & Ecosystem
 
 ### AWS Cloud Best practices principle
+
 ### Well Architected Framework 6 pillars
+
 - Operational Excellence
 - Security
 - Reliability
@@ -1107,122 +1268,207 @@ Bridge between on-premise data and cloud data in S3
 - Sustainability
 
 #### Operational Excellence
+
 - Design principles
-  - Perform operations as code
-  - Annotate documentation
-  - Make frequent, small, reversible changes
-  - Refine operations procedures frequently
-  - Anticipate failure
-  - Learn from all operational failures
+    - Perform operations as code
+    - Annotate documentation
+    - Make frequent, small, reversible changes
+    - Refine operations procedures frequently
+    - Anticipate failure
+    - Learn from all operational failures
 
 ### Security
+
 - Design principles
-  - Implement a strong  identity foundation
-  - Enable traceability
-  - Apply security at all layers
-  - Automate security best practices
-  - Protect data in transit and at rest
-  - Keep people away from data
+    - Implement a strong identity foundation
+    - Enable traceability
+    - Apply security at all layers
+    - Automate security best practices
+    - Protect data in transit and at rest
+    - Keep people away from data
 
 ### Reliability
+
 - Design principles
-  - Test recovery procedures
-  - Automatically recover from failure
-  - Scale horizontally to increase aggregate system availability
-  - Stop guessing capacity
-  - Manage change in automation
+    - Test recovery procedures
+    - Automatically recover from failure
+    - Scale horizontally to increase aggregate system availability
+    - Stop guessing capacity
+    - Manage change in automation
 
 ### Performance Efficiency
+
 - Design principles
-  - Democratize advanced technologies
-  - Go global in minutes
-  - Use serverless architectures
-  - Experiment more often
-  - Mechanical sympathy
+    - Democratize advanced technologies
+    - Go global in minutes
+    - Use serverless architectures
+    - Experiment more often
+    - Mechanical sympathy
 
 ### Cost Optimization
+
 - Design principles
-  - Adopt a consumption mode
-  - Measure overall efficiency
-  - Stop spending money on data center operations
-  - Analyze and attribute expenditure
-  - Use managed and application leve services to reduce cost of ownership
+    - Adopt a consumption mode
+    - Measure overall efficiency
+    - Stop spending money on data center operations
+    - Analyze and attribute expenditure
+    - Use managed and application leve services to reduce cost of ownership
 
 ### Sustainability
-- Design principles
-  - Understand your impact
-  - Establish sustainability goals
-  - Maximize utilization
-  - Anticipate and adopt new, more efficient hardware and software offerings
-  - Use managed services
-  - Reduce the downstream impact of your cloud workloads
 
+- Design principles
+    - Understand your impact
+    - Establish sustainability goals
+    - Maximize utilization
+    - Anticipate and adopt new, more efficient hardware and software offerings
+    - Use managed services
+    - Reduce the downstream impact of your cloud workloads
 
 ### AWS Well-Architected Tool
+
 - Review your architectures against the 6 pillars and adopt architectural best practices
 
 ### AWS Cloud Adoption Framework (CSF)
+
 - Capabilities
-  - Business
-  - People
-  - Governance
-  - Platform
-  - Security
-  - Operations
+    - Business
+    - People
+    - Governance
+    - Platform
+    - Security
+    - Operations
 - Transformation Domains
-  - Technology
-  - Process
-  - Organization
-  - Product
+    - Technology
+    - Process
+    - Organization
+    - Product
 
 ### AWS Right Sizing
+
 - Start small
 - Lowest possible cost
-  - Before a cloud Migration
-  - continuously after the cloud onboarding process
+    - Before a cloud Migration
+    - continuously after the cloud onboarding process
 - Cloud Watch, Cost Explorer, Trusted Advisor
 
 ### AWS Ecosystem
+
 - AWS Blogs
 - AWs Forums (community)
 - AWS Whitepapers & Guides
 - AWS Partner Solutions (Quick Start)
-  - CloudFormation, Template
+    - CloudFormation, Template
 - AWS Solutions
-  - Vetted Technology Solutions for the AWS cloud
+    - Vetted Technology Solutions for the AWS cloud
 - AWS Marketplace
-  - Custom AMI
-  - CloudFormation templates
-  - Saas
-  - Containers
+    - Custom AMI
+    - CloudFormation templates
+    - Saas
+    - Containers
 - AWS Training
-  - Digital
-  - Classroom
+    - Digital
+    - Classroom
 - AWS Professional Services & Partner Network
-  - APN Technology Partners
-  - Consulting
-  - Training
-  - Competency Program
-  - Navigate Program
+    - APN Technology Partners
+    - Consulting
+    - Training
+    - Competency Program
+    - Navigate Program
 
 ### AWS Knowledge center
+
 - Contains the most frequent & common questions and requests
 
 ### AWS IQ
+
 - Quickly find professional help for your AWS projects
 - Engage and pay 3rd party experts for on-demand project work
 
 ### AWS re:Post
+
 - AWS managed Q&A service, replaces of AWS Forums
 
 ### AWS managed service (AMS)
+
 - Provide infrastructure and application support on AWS
 - Team of AWS experts who manage and operate your infrastructure for security, reliability and availability
- 
+
 ### Cloud Foundations
--Guided path to help customers deploy, configure, and secure their new workloads while ensuring they are ready for on-going operations in the cloud
 
+-Guided path to help customers deploy, configure, and secure their new workloads while ensuring they are ready for
+on-going operations in the cloud
 
+### AWS Regions
+
+- Cluster of data centers
+- Most AWS services are region-scoped
+
+### AWS Availability Zones
+
+- Each region has min 3, max 6 AZ
+- Each AZ has one or more discrete data centers with redundant power, networking and connectivity
+- Separate from each other, isolated from disasters
+- Connected with high bandwidth, ultra-low latency networking
+
+### AWS Points of Presence (Edge Locations)
+
+- 400+ (400 + edge locations & 10 + Regional Caches)
+- Content is delivered to end users with lower latency
+
+### IAM
+
+- Identity and Access Management
+- Global Service
+
+#### Users & Groups
+
+- Users are people within your organization, and can be grouped
+- Groups only contain users, not other groups
+- Users don't have to belong to a groups, and can belong to multiple groups
+
+#### Permissions
+
+- Policies : JSON documents
+- Define permissions of the users
+- Least privilege principle
+
+#### Password Policy
+
+- Minimum password length
+- Require specific character types
+- Password expiration
+- Prevent password re-use
+
+#### Multi Factor Authentication - MFA
+
+- Virtual MFA device
+- Universal 2nd Factor (U2F) Security Key
+- Hardware Key Fob MFA device
+- Hardware Key Fob MFA device for AWS GovCloud (US)
+
+#### IAM Roles for Services
+
+- Some AWS service will need to perform actions on your behalf
+- We will assign permissions to AWS services with IAM rol
+
+#### IAM Security Tools
+
+- IAM Credential Report (account-level)
+    - A report that lists all your account's users and the status of their various credentials
+- IAM Access Advisor (user-level)
+    - Show the service permissions granted to a user and when those services are last accessed
+    - To revise your polices
+
+#### IAM Section - Summary
+
+- Users: mapped to a physical user, has a password for AWS console
+- Groups: contains users only
+- Policies: JSON document that outlines permissions for users or groups
+- Roles: for EC2 instances or AWS services
+- AWS CLI: Manage AWS services using command-line
+- AWS SDK: Manage AWS services using a programming language
+- Access keys: Access AWS using CLI or SDK
+- Audit: IAM credential Reports & IAM Access Advisor
 
 AMI
 Amazon machine image
