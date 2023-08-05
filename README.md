@@ -248,7 +248,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
   - gp3:
     - Can increase IOPS up to 16000 and throughput up to 1000MiB/s independently
   - gp2:
-    - Size of the volume and IOPSare linked
+    - Size of the volume and IOPS are linked
     - 3 IOPS per GB
 - io1/io2 (SSD 4GB-16TB): Highest-performance SSD volume for mission-critical low-latency or high-throughput workloads
   - More than 16000 IOPS
@@ -278,7 +278,16 @@ EC2 instance metadata is data about your instance that you can use to manage the
 - Up to 16 EC2 Instances at a time
 - Must use a file system that's cluster-aware
 
-### EBS Encryption 
+### EBS Encryption
+
+- When create an encrypted EBS volume:
+  - Data at rest is encrypted inside the volume
+  - All the data in flight moving between the instance and the volume is encrypted
+  - All snapshots are encrypted
+- Encryption and decryption are handled transparently
+- Encryption has a minimal impact on latency
+- Copying an unencrypted snapshot allows encryption
+- Snapshots of encrypted volumes are encrypted
 
 ### AMI
 
@@ -298,6 +307,52 @@ EC2 instance metadata is data about your instance that you can use to manage the
 - Good for buffer/cache/scratch data/temporary content
 - Risk of data loss if hardware fails
 - Backup and Replication are client responsibility
+
+### Amazon EFS - Elastic File System
+
+- Managed NFS (Network file system) that can be mounted on many EC2
+- EFS works with EC2 instances in multi-AZ
+- Highly available, scalable, expensive, pay per use
+- Compatible with Linux based AMI
+- Use NFSv4.1 protocol
+- Use security group to control access to EFS
+- Performance & Storage Classes
+  - EFS Sale
+    - Grow to PB network automatically
+  - Performance mode (set at EFS creation time)
+    - General Purpose
+    - Max I/O
+  - Throughput Mode
+    - Bursting
+      - Throughput scales with files system size
+    - Provisioned
+      - set your throughput regardless of storage size
+    - Elastic
+      - Used for unpredictable workloads
+  - Storage Classes
+    - Storage Tiers (lifecycle management feature)
+      - Standard
+      - Infrequent access
+    - Availability and durability
+      - Standard/Regional
+      - One Zone
+    - Over 90% in cost savings
+
+### EBS vs EFS
+
+- EBS
+  - one instance (except multi-attach io1/io2)
+  - are locked at the AZ level
+  - gp2: IU increases if the disk size increases
+  - io1: can increase IO independently
+  - To migrate EBS volume across AZ
+    - Take snapshot and restore to another AZ
+    - Backups use IO
+  - Root EBS volumes get terminated by default if the EC2 terminated
+- EFS
+  - Mount 100s of instances across AZ
+  - EFS share websites files
+  - Only for Linux instances
 
 ### Amazon FSx
 
