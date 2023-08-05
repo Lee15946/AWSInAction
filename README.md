@@ -326,7 +326,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
     - Bursting
       - Throughput scales with files system size
     - Provisioned
-      - set your throughput regardless of storage size
+      - Set your throughput regardless of storage size
     - Elastic
       - Used for unpredictable workloads
   - Storage Classes
@@ -2364,6 +2364,6 @@ manage any testing infrastructure.
 
 Credential Reports
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODI5MjA2NTA5LC00NzMxOTExMDQsLTExNj
-k4ODg4NTBdfQ==
+eyJoaXN0b3J5IjpbNzQzNTEzMTAxLDgyOTIwNjUwOSwtNDczMT
+kxMTA0LC0xMTY5ODg4ODUwXX0=
 -->
