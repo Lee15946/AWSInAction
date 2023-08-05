@@ -368,7 +368,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
 		- Scale up/down
 	- Horizontal Scalability (Elasticity)
 		- Scale out/in
-
+- High Availability
 
 High availability
 
@@ -2365,6 +2365,6 @@ manage any testing infrastructure.
 
 Credential Reports
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMDM4MjMwMzcsLTQ3MzE5MTEwNCwtMT
-E2OTg4ODg1MF19
+eyJoaXN0b3J5IjpbMTAyMTY3MzYwNywtNDczMTkxMTA0LC0xMT
+Y5ODg4ODUwXX0=
 -->
