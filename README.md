@@ -12,7 +12,6 @@
 ### EC2 sizing & configuration options
 
 - Operating system (OS): Linux,Windows,MacOS
--
 - CPU
 - RAM
 - Storage
@@ -30,7 +29,6 @@
 
 EC2 instance metadata
 EC2 instance metadata is data about your instance that you can use to manage the instance.
-
 
 #### Classic Ports to know
 
@@ -219,15 +217,87 @@ EC2 instance metadata is data about your instance that you can use to manage the
   - Available for On-Demand, Reserved and Spot instances
   - An instance can NOT be hibernated more than 60 days
 
+## EC2 instance storage
+
 ### EBS volume
 
-It's a network drive
-It's locked to an AZ
-Have a provisioned capacity
-
+- An Elastic Block store s a network drive
+- Multiple-attache feature for some EBS
+- Bound to a specific availability zone
+- Have a provisioned capacity
+- Delete on Termination attribute
+  - Preserve root volume when instance is terminated
 - EBS snapshot
-  - EBS snapshot archive tier
-  - EBS recycle bin
+  - Make a backup of your EBS at a point in time
+  - Not necessary to detach volume to do snapshot, but recommend
+  - Can copy snapshots across AZ or Region
+  - Snapshots Features
+    - EBS snapshot archive tier
+      - 75% cheaper
+      - Takes within 24 to 72 hours for restoring the archive
+    - EBS recycle bin
+      - Setup rule to retain deleted snapshots so you can recover them after an accidental deletion
+      - Specify retention (1 day to 1 year)
+    - Fast Snapshot Restore (FSR)
+      - Force full initialization of snapshot to have no latency on the first use ($$$$)
+
+### EBS Volume Types
+
+- gp2/gp3 (SSD 1GB - 16TB): General purpose SSD volume that balances price and performance for a wide variety of workloads
+  - Cost effective storage, low-latency
+  - gp3:
+    - Can increase IOPS up to 16000 and throughput up to 1000MiB/s independently
+  - gp2:
+    - Size of the volume and IOPSare linked
+    - 3 IOPS per GB
+- io1/io2 (SSD 4GB-16TB): Highest-performance SSD volume for mission-critical low-latency or high-throughput workloads
+  - More than 16000 IOPS
+  - Great for database workloads
+  - Can increase PIOPS independently from storage size
+  - Max PIOPS: 64000 for Nitro EC2 instances & 32000 for other
+  - io2 have more durability and more IOPS per GiB
+  - io2 Block Express (4GB - 64TB)
+    - Sub-millisecond latency
+    - Max PIOPS: 256000
+  - Support EBS multi-attach
+- st1(HDD 125GB - 16TB): Low cost HDD volume designed for frequently accessed, throughput intensive workloads
+  - Throughput Optimized HDD
+  - Big data, data warehouses, Log processing
+- sc1(HDD same): Lowest cost HDD volume designed for less frequently accessed workloads
+  - Cold HDD
+  - For data is infrequently accessed
+- **Only gp2/gp3 and io1/io2 can be used as boot volumes**
+
+### EBS Mull-Attach - io1/io2 family
+
+- Attach the same EBS volume to multiple EC2 instances in same AZ
+- Each instance has full read/write permission to the high-performance volume
+- Use case:
+  - Higher application availability in clustered Linux applications
+  - Applications must manage concurrent write operations
+- Up to 16 EC2 Instances at a time
+- Must use a file system that's cluster-aware
+
+### EBS Encryption 
+
+### AMI
+
+- Amazon Machine Image
+- Customization of an EC2 instance
+- Built for specific region
+- Can launch EC2 instances from
+  - A public AMI
+  - Your own AMI
+  - An AWS marketplace AMI
+
+### EC2 instance store
+
+- High performance hardware disk
+- Better I/O performance
+- Ephemeral, lose storage if stopped
+- Good for buffer/cache/scratch data/temporary content
+- Risk of data loss if hardware fails
+- Backup and Replication are client responsibility
 
 ### Amazon FSx
 
