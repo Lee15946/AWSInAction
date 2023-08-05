@@ -30,7 +30,7 @@
 EC2 instance metadata
 EC2 instance metadata is data about your instance that you can use to manage the instance.
 
-#### Classic Ports to know
+### Classic Ports to know
 
 - 22 = SSH (Secure shell) - log into Linux instance
 - 21 = FTP (File Transfer Protocol) - upload files into a file share
@@ -2362,5 +2362,5 @@ manage any testing infrastructure.
 
 Credential Reports
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMTM0OTk5OTFdfQ==
+eyJoaXN0b3J5IjpbLTExNjk4ODg4NTBdfQ==
 -->
