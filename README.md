@@ -369,10 +369,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
 	- Horizontal Scalability (Elasticity)
 		- Scale out/in
 - High Availability
-
-High availability
-
-- at least 2 AZ
+	- Running your application in at least 2 data centers (AZs)
 
 ### ELB (Elastic load balancer)
 
@@ -2365,6 +2362,6 @@ manage any testing infrastructure.
 
 Credential Reports
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAyMTY3MzYwNywtNDczMTkxMTA0LC0xMT
+eyJoaXN0b3J5IjpbLTYyNTI2NDcxNywtNDczMTkxMTA0LC0xMT
 Y5ODg4ODUwXX0=
 -->
