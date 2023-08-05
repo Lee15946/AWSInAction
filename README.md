@@ -362,10 +362,10 @@ EC2 instance metadata is data about your instance that you can use to manage the
 - FSx for Windows File Server
 - FSx for NetApp ONTAP
 
-## Scalability & High Avaliablity
+## Scalability & High Availability
 - Scalability
 	- Vertical Scalability
-	- Horizontal Scalabiity (Elasticity)
+	- Horizontal Scalability (Elasticity)
 	- , sadfih
 
 - Vertical scalability (scale up/down)
@@ -2366,6 +2366,6 @@ manage any testing infrastructure.
 
 Credential Reports
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQxNDg3MDczMiwtNDczMTkxMTA0LC0xMT
-Y5ODg4ODUwXX0=
+eyJoaXN0b3J5IjpbLTYyNzk5NzMzLC00NzMxOTExMDQsLTExNj
+k4ODg4NTBdfQ==
 -->
