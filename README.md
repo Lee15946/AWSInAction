@@ -1,5 +1,75 @@
 # AWS In Action
 
+## IAM Section 
+
+- Identity and Access Management
+- Global Service
+- Root account created by default, shouldn't be used or shared
+
+### Users & Groups
+
+- Users are people within your organization, and can be grouped
+- Groups only contain users, not other groups
+- Users don't have to belong to a group, and can belong to multiple groups
+
+### IAM Policies
+
+- Policies: JSON documents
+- Define permissions of the users
+- Least privilege principle
+- IAM policy structure:
+	- Version
+	- Id: (optional)
+	- Statement: one or more individual statements (required)
+		- Sid: (optional)
+		- Effect: Allow/Deny
+		- Action: lists of actions
+		- Resource: lists of resources to which action applied to
+		- Condition: (optional)
+
+### Password Policy
+
+- Minimum password length
+- Require specific character types
+- Password expiration
+- Prevent password re-use
+
+### Multi Factor Authentication - MFA
+
+- Virtual MFA device
+- Universal 2nd Factor (U2F) Security Key
+- Hardware Key Fob MFA device
+- Hardware Key Fob MFA device for AWS GovCloud (US)
+
+### Access AWS
+- AWS Management console
+- AWS Command Line interface (CLI)
+- AWS Software Developer Kit (SDK)
+- Access Key and Secret Access Key
+
+#### IAM Roles for Services
+
+- Some AWS service will need to perform actions on your behalf
+- We will assign permissions to AWS services with IAM rol
+
+#### IAM Security Tools
+
+- IAM Credential Report (account-level)
+  - A report that lists all your account's users and the status of their various credentials
+- IAM Access Advisor (user-level)
+  - Show the service permissions granted to a user and when those services are last accessed
+  - To revise your polices
+
+#### IAM Section - Summary
+
+- Users: mapped to a physical user, has a password for AWS console
+- Groups: contains users only
+- Policies: JSON document that outlines permissions for users or groups
+- Roles: for EC2 instances or AWS services
+- AWS CLI: Manage AWS services using command-line
+- AWS SDK: Manage AWS services using a programming language
+- Access keys: Access AWS using CLI or SDK
+- Audit: IAM credential Reports & IAM Access Advisor
 ## EC2
 
 - Elastic Compute Cloud = Infrastructure as a Service
@@ -1726,61 +1796,6 @@ on-going operations in the cloud
 - 400+ (400 + edge locations & 10 + Regional Caches)
 - Content is delivered to end users with lower latency
 
-### IAM
-
-- Identity and Access Management
-- Global Service
-
-#### Users & Groups
-
-- Users are people within your organization, and can be grouped
-- Groups only contain users, not other groups
-- Users don't have to belong to a groups, and can belong to multiple groups
-
-#### Permissions
-
-- Policies : JSON documents
-- Define permissions of the users
-- Least privilege principle
-
-#### Password Policy
-
-- Minimum password length
-- Require specific character types
-- Password expiration
-- Prevent password re-use
-
-#### Multi Factor Authentication - MFA
-
-- Virtual MFA device
-- Universal 2nd Factor (U2F) Security Key
-- Hardware Key Fob MFA device
-- Hardware Key Fob MFA device for AWS GovCloud (US)
-
-#### IAM Roles for Services
-
-- Some AWS service will need to perform actions on your behalf
-- We will assign permissions to AWS services with IAM rol
-
-#### IAM Security Tools
-
-- IAM Credential Report (account-level)
-  - A report that lists all your account's users and the status of their various credentials
-- IAM Access Advisor (user-level)
-  - Show the service permissions granted to a user and when those services are last accessed
-  - To revise your polices
-
-#### IAM Section - Summary
-
-- Users: mapped to a physical user, has a password for AWS console
-- Groups: contains users only
-- Policies: JSON document that outlines permissions for users or groups
-- Roles: for EC2 instances or AWS services
-- AWS CLI: Manage AWS services using command-line
-- AWS SDK: Manage AWS services using a programming language
-- Access keys: Access AWS using CLI or SDK
-- Audit: IAM credential Reports & IAM Access Advisor
-
 AMI
 Amazon machine image
 
@@ -2364,6 +2379,6 @@ manage any testing infrastructure.
 
 Credential Reports
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzQzNTEzMTAxLDgyOTIwNjUwOSwtNDczMT
-kxMTA0LC0xMTY5ODg4ODUwXX0=
+eyJoaXN0b3J5IjpbLTE4NzU4MDc5MzcsNzQzNTEzMTAxLDgyOT
+IwNjUwOSwtNDczMTkxMTA0LC0xMTY5ODg4ODUwXX0=
 -->
