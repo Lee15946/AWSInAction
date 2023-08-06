@@ -331,10 +331,10 @@ EC2 instance metadata is data about your instance that you can use to manage the
     - Sub-millisecond latency
     - Max PIOPS: 256000
   - Support EBS multi-attach
-- st1(HDD 125GB - 16TB): Low cost HDD volume designed for frequently accessed, throughput intensive workloads
+- st1 (HDD 125GB - 16TB): Low cost HDD volume designed for frequently accessed, throughput intensive workloads
   - Throughput Optimized HDD
   - Big data, data warehouses, Log processing
-- sc1(HDD same): Lowest cost HDD volume designed for less frequently accessed workloads
+- sc1 (HDD same as above): Lowest cost HDD volume designed for less frequently accessed workloads
   - Cold HDD
   - For data is infrequently accessed
 - **Only gp2/gp3 and io1/io2 can be used as boot volumes**
@@ -2380,7 +2380,7 @@ manage any testing infrastructure.
 
 Credential Reports
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjc0ODg2MjgwLDE2NDYyMTEyNCwtNjI0OT
+eyJoaXN0b3J5IjpbNzQwMjc4MzE5LDE2NDYyMTEyNCwtNjI0OT
 Q1ODk4LDc0MzUxMzEwMSw4MjkyMDY1MDksLTQ3MzE5MTEwNCwt
 MTE2OTg4ODg1MF19
 -->
