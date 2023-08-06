@@ -53,7 +53,7 @@
 - Some AWS service will need to perform actions on your behalf
 - We will assign permissions to AWS services with IAM role
 
-#### IAM Security Tools
+### IAM Security Tools
 
 - IAM Credential Report (account-level)
   - A report that lists all your account's users and the status of their various credentials
@@ -61,7 +61,7 @@
   - Show the service permissions granted to a user and when those services are last accessed
   - To revise your polices
 
-#### IAM Section - Summary
+### IAM Section - Summary
 
 - Users: mapped to a physical user, has a password for AWS console
 - Groups: contains users only
@@ -71,6 +71,7 @@
 - AWS SDK: Manage AWS services using a programming language
 - Access keys: Access AWS using CLI or SDK
 - Audit: IAM credential Reports & IAM Access Advisor
+
 ## EC2
 
 - Elastic Compute Cloud = Infrastructure as a Service
@@ -2380,6 +2381,7 @@ manage any testing infrastructure.
 
 Credential Reports
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYyNDk0NTg5OCw3NDM1MTMxMDEsODI5Mj
-A2NTA5LC00NzMxOTExMDQsLTExNjk4ODg4NTBdfQ==
+eyJoaXN0b3J5IjpbMTY0NjIxMTI0LC02MjQ5NDU4OTgsNzQzNT
+EzMTAxLDgyOTIwNjUwOSwtNDczMTkxMTA0LC0xMTY5ODg4ODUw
+XX0=
 -->
