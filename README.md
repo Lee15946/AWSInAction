@@ -44,13 +44,14 @@
 ### Access AWS
 - AWS Management console
 - AWS Command Line interface (CLI)
+	- AWS Cloud Shell
 - AWS Software Developer Kit (SDK)
 - Access Key and Secret Access Key
 
-#### IAM Roles for Services
+### IAM Roles for Services
 
 - Some AWS service will need to perform actions on your behalf
-- We will assign permissions to AWS services with IAM rol
+- We will assign permissions to AWS services with IAM role
 
 #### IAM Security Tools
 
@@ -2379,6 +2380,6 @@ manage any testing infrastructure.
 
 Credential Reports
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NzU4MDc5MzcsNzQzNTEzMTAxLDgyOT
-IwNjUwOSwtNDczMTkxMTA0LC0xMTY5ODg4ODUwXX0=
+eyJoaXN0b3J5IjpbLTYyNDk0NTg5OCw3NDM1MTMxMDEsODI5Mj
+A2NTA5LC00NzMxOTExMDQsLTExNjk4ODg4NTBdfQ==
 -->
