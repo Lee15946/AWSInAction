@@ -434,6 +434,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
 - FSx for NetApp ONTAP
 
 ## Scalability & High Availability
+
 - Scalability
 	- Vertical Scalability
 		- Increase instance size
@@ -2380,7 +2381,7 @@ manage any testing infrastructure.
 
 Credential Reports
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzQwMjc4MzE5LDE2NDYyMTEyNCwtNjI0OT
+eyJoaXN0b3J5IjpbMTY1ODI5ODUzLDE2NDYyMTEyNCwtNjI0OT
 Q1ODk4LDc0MzUxMzEwMSw4MjkyMDY1MDksLTQ3MzE5MTEwNCwt
 MTE2OTg4ODg1MF19
 -->
