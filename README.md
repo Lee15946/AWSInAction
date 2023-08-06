@@ -127,12 +127,11 @@ EC2 instance metadata is data about your instance that you can use to manage the
     - High performance computing (HPC)
     - Scientific modeling & machine learning
     - Dedicated gaming servers
-- Memory Optimized R,X,Z
+- Memory Optimized: R,X,Z
   - Good RAM
   - Fast performance for workloads that process large data sets in memory
-- Storage Optimized I,G,H
-  - Great for storage-intensive tasks that require high, sequential read and write access to large data sets on local
-      storage
+- Storage Optimized: I,G,H
+  - Great for storage-intensive tasks that require high, sequential read and write access to large data sets on local storage
 
 ### EC2 Instances Purchasing options
 
@@ -2381,7 +2380,7 @@ manage any testing infrastructure.
 
 Credential Reports
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY0NjIxMTI0LC02MjQ5NDU4OTgsNzQzNT
-EzMTAxLDgyOTIwNjUwOSwtNDczMTkxMTA0LC0xMTY5ODg4ODUw
-XX0=
+eyJoaXN0b3J5IjpbNjc0ODg2MjgwLDE2NDYyMTEyNCwtNjI0OT
+Q1ODk4LDc0MzUxMzEwMSw4MjkyMDY1MDksLTQ3MzE5MTEwNCwt
+MTE2OTg4ODg1MF19
 -->
