@@ -620,18 +620,60 @@ EC2 instance metadata is data about your instance that you can use to manage the
 
 ### Auto Scaling Group
 
-- scale out
-- scale in
-- minimum and maximum
-- register new instance to LB
-- replace unhealthy instances
-- strategies
+- In real-life, the load on your websites and application can change
+- In the cloud, you can create and get rid of servers very quickly
+- The goal of ASG is to:
+    - Scale out (add EC2 instances) tom match an increase load
+    - Scale in (remove EC2 instances) to match a decrease load
+    - Ensure we have a minimum and maximum number of EC2 instances running
+    - Automatically register new instances to load balancer
+    - Re-create an EC2 instance in case a previous one is terminated (ex: if unhealthy)
+- ASG are free
+- ASG Attributes
+    - A Launch Template (Older Launch Configurations are deprecated)
+        - AMI + Instance Type
+        - EC2 User Data
+        - EBS Volumes
+        - Security Groups
+        - SSH Key Pair
+        - IAM roles for EC2 instances
+        - Network + Subnets Information
+        - Load Balancer Information
+    - Min size / Max size / Initial Capacity
+- CloudWatch Alarms & Scaling
+    - Scale ASG based on CloudWatch alarms
+    - An alarm monitors a metric (such as an Average CPU, or a custom metric)
+    - Metrics such as average CPU are computed for the overall ASG instances
+    - Based on the alarm, we can:
+        - Scale-out policies
+        - Scale-in policies
+
+### ASG Dynamic Scaling Policies
+
+- Strategies
     - Manual scaling
     - Dynamic scaling
-        - Simple/step scaling
         - Target tracking scaling
-        - Scheduled scaling
-        - Predictive scaling
+            - Most simple and easy to set up
+            - Example: Want the average ASG CPU to stay at around 40%
+        - Simple/step scaling
+            - When a CloudWatch alarm is triggered (example CPU > 70%), then add 2 units
+            - When a CloudWatch alarm is triggered (example CPU < 30%), then remove 1 unit
+    - Scheduled scaling
+        - Anticipate a scaling based on known usage pattern
+    - Predictive scaling
+        - Continuously forecast load and schedule scaling ahead
+- Good metrics to scale on
+    - CPU Utilization
+    - Request Count per Target
+    - Average Network In/Out
+    - Any custom metric
+- Scaling Cooldowns
+    - After a scaling activity happens, you are in the cooldown period (default 300 seconds)
+    - During the cooldown period, the ASG will not launch or terminate additional instances ( to allow metrics to
+      stabilize)
+    - Advice: Use a ready-to-use AMI to reduce configuration time in order to be serving request faster and reduce the
+      cooldown period
 
 Amazon S3
 
