@@ -885,6 +885,9 @@ EC2 instance metadata is data about your instance that you can use to manage the
     - To encrypt an unencrypted database, go through a DB snapshot & restore as encrypted
 - In-fligt encryption: TLS-ready by default, use the AWS TLS root certificates client side
 - IAM Authentication: IAM roles to connect to your database (instead of username/pw)
+    - MySQL
+    - MariaDB
+    - PostgreSQL
 - Security Groups: Control Network access to your RDS/Aurora DB
 - No SSH available except on RDS custom
 - Audit logs can be enabled and sent to AWS CloudWatch Logs for longer retention
@@ -893,13 +896,77 @@ EC2 instance metadata is data about your instance that you can use to manage the
 
 - Fully Managed database proxy for RDS
 - Allows apps to pool and shared DB connections established with the database
-- Improving database efficient by reducing the stress on database resources and minimizing open connections (and time outs)
+- Improving database efficient by reducing the stress on database resources and minimizing open connections (and time
+  outs)
 - Serverless, autoscaling, highly available (mutli-AZ)
 - Reduced RDS & Aurora failover time by up 66%
 - Supports RDS(MySQL, PostgresSQL, MariaDB,MS SQL Server) and Aurora (MySQL,PostgresSQL)
 - No code changes required for most apps
 - Enforce IAM Authentication for DB, and securely store credentials in AWS Secret Manager
 - RDS Proxy is never publicly accessible (must be accessed from VPC)
+
+### Amazon ElastiCache
+
+- Overview
+    - Get managed Redis or Memcached
+    - Caches are in-memory databases with really high performance, low latency
+    - Helps reduce load off to databases for read intensive workloads
+    - Helps make your application stateless
+    - AWS takes care of OS maintenance / patching, optimization, setup, configuration, monitoring, failure recovery and
+      backups
+    - Using ElastiCache involves heavy application code changes
+- SA - DB Cache
+    - Applications queries ElastiCache, if not available, get from RDS and store in ElastcCache
+    - Helps relieve load in RDS
+    - Cache must have an invalidation strategy to make sure only the most current data is used in there≈
+- SA - User Session Store
+    - Users logs into any of the application
+    - The application writes the session data into ElastiCache
+    - The user hits another instance of our application
+    - The instance retrieves the data and the user is alraedy logged in
+- Redis vs Memcached
+    - Redis
+        - Multi AZ with Auto-Failover
+        - Read Replicas to scale reads and have high availability
+        - Data durability using AOF persistence
+        - Backup and restore features
+        - Supports Sets and Sorted Sets
+    - Memcached
+        - Multi-node for partitioning of data (sharding)
+        - No high availability (replication)
+        - Non persistent
+        - No backup and restore
+        - Multi-threaded architecture
+
+### ElastiCache - Cache Security
+
+- ElastiCache supports IAM Authentication for Redis
+- IAM polices on ELastiCache are only used for AWS API-level security
+- Redis Auth
+    - password/token for Redis cluster
+    - Extra level of security for your cache (on top of security group)
+    - Support SSL in flight encryption
+- Memcached
+    - Supports SASL-based authentication (advanced)
+
+### Patterns for ELasitCache
+
+- Lazy Loading: all the read data is cached, data can become stale in cache
+- Write Through: Adds or update data in the cache when written in DB (no stale data)
+- Session Store: store temporay session data in cache (using TTL features)
+- Redis use case:
+    - Gaming Leaderboards are computationally complex
+    - Redis Sorted sets gurantee both uniqueness and element ordering
+    - Each time a new element added, it's randked in real time, then added in correct order
+
+### Classic ports
+
+- PostgreSQL: 5432
+- MySQL: 3306
+- Oracle RDS: 1521
+- MSSQL Server: 1433
+- MariaDB: 3306
+- Aurora: 5432/3306
 
 Amazon S3
 
