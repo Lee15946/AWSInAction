@@ -1490,21 +1490,280 @@ EC2 instance metadata is data about your instance that you can use to manage the
     - Can be used to retrieve only partial data (for example the head of a file)
 
 ### S3 Select & Glacier Select
+
 - Retrieve less data using SQL by performing server-side filtering
 - Can filter by rows&columns (simple SQL statements)
 - Less network transfer, less CPU cost client-side
 
 ### S3 Batch Operations
+
 - Perform bulk operations on existing S3 objects with a single request, example:
-  - Modify object metadata&properties
-  - Copy objects between S3 buckets
-  - Encrypt un-encrypted objects
-  - Modify ACLs, tags
-  - Restore objects from S3 Glacier
-  - Invoke Lambda function to perform custom action on each object
+    - Modify object metadata&properties
+    - Copy objects between S3 buckets
+    - Encrypt un-encrypted objects
+    - Modify ACLs, tags
+    - Restore objects from S3 Glacier
+    - Invoke Lambda function to perform custom action on each object
 - A job consists of a list of objects, the action to perform, and optional parameters
 - S3 Batch Operations manages retries, tracks progress, send completion notifications, generate reports...
 - You can use S3 Inventory to get object list and use S3 Select to filter you objects
+
+## Amazon S3 Security
+
+### Amazon S3 - Object Encryption
+
+- You can encrypt objects in S3 buckets using one of 4 methods
+- Server-Side Encryption (SSE)
+    - Server-Side Encryption with Amazon S3-Managed Keys (SSE-S3) - Enable by Default
+        - Encrypts S3 objects using keys handled, managed and owned by AWS
+    - Server-Side Encryption with KMS Keys stored in AWS KMS (SSE-KMS)
+        - Leverage AWS Key Management Service (KMS) to manage encryption keys
+    - Server-Side Encryption with Customer-Provide Keys (SSE-C)
+        - When you want to manage your own encryption keys
+- Client-Side Encryption
+- It's important to understand which one are for which situation for the exam
+
+### Amazon S3 Encryption - SSE-S3
+
+- Encryption using keys handled managed, and owned by AWS
+- Object is encrypted server-side
+- Encryption type is AES-256
+- Must set header "x-amz-server-side-encryption":"AES256"
+- Enable by default for new buckets & new objects
+
+### Amazon S3 Encryption - SSE-KMS
+
+- Encryption using keys handled and managed by AWS KMS
+- KMS advantages: user control + audit key usage using CloudTrail
+- Object is encrypted server side
+- Must set header "x-amz-server-side-encryption":"aws:kms"
+- Limitation
+    - Maybe impacted by the KMS limits
+    - When upload, it calls the GenerateDataKey KMS API
+    - When download, it calls the Decrypt KMS API
+    - Count towards the KMS quota pert second (5500, 10000, 30000 req/s based on region)
+    - Can request a quota increase using the Service Quotas Console
+
+### Amazon S3 Encryption - SSE-C
+
+- Server-Side Encryption using keys fully managed by the customer outside of AWS
+- Amazon S3 does NOT store the encryption key you provide
+- HTTPS must be used
+- Encryption key must provide in HTTP headers, for every HTTP request made
+
+### Amazon S3 Encryption - Client-Side Encryption
+
+- Use client libraries such as Amazon S3 Client-Side Encryption Library
+- Clients must encrypt data themselves before sending to Amazon S3
+- Clients must decrypt data themselves when retrieving from Amazon S3
+- Customer fully manages the keys and encryption cycle
+
+### Amazon S3 - Encryption in transit (SSL/TLS)
+
+- Encryption in flight is also called SSL/TLS
+- Amazon S3 exposed two endpoints:
+    - HTTP Endpoint - non encrypted
+    - HTTPS Endpoint - encryption in flight
+- HTTPS is recommended
+- HTTPS is mandatory for SSE-C
+- Force encryption is Transit: aws:SecureTransport
+
+### Amazon S3 Encryption - DSSE-KMS
+
+- Dual-layer Server-Side encryption
+- Double encryption based on KMS
+
+### Amazon S3- Default Encryption vs Bucket Policies
+
+- SSE-S3 encryption is automatically applied to new objects stored in S3 bucket
+- Optionally, you can "force encryption" using a bucket policy and refuse any API call to PUT an S3 object without
+  encrypt ion headers (SSE-KMS or SSE-C)
+
+### S3 CORS
+
+- What is CORS?
+    - Cross-Origin Resource Sharing (CORS)
+    - Origin = scheme(protocol) + host(domain) + port
+    - Web Browser based mechanism to allow requests to other origins while visiting the main origin
+    - The results won't be fulfilled unless the other origin allows for the requests, using CORS Headers
+- Amazon S3 - CORS
+    - If a client makes a cross-region request on our S3 bucket, we need to enable the correct CORS headers
+    - You can allow for a specific origin or for * (all regions)
+
+### Amazon S3- MFA Delete
+
+- MFA (Multi-Factor Authentication) - force users to generate a code on a device (usually a mobile phone or hardware)
+  before doing important operation on S3
+- MFA will be required to:
+    - Permanently delete an object version
+    - Suspend Versioning on the bucket
+- MFA won't be required to:
+    - Enable Versioning
+    - List deleted versions
+- To use MFA delete. Versioning must be enabled on the bucket
+- Only the bucket owner(root account) can enable/disable MFA Delete
+
+### S3 Access Logs
+
+- For audit purpose, you may want to log all access to S3 bucket
+- Any request made to S3, from any account, authorized or denied, will be logged into another S3 bucket
+- The data can be analyzed using data analysis tools...
+- The target logging bucket must be in the same AWS region
+- Do not set your logging bucket to be the monitored bucket
+- It will create a logging loop, and your bucket will grow exponentially
+
+### Amazon S3 - Pre-Signed URLs
+
+- Generate pre-signed URLs using the S3 Console, AWS CLI or SDK
+- URL Expiration
+    - S3 Console - 1 min up to 720 minutes (12 hours)
+    - AWS CLI - configure expiration with -expires-in parameter in seconds (defaullt 3600 ses, max 604800 secs ~ 168
+      hours)
+- Users given a pre-signed URL inherit the permissions of the user that generated the URL for GET/PUT
+- Examples:
+    - Allow only logged-in users to download a premium video from your S3 bucket
+    - Allow an ever-changing list of users to download files by generating URLs dynamically
+    - Allow temporaily a user to upload a file to a precise location in your S3 bucket
+
+### Glacier Vault Lock & S3 Object Lock
+
+- S3 Glacier Vault Lock
+    - Adopt a WORM (Write Once Read Many) model
+    - Create a Vault Lock Policy
+    - Lock the policy for future edits (can no longer be changed or deleted)
+    - Helpful for compliance and data retention
+- S3 Object Lock (versioning must be enabled)
+- Adopt a WORM model
+- Block an object version deletion for a specified amount of time
+- Retention mode - Compliance
+    - Object versions can't be overwritten or deleted by any user, including the root user
+    - Objects retention modes can't be changed, and retention periods can't be shortened
+- Retention mode - Governance
+    - Most users can't overwrite or delete an object version or alter it's lock settings
+    - Some users have special permissions to change the retention or delete the object
+- Retention Period: protect the object for a fixed period, it can be extended
+- Legal Hold:
+    - Protect the object indefinitely, independent from retention period
+    - Can be freely placed and removed using the s3:PutObjectLegalHold IAM permission
+
+### S3 Access Points
+
+- Access Points simplify security management for S3 Buckets
+- Each Access Point has:
+    - Its own DNS name (Internet Origin or VPC Origin)
+    - An access point policy (similar to bucket policy) - manage security at scale
+- S3 - Access Point - VPC Origin
+    - We can define the access point to be accessible only from within the VPC
+    - You must create a VPC Endpoint to access the Access Point (Gateway or Interface Endpoint)
+    - The VPC Endpoint Policy must allow access to the target bucket and Access Point
+
+### S3 Object Lambda
+
+- Use AWS Lambda Functions to change the object before it is retrieved by the caller application
+- Only one S3 bucket is needed, on top of which we create S3 Access Point and S3 Object Lambda Access Points
+- Use Cases:
+    - Redacting personally identifiable information for analytics or non-production environment
+    - Converting across data formats, such as converting XML to JSON
+    - Resizing and watermarking images on the fly using caller-specific details, such as the user who requested the
+      object
+
+## CloudFront & AWS Global Accelerator
+
+### AWS CloudFront
+
+- CDN (Content Delivery Network)
+- Improve read performance, content is cached at the edge
+- Improve users experience
+- 216 Point of Presence globally (edge locations)
+- DDoS protection, integration with Shield, WAF
+- CloudFront - Origins
+    - S3 bucket
+        - For distributing files and caching them at the edge
+        - Enhanced seucrity with CloudFront Origin Access Control (OAC)
+        - OAC is replacing Origin Access Identity (OAI)
+        - CloudFront can be used as an ingress (to upload files to S3)
+    - Customer Origin (HTTP)
+        - Application Load Balancer
+        - EC2 instance
+        - S3 website (must first enable the bucket as a static S3 website)
+        - Any HTTP backend you want
+- CloudFront vs S3 Cross Region Replication
+    - CloudFront:
+        - Global Edge network
+        - Files are cached for a TTL
+        - Great for static content that must be available everywhere
+    - S3 Cross Region Replication
+        - Must be setup for each region you want replication to happen
+        - Files are updated in near real-time
+        - Read Only
+        - Great for dynamic content that needs to be available at low-latency in few regions
+- ALB or EC2 as an origin
+    - EC2 instances or ALB must be public
+- CloudFront Get Restriction
+    - You can restrict who can access your distribution
+        - Allowlist: Allow your users to access your content only if they're in one of the countries on a list of
+          approved countries
+        - Blocklist: Prevent your users from accessing your content if they're in one of the countries on a list of
+          banned countries
+    - The country is determined using a 3rd party Geo-IP database
+    - Use case: Copyright Laws to control access to content
+
+### CloudFront - Price Classes
+
+- CloudFront Edge locations are all around the world
+- The cost of data out per edge location varies
+- You can reduce the number of edge locations for cost reduction
+- Three price classes:
+    - Price Class: All regions - best performance
+    - Price Class 200: most regions, but excludes the most expensive regions
+    - Price Class 100: only the least expensive regions
+
+### CloudFront - Cache Invalidations
+
+- In case you update the back-end origin, CloudFront doesn't know about it and will only get the refreshed content after
+  the TTL has expired
+- However you can force an entire or partial cache refresh (thus bypassing the TTL) by performing a CloudFront
+  Invalidation
+- You can invalidate all files (*) or a special path (/images/*)
+
+### AWS Global Accelerator
+
+- Global users for our application
+    - You have deployed an application and have global users who want to access it directly
+    - They go over the public internet, which can add a lot of latency due to many hops
+    - We wish to go as fast as possible through AWS network to minimize latency
+- Unicast IP: one server holds one IP address
+- Anycast IP: all servers hold the same IP address and the client is routed to the nearest one
+- AWS Global Accelerator
+    - Leverage the AWS internal network to route to your application
+    - 2 Anycast IP are created for your application
+    - The Anycast IP send traffic directly to Edge Locations
+    - The Edge locations sent the traffic to your application
+    - Works with Elastic IP, EC2 instances, ALB, NLB, public or private
+    - Consistent Performance
+        - Intelligent routing to lowest latency and fast regional failover
+        - No issue with client cache (because the IP doesn't change)
+        - Internal AWS network
+    - Health Checks
+        - Global Accelerator performs a health check of your applications
+        - Help make your application global (failover less than 1 minute for unhealthy)
+        - Great for disaster recovery
+    - Security
+        - Only 2 external IP need to be whitelisted
+        - DDos protection thanks to AWS Shield
+- AWS Global Accelerator vs CloudFront
+    - They both use the AWS global network and its edge locations around the world
+    - Both services integrate with AWS Shield for DDoS protection
+    - CloudFront
+        - Improves performance for both cachable content (such as images and videos)
+        - Dynamic content (such as API acceleration and dynamic site delivery)
+        - Content is served at the edge
+    - Global Accelerator
+        - Improve performance for a wide range of applications over TCP or UDP
+        - Proxying packets at the edge to applications running in one or more AWS Regions
+        - Good fir for non-HTTP use cases, such as gaming(UDP), IoT(MQTT) or Voice over IP
+        - Good for HTTP use cases that required static IP addresses
+        - Good for HTTP use cases that required deterministic, fast regional failover
 
 ### AWS Snow family
 
@@ -1780,16 +2039,6 @@ Bridge between on-premise data and cloud data in S3
     - Weighted routing policy (Health check)
     - Latency routing policy
     - Failover routing policy (Disaster recovery)
-
-### CloudFront
-
-- CDN (Content Delivery Network)
-- Improve read performance, content is cached at the edge
-- DDoS protection, integration with Shield, WAF
-- Origins
-    - S3 bucket
-    - Customer Origin (HTTP)
-- Great for static content
 
 ### S3 Transfer Acceleration
 
