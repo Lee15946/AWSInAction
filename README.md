@@ -1191,6 +1191,75 @@ EC2 instance metadata is data about your instance that you can use to manage the
     - Create a Hosted Zone in Route53
     - Update NS Records on 3rd party website to use Route53 Name Servers
 
+## Solution Architecture Discussions
+
+### Stateless Web App
+
+- Public vs Private IP and EC2 instances
+- Elastic IP vs Route53 vs Load Balancers
+- Route53 TTL, A records and Alias Records
+- Maintaining EC2 instances manually vs Auto Scaling Groups
+- MultiAZ to survive disasters
+- ELB Health Checks
+- Security Group Rules
+- Reservation of capacity for costing saving when possible
+- Considering 5 pillars for a well-architected application: costs, performance, reliability, security, opertional
+  excellence
+
+### Stateful Web App
+
+- ELB sticky sessions
+- Web clients for storing cookies and making our web app stateless
+- ElastiCache
+    - For storing sessions (alternative: DynamoDB)
+    - For caching data from RDS
+    - Multi AZ
+- RDS
+    - For storing user data
+    - Read replicas for scaling reads
+    - Multi AZ for disaster recovery
+- Tight Security with security groups referencing each other
+- Aurora Database to have easy Multi-AZ and Read-Replicas
+- Storing data in EBS (single instance application)
+- Vs Storing data in EFS (distributed application)
+
+### Instantiating Applications quickly
+
+- When launching a full stack(EC2,EBS,RDS), it can take time to:
+    - Install applications
+    - Insert initial(or recovery) data
+    - Configure everything
+    - Launch the application
+- EC2 instances:
+    - Use a Golden AMI: install your applications, OS dependencies etc... beforehand and launch your EC2 instance from
+      the Golden AMI
+    - Bootstrap using User Data: For dynamic configuration, use User Data scripts
+    - Hybrid: mix Golden AMI and User Data (Elastic Beanstalk)
+- RDS Databases:
+    - Restore from a snapshot: the database will have schemas and data ready
+- ENS Volumes:
+    - Restore from a snapshot: the disk will already be formatted and have data
+
+### Elastic Beanstalk
+
+- Developer centric view of deploying an application on AWS
+- It uses all the components we've seen before: EC2, ASG, ELB, RDS...
+- Managed service
+    - Automatically handles capacity provisioning, load balancing, scaling, application health monitoring, instance
+      configuration...
+    - Just the application code is the responsibility of the developer
+- We still have full control over the configuration
+- Components:
+    - Application: collection of Elastic Beanstalk components(environments, versions, configurations...)
+    - Application Version: an iteration of your application code
+    - Environment:
+        - Collection of AWS resources running an application version ( only one application version at a time)
+        - Tiers: Web Server Environment Tier & Worker Environment Tier
+        - You can create multiple environments (dev,test,prod...)
+- Deployment Modes:
+    - Single Instance (Great for dev)
+    - High Availability with Load Balancer (Great for prod)
+
 Amazon S3
 
 ### Buckets
