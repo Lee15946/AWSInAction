@@ -2326,6 +2326,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
     - Provisioned mode or on-demand capacity mode
 
 ### Amazon MQ
+
 - SQS, SNS are cloud-native services: proprietary protocols from AWS
 - Traditional applications running from on-premises may use open protocol such as: MQTT, AMQP, STOMP, Openwire, WSS
 - When migrating to the cloud, instead of re-engineering the application to use SQS and SNS, we can use Amazon MQ
@@ -2335,7 +2336,177 @@ EC2 instance metadata is data about your instance that you can use to manage the
 - Amazon MQ has both queue feature and topic feature
 - High availability
     - Deploy in multi-AZ
-  - Has back-up storage mounted in EFS
+    - Has back-up storage mounted in EFS
+
+## Containers on AWS
+
+### Docker Introduction
+
+- What is Docker?
+    - Docker is a software development platform to deploy apps
+    - Apps are packaged in containers that can be run any OS
+    - Apps run the same, regardless of where they are run
+        - Any machine
+        - No compatibility issues
+        - Predictable behavior
+        - Less work
+        - Easier to maintain and deploy
+        - Works with any language, any OS, any technology
+    - Use cases: microservices architecture, lift-and-shift apps from on-premises to the AWS cloud...
+- Where are Docker images stored?
+    - Docker images are stored in Docker Repositories
+    - Docker Hub
+        - Public repository
+        - Find base images for many technologies for OS
+    - Amazon ECR
+        - Private repository
+        - Public repository (Amazon ECR Public Gallery)
+- Docker versus Virtual Machines
+    - Docker is sort of a virtualization technology, but not exactly
+    - Resources are shard with the host => many containers on one server
+- Docker Containers Management on AWS
+    - Amazon Elastic Container Service (Amazon ECS)
+        - Amazon's own container platform
+    - Amazon Elastic Kubernetes Service (Amazon EKS)
+        - Amazon's managed kubernetes (open source)
+    - AWS Fargate
+        - Amazon's own Serverless container platform
+        - Works with ECS and EKS
+    - Amazon ECR
+        - Store container images
+
+### Amazon ECS
+
+- Amazon ECS - EC2 Launch Type
+    - ECS = Elastic control Service
+    - Launch Docker containers on AWS = Launch ECS Tasks on ECS Clusters
+    - EC2 Launch Type: you must provision & maintain the infrastructure (the EC2 instance s)
+    - Each EC2 instance must run the ECS agent to register in the ECS Cluster
+    - AWS takes care of starting/stopping containers
+- Amazon ECS - Fargate Launch Type
+    - Launch Docker containers on AWS
+    - You don not provision the infrastructure (no EC2 instances to manage)
+    - It's all Servers
+    - You just create task definitions
+    - AWS just run ECS Tasks for you based on the CPU/RAM you need
+    - To scale, just increase the number of tasks. Simple - no more EC2 instances
+- Amazon ECS - IAM Roles for ECS
+    - ECS Instance Profile (EC2 Launch Type only)
+        - Used by the ECS agent
+        - Makes API calls to ECS service
+        - Send container logs to CloudWatch logs
+        - Pull Docker image from ECR
+        - Reference sensitive data in Secrets Manager or SSM Parameter Store
+    - ECS Task Role:
+        - Allow each tasks to have a specific role
+        - Use different roles for the different ECS services you run
+        - Task Role is defined in the task definition
+- Amazon ECS - Load Balancer Integrations
+    - Application Load Balancer supported and works for most use cases
+    - Network Load Balancer recommended only for high throughput/ high performance use cases. or to pair it with AWS
+      Private Link
+    - Classic Load Balancer supported but nor recommended (no advanced features - no Fargate)
+- Amazon ECS - Data Volumes (EFS)
+    - Mount EFS file systems onto ECS tasks
+    - Works for both EC2 and Fargate launch types
+    - Tasks running in any AZ will share the same data in the EFS file system
+    - Fargate + EFS = Serverless
+    - Use cases: Persistent multi-AZ shared storage for your containers
+    - Note:
+        - Amazon S3 can not be mounted as a file system
+
+### Amazon ECS - Auto Scaling
+
+- ECS Service Auto Scaling
+    - Automatically increase/decrease the desired number of ECS tasks
+    - Amazon ECS Auto Scaling uses AWS Application Auto Scaling
+        - ECS service Average CPU Utilization
+        - ECS Service Average Memory Utilization - Scale on RAM
+        - ALB Request Count Per Target - metric coming from the ALB
+    - Target Tracking - scale based on target value for a specific CloudWatch metric
+    - Step Scaling - scale based on a specified CloudWatch Alarm
+    - Scheduled Scaling - scale based on a specified date/time (predictable changes)
+- ECS Service Auto Scaling(task level) != EC2 Auto Scaling (EC2 instance level)
+- Fargate Auto Scaling is much easier to set up (because Serverless)
+- EC2 Launch Type - Auto Scaling EC2 Instances
+    - Accommodate ECS Service Scaling by adding underlying EC2 instances
+    - Auto Scaling Group Scaling
+        - Scale your ASG based on CPU Utilization
+        - Add EC2 instances over time
+    - ECS Cluster Capacity Provider
+        - Used to automatically provision and scale the infrastructure for your ECS Tasks
+        - Capacity Provider paired with an Auto Scaling Group
+        - Add EC2 Instances when you are missing capacity(CPU, RAM...)
+
+### Amazon ECS - Solutions Architectures
+
+- ECS tasks invoked by Event Bridge
+    - Client uploads object to S3 Bucket
+    - S3 send event to Amazon EventBridge
+    - Event Bridge has a rule to Run ECS Task
+    - AWS Fargate run a task which has a Task Role to Access S3 & DynamoDB
+    - Task to get object from S3 and Save result to Amazon DynamoDB
+- ECS tasks invoked by Event Bridge Schedule
+    - Amazon EventBridge trigger a rule every 1 hour to Run ECS task
+    - AWS Fargate run a task with ECS Task Role to Access S3
+    - Task has batch processing on Amazon S3
+- ECS - SQS Queue Example
+    - Messages send to SQS Queue
+    - ECS Service poll for messages and run the task
+- ECS - Intercept Stopped Tasks using EventBridge
+    - When ECS Task exited, will send an event to EventBridge
+    - And trigger the SNS to send email to Administrator
+
+### Amazon ECR
+
+- ECR = Elastic Container Registry
+- Store and manage Docker images on AWS
+- Private and Public repository (Amazon ECR Public Gallery)
+- Fully integrated with ECS, backed by Amazon S3
+- Access is controlled through IAM (permission errors => policy)
+- Supports image vulnerability scanning, versioning, image tags, image lifecycle
+
+### Amazon EKS
+
+- Amazon EKS = Amazon Elastic Kubernetes Service
+- It is a way to launch managed Kubernetes clusters on AWS
+- Kubernetes is an open-source system for automatic deployment, scaling and management of container (usually Docker)
+  application
+- It's an alternative to ECS, similar goal but different API
+- EKS supports EC2 if you want to deploy worker nodes or Fargate to deploy servers containers
+- Use case: if your company is already using Kubernetes on-premises or in another cloud, and wants to migrate to AWS
+  using Kubernetes
+- Kubernetes is cloud-agnostic (can be used in any cloud - Azure, GCP...)
+- Amazon EKS - Node Types
+    - Managed Node Groups
+        - Create and manage Nodes(EC2 instances) for you
+        - Nodes are part of an ASG managed by EKS
+        - Supports: On-Demand or Spot instances
+    - Self-Managed Nodes
+        - Nodes created by you and registered to the EKS cluster and managed by an ASG
+        - You can use prebuilt AMI - Amazon EKS Optimized AMI
+        - Supports On-Demand or Spot Instances
+    - AWS Fargate
+        - No maintenance required; no nodes managed
+- Amazon EKS - Data Volumes
+    - Need to specify StorageClass manifest on your EKS cluster
+    - Leverages a Container Storage Interface (CSI) compliant driver
+    - Support for
+        - Amazon EBS
+        - Amazon EFS (works with Fargate)
+        - Amazon FSx for Lustre
+        - Amazon FSx for NetApp ONTAP
+
+### AWS App Runner
+
+- Fully managed service that makes it easy to deploy web applications and APIs at scale
+- No infrastructure experience required
+- Start with your source code or container image
+- Automatically builds and deploy the web app
+- Automatic scaling, high available, load balancer, encryption
+- VPC access support
+- Connect to database, cache, and message queue services
+- Use cases: web apps, APIs, microservices, rapid production deployments
 
 ### AWS RDS
 
