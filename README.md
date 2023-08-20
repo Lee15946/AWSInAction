@@ -3047,6 +3047,260 @@ EC2 instance metadata is data about your instance that you can use to manage the
 - Encryption in transit and at rest
 - Use case: IoT apps, operational applications, real-time analytics
 
+## Data & Analytics
+
+### Amazon Athena
+
+- Serverless query service to analyze data stored in Amazon S3
+- Uses standard SQL language to query the files (built in Presto)
+- Supports CSV, JSON, ORC, Avro and Parquet
+- Pricing: $5.00 perTB of data scanned
+- Commonly used with Amazon QuickSight for reporting/dashboards
+- Use cases: Business intelligence / analytics / reporting, analyze & query VPC Flow Logs, ELB Logs, CloudTrail trails,
+  etc...
+- Exam Tip: analyze data in S3 using serverless SQL, use Athena
+
+### Amazon Athena - Performance Improvement
+
+- Use columnar data for cost-savings (less scan)
+    - Apache Parquet or ORC is recommended
+    - Huge performance improvement
+    - Use Glue to convert your data to Parquet or ORC
+- Compress data for smaller retrievals (bzip2, gzip, lz4, snappy, zlip, zstd...)
+- Partition datasets in S3 for easy querying on virtual columns
+- Use larger files (> 128MB) to minimize overhead
+
+### Amazon Athena - Federated Query
+
+- Allows you to run SQL queries across data stored in relational, non-relational, object and custom data sources (AWS or
+  on-premises)
+- Use Data Source Connectors that run on AWS Lambda to run Federated Queries(e.g, CloudWatch Logs, DynamoDB, RDS...)
+- Store the result back in Amazon S3
+
+### Amazon Redshift
+
+- Redshift is based on PostgreSQL, but it's not used for OLTP
+- It's OLAP - online analytical processing (analytics and data warehousing)
+- 10x better performance than other data warehouses, scale to PBs of data
+- Columnar storage of data (instead of row based) & parallel query enggine
+- Pay as you go based on the instances provisioned
+- Has a SQL interface for performing the queries
+- BI tools such as Amazon QuickSight or Tableau integrate with it
+- vs Athena: faster queries / joins / aggregations thanks to indexes
+- Redshift Cluster
+    - Leader node: for query planning, results aggregation
+    - Compute node: for performing the queries, send results to leader
+    - You provision the node size in advance
+    - You can use Reserved Instances for cost savings
+- Redshift - Snapshots & DR
+    - Redshift has "Multi-AZ" mode for some clusters
+    - Snapshots are point-in-time backups of a cluster, stored internally in S3
+    - Snapshots are incremental (only what has changed is saved)
+    - You can restore a snapshot into a new cluster
+    - Automated: every 8 hours, every 5GB, or on a schedule, Set retention
+    - Manual: snapshot is retained until you delete it
+    - You can configure Amazon Redshift to automaticalyy copy snapshots (automated or manual) of a cluster or another
+      AWS Region
+- Loading data into Redshift: Large inserts are MUCH better
+    - Amazon Kinesis Data Firehose - through S3 copy
+    - S3 using COPY command
+        - Internet - Without Enhanced VPC routing
+        - Through VPC - With Enhanced VPC Routing
+    - EC2 Instance - JDBC driver
+        - Better to write Data in batches
+- Redshift Spectrum
+    - Query data that is already in S3 without loading it
+    - Must have a Redshift cluster available to start the query
+    - The query is then submitted to thousands of Redshift Spectrum nodes
+
+### Amazon OpenSearch
+
+- Amazon OpenSearch is successor to Amazon ElastiCache
+- In DynamoDB, queries only exist by primary key or indexes
+- With OpenSearch, you can search any field, even partially matches
+- It's common to use OpenSearch as a complement to another database
+- Two modes: managed cluster or serverless cluster
+- Does not natively support SQL (can be enabled via a plugin)
+- Ingestion from Kinesis Data Firehose, AWS IoT, and CloudWatch Logs
+- Security through Cognito & IAM, KMS, encryption, TLS
+- Comes with OpenSearch Dashboards (visualization)
+- OpenSearch patterns
+    - DynamoDB
+        - CRUD -> DynamoDB Table -> DynamoDB Stream -> Lambda Function -> Amazon OpenSearch -> EC2 (API to search items)
+    - CloudWatch Logs
+        - CloudWatch Logs -> Subscription Filter -> Lambda Function (managed by AWS) -> (Realtime) Amazon OpenSearch
+        - CloudWatch Logs -> Subscription Filter -> Kinesis Data Firehose -> (Near Real Time) Amazon OpenSearch
+    - Kinesis Data Streams & Kinesis Data Firehose
+        - Kinesis Data Streams -> Kinesis Data Firehose (near real time) -> data transformation (Lambda) -> Amazon
+          OpenSearch
+        - Kinesis Data Streams -> Lambda Function (real time) -> Amazon OpenSearch
+
+### Amazon EMR
+
+- EMR stands for "Elastic MapReduce"
+- EMR helps creating Hadoop clusters (Big Data) to analyze and process vast amount of data
+- The clusters can be made of hundreds of EC2 instances
+- EMR comes bundled with Apache Spark, HBase, Presto, Flink...
+- EMR takes care of all the provisioning and configuration
+- Auto-scaling and integrated with Spot instances
+- Use cases: data processing, machine learning, web indexing, big data...
+- Amazon EMR - Node types & purchasing
+    - Master Node: Manage the cluster, coordinate, manage health - long running
+    - Core Node: Run tasks and store data - long running
+    - Task Node(optional): Just to run tasks - usually Spot
+    - Purchasing options:
+        - On-demand: reliable, predictable, won't be terminated
+        - Reserved (min 1 year): cost savings (EMR will automatically use if available)
+        - Spot instances: cheaper, can be terminated, less reliable
+    - Can have long-running cluster, or transient (temporary) cluster
+
+### Amazon QuickSight
+
+- Serverless machine learning-powered business intelligence service to create interactive dashboards
+- Fast, automatically scalable, embeddable, with per-session pricing
+- Use cases:
+    - Business analytics
+    - Building visualizations
+    - Perform ad-hoc analytics
+    - Get business insights using data
+- Integrated with RDS, Aurora, Athena, Redshift, S3...
+- In-memory computation using SPICE engine if data is imported into QuickSight
+- Enterprise edition: possibility to setup Column-Level security (CLS)
+- QuickSight Integrations
+    - Data sources(AWS Services):
+        - RDS
+        - Aurora
+        - Redshift
+        - Athena
+        - S3
+        - OpenSearch
+        - Timestream
+    - Data Sources(SaaS)
+        - Salesforce
+        - JIRA
+    - Teradata/On-premises Databases(JDBC)
+    - Data sources(Imports)
+        - XLSX
+        - CSV
+        - JSON
+        - TSV
+        - ELF&CLF(Long format)
+- QuickSight - Dashboard & Analysis
+    - Define Users(standard versions) and Groups(enterprise version)
+        - These users&groups only exist within QuickSight, not IAM!!
+    - A dashboard...
+        - is a read-only snapshot of an analysis that you can share
+        - preserves the configuration of the analysis (filtering, parameters, controls, sort)
+    - You can share the analysis or the dashboard with Users or Groups
+    - To share a dashboard, you mush first publish it
+    - Users who see the dashboard can also see the underlying data
+
+### AWS Glue
+
+- Managed extract, transform, and load (ETL) service
+- Useful to prepare and transform data for analytics
+- Fully serverless service
+- AWS Glue - Convert data into Parquet format
+- Glue Data Catalog: catalog of datasets
+    - Use AWS Glue Data Crawler to get data from Amazon S3/RDS/DynamoDB, JDBC to write metadata to AWS Glue Data Catalog
+    - It can be used as Data discovery to Amazon Athena, Amazon Redshift Spectrum, Amazon EMR
+- Glue - things to know at high-level
+    - Glue Job Bookmarks: prevent re-processing old data
+    - Glue Elastic Views:
+        - Combine and replicate data across multiple data store using SQL
+        - No custom code, Glue monitors for changes in the source data, serverless
+        - Leverages a "virtual table"(materialized view)
+    - Glue DataBrew: clean and normalize data using pre-built transformation
+    - Glue Studio: new GUI to create. run and monitor ETL jobs in Glue
+    - Glue Streaming ETL (built on Apache Spark Structured Streaming): compatible with Kinesis Data Streaming, Kafka,
+      MSK(managed Kafka)
+
+### AWS Lake Formation
+
+- Data lake = central place to have all your data for analytics purposes
+- Fully managed service that makes it easy to setup a data lake in days
+- Discover, cleanse, transform, and ingest data into your Data Lake
+- It automates many complex steps (collecting, cleansing, moving cataloging data,...) and de-duplicate (using ML
+  Transforms)
+- Combine structured and unstructured data in the data lake
+- Out-of-the-box source blueprints: S3, RDS, Relational & NoSQL DB...
+- Fine-grained Access Control for your applications (row and column-level)
+- Built on top of AWS Glue
+- AWS Lake Formation
+    - Data sources: Amazon S3, RDS, Aurora, On-premises Database (SQL&NoSQL)
+    - Ingest to Data Lake stores in S3
+    - Can have Source Crawlers, ETL and Data Pre, Data Catalog, Security Settings, Access Control
+    - Can send data to Athena, Redshift, EMR, Spark and to users
+- AWS Lake Formation Centralized Permissions Example
+    - Access Control Column-level security across all services connected to AWS Lake Formation
+
+### Kinesis Data Analytics
+
+- Kinesis Data Analytics for SQL applications
+    - Real-time analytics on Kinesis Data Stream & Firehose using SQL
+    - Add reference data from Amazon S3 to enrich streaming data
+    - Fully managed, no servers to provision
+    - Automatic scaling
+    - Pay for actual consumption rate
+    - Output:
+        - Kinesis Data Streams: create streams out of the real-time analytics queries
+        - Kinesis Data Firehose: send analytics query result to destinations
+    - Use cases:
+        - Time-series analytics
+        - Real-time dashboards
+        - Real-time metrics
+- Kinesis Data Analytics for Apache Flink
+    - Use Flink (Java, Scala or SQL) to process and analyze streaming data
+    - Read from Kinesis Data Streams, Amazon MSK
+    - Run any Apache Flink application on a managed cluster on AWS
+        - provisioning compute resources, parallel computation, automatic scaling
+        - application backups (implemented as checkpoints and snapshots)
+        - Use an Apache Flink programming features
+        - Flink does not read frm Firehose (use Kinesis Analytics for SQL instead)
+
+### Amazon MSK
+
+- Amazon Managed Streaming for Apache Kafka (Amazon MSK)
+- Alternative to Amazon Kinesis
+- Fully managed to Apache Kafka on AWS
+    - Allow you to create, update, delete clusters
+    - MSK creates & manages Kafka brokers nodes & Zookeeper nodes for you
+    - Deploy the MSK cluster in your VPC, multi-AZ (up to 3 for HA)
+    - Automatic recovery from common Apache Kafka failures
+    - Data is stored on EBS volumes for as long as you want
+- MSK Serverless
+    - Run Apache Kafka on MSK without managing the capacity
+    - MSK automatically provisions resources and scales compute & storage
+- Kinesis Data Streams vs Amazon MSK
+    - Kinesis Data Streams
+        - 1MB message size limit
+        - Data Streams with Shards
+        - Shard Splitting & Merging
+        - TlS In-flight encryption
+        - KMS at-rest encryption
+    - Amazon MSK
+        - 1MB by default, configure for higher (ex: 10MB)
+        - Kafka Topics with Partitions
+        - Can only add partitions to a topic
+        - PLAINTEXT on TLS in-flight EEncryption
+        - KMS at-rest encryption
+- Amazon MSK Consumers
+    - Kinesis Data Analytics for Apache Flink
+    - AWS Glue Streaming ETL Jobs Powered by Apache Spark Streaming
+    - Lambda
+    - Applications running on Amazon EC2/ECS/EKS
+
+### Big Data Ingestion Pipeline
+
+- IoT Core allows you to harvest data from IoT devices
+- Kinesis is great for real-time data collection
+- Firehose helps with data delivery to S3 in near real-time (1 minute)
+- Lambda can help Firehose with data transformations
+- Amazon S3 can trigger notifications to SQS
+- Lambda can subscribe to SQS (we could have connector S3 to Lambda)
+- Athena is a serverless SQL service and results are stored in S3
+- The reporting bucket contains analyzed and can be used by reporting tool such as AWS QuickSight, Redshift etc...
+
 ### AWS RDS
 
 - Relational Database Service
