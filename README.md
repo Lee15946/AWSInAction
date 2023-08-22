@@ -3741,6 +3741,133 @@ EC2 instance metadata is data about your instance that you can use to manage the
     - Evaluate resources against compliance rules
     - Get timeline of changes and compliance
 
+## Identity and Access Management (IAM) - Advanced
+
+### AWS Organizations
+
+- Global service
+- Allows to manage multiple AWS accounts
+- The main account is the management account
+- Other accounts are member accounts
+- Memeber accounts can only be part of one organization
+- Consolidated Billing across all accounts - songle payment method
+- Pricing benefits from aggregated usage (volume discount for EC2, S3)
+- Shared reserved instances and Saving Plans discounts across accounts
+- API is available to automate AWS account creation
+- Organizational Units (OU)
+- Advantages
+    - Multi Account vs One Account MultiVPC
+    - Use tagging standard for billing purposes
+    - Enable CloudTrail on all accounts, send logs to central S3 account
+    - Send CloudWatch Logs to central logging account
+    - Establish Cross Account Roles for Admin purposes
+- Security: Service Control Policies (SCP)
+    - IAM policies applied to OU or Accounts to restrict Users and Roles
+    - They do not apply to the management account (full admin power)
+    - Must have an explicit allow (does not allow anything by default - like IAM)
+    - SCP Examples: Blocklist and Allowlist strategies
+
+### IAM - Advanced Policies
+
+- IAM Conditions
+    - aws:SourceIp: restrict the client IP from which API calls are being made
+    - aws:RequestedRegion: restrict the region the API calls are made to
+    - ec2: ResourceTage: restrict based on tags
+    - aws: MultiFactorAuthPresent to force MFA
+- IAM for S3
+    - s3:ListBucket permission applies to arn:aws:s3::test => bucket level permission
+    - s3:GetObject,s3::PutObject,s3::DeleteObject applies to arn:aws:s3::test/* => object level permission
+- Resource Policies & aws:PrincipalOrgID
+    - aws:PrincipalOrgID can be used in any resource policies to restrict access to accounts that are member of an AWS
+      Organization
+
+### IAM - Resource-based Policies vs IAM Roles
+
+- Cross account:
+    - attaching a resource-based policy to a resource (example: S3 bucket policy)
+    - OR using a role as a proxy
+- When you assume a role(user,application or service), you give up your original permissions and take the permissions
+  assigned to the role
+- When using a resource-based policy, then principal doesn't have to give up his permissions
+- Example: User in account A needs to scan a DynamoDB table in Account A and dump it in an S3 bucket in account B
+- Supported by: Amazon S3 buckets, SNS topics, SQS queues, etc...
+- Amazon EventBridge - Security
+    - When a rule runs, it needs permissions on the target
+    - Resource-base policy: Lambda, SQS,SNS, CloudWatch Logs, API Gateway
+    - IAM role: Kinesis stream, Systems Manager Run Command, ECS task
+
+### IAM - Policy Evaluation Logic
+
+- IAM Permission Boundaries
+    - IAM Permission Boundaries are supported for users and roles (not groups)
+    - Advanced feature to use a managed policy to set the maximum permissions an IAM entity can get
+    - Can be used in combinations of AWS Organizations SCP
+- IAM Policy Evaluation Logic
+    - Deny -> Organizations SCPs -> Resource-based policies -> Identity-based policies -> IAM permissions boundaries ->
+      Session policies
+
+### AWS IAM Identity Center (successor to AWS Single Sing-On)
+
+- One login (sing sing-on) for all your
+    - AWS accounts in AWS Organizations
+    - Business cloud applications (e.gg, Salesforce, Box, Microsoft 365)
+    - SAML2.0-enabled applications
+    - EC2 Windows Instances
+- Identity providers
+    - Built-in identity store in IAM Identity Center
+    - 3rd party: Active Directory(AD), OneLoin, Okta
+- Fine-grained Permissions and Assignments
+    - Multi-Account Permissions
+        - Manage access across AWS acoounts in your AWS Organization
+        - Permission Sets - a collection of one or more IAM policies assigned to users and groups to define AWS access
+    - Application Assignments
+        - SSO access to many SAML 2.0 business applications
+        - Provide required URLs, certificates, and metadata
+    - Attribute-Based Access Control (ABAC)
+        - Fine-grained permissions based on users' attributes stored in IAM Identity Center Store
+        - Example: cost center, title, locale
+        - Use case: Define permission once, then modify AWS access by changing the attributes
+
+### AWS Directory Services
+
+- What is Microsoft Active Directory (AD)?
+    - Found on any Windows Server with AD Domain Services
+    - Database of objects: User Accounts, Computers, Printers, File Shares, Security Groups
+    - Centralized security managements, create account, assign permissions
+    - Objects are organized in trees
+    - A group of tress is a forest
+- AWS Directory Services
+    - AWS Managed Microsoft AD
+        - Create your own AD in AWS, manage users locally, supports MFA
+        - Establish "trust" connections with your on-premise AD
+    - AD Connector
+        - Directory, Gateway (proxy) to redirect to on-premise AD, supports MFA
+        - Users are managed on the on-premise AD
+    - Simple AD
+        - AD-compatible managed directory on AWS
+        - Cannot be joined with on-premise AD
+- IAM Identity Center - Active Directory Setup
+    - Connect to an AWS Managed Microsoft AD (Directory Service)
+        - Integration is out of the box
+    - Connect to a Self-Managed Directory
+        - Create Two-way Trust Relationship using AWS Managed Microsoft AD
+        - Create an AD Connector
+
+### AWS Control Tower
+
+- Easy way to set up and govern a secure and compliant multi-account AWS environment based on best practices
+- AWS Control Tower uses AWS Organizations to create accounts
+- Benefits:
+    - Automate the set up of your environment in a few clicks
+    - Automate ongoing policy managements using guardrails
+    - Detect polict violations and remediate them
+    - Monitor compliance through an interactive dashboard
+- AWS Control Tower - Guardrails
+    - Provides ongoing governance for your Control Tower environemnt (AWS accounts)
+    - Preventive Guardrail - using SCPs (e.g, Restrict Regions across all your accounts)
+    - Detective Guardrail - using AWS config (e.g, identify untagged resources)
+    -
+
 ### AWS RDS
 
 - Relational Database Service
