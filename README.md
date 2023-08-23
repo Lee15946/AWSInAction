@@ -4216,6 +4216,167 @@ EC2 instance metadata is data about your instance that you can use to manage the
   protect your sensitive data in AWS
 - Macie helps identify and alert you to sensitive data, such as personal identifiable information (PII)
 
+## Other AWS Services
+
+### AWS CloudFormation
+
+- CloudFormation is a declarative way of outlining your AWS Infrastructure for any resources (most of them are
+  supported)
+- CloudFormation creates resources in the right order, with the exact configuration that you specify
+- Benefits of AWS CloudFormation
+    - Infrastructure as code
+        - No resources are manually created, which is excellent for control
+        - Changes to the infrastructure are reviewed through code
+    - Cost
+        - Each resources within the stack is tagged with an identifier so you can easily see how much a stack costs you
+        - You can estimate the costs of your resources using the CloudFormation template
+        - Savings strategy: In Dev, you could automation deletion of templates at 5 PM and recreated at 8 AM, safely
+    - Productivity
+        - Ability to destroy and re-create an infrastructure on the cloud on the fly
+        - Automated generation of Diagram for your templates
+        - Declarative programming (no need to figure out ordering and orchestration)
+    - Don't re-invent the wheel
+        - Leverage existing templates on the web
+        - Leverage the documentation
+    - Supports(almost) all AWS resources
+        - Everything we'll see in this course is supported
+        - You can use "custom resources" for resources that are not supported
+    - CloudFormation Stack Designer
+        - We can see all the resources
+        - We can see the relations between the components
+
+### Amazon Simple Email Service (Amazon SES)
+
+- Fully managed service to send emails securely, globally and at scale
+- Allows inbound/outbound emails
+- Reputation dashboard, performance insights, anti-spam feedback
+- Provides statistics such as email delivers, bounces, feedback loop results, email open
+- Supports DomainKeys Identified Mail (DKIM) and Sender Policy Framework (SPF)
+- Flexible IP deployment: shared, dedicated, and customer-owned IPs
+- Send emails using your application using AWS Console, APIs or SMTP
+- Use cases: transactional, marketing and bulk email communications
+
+### Amazon Pinpoint
+
+- Scalable 2-way (outbound.inbound) marketing communicates services
+- Supports email, SMS, push, voice and in-app messaging
+- Ability to segment and personalize messages with the right content to customers
+- Possibility to receive replies
+- Scales to billions of messages per day
+- Use cases: run campaigns by sending marketing, bulk transactional SMS messages
+- Versus Amazon SNS or Amazon SES
+    - In SNS&SES you managed each message's audience, content and delivery schedule
+    - In Amazon Pinpoint, you create message templates, delivery schedules, highly-targeted segments, and full campaigns
+
+### System Manager - SSM Session Manager
+
+- Allows you to start a secure shell on your EC2 and on-premises servers
+- No port 22 needed (better security)
+- No SSH access, bastion hosts, or SSH keys needed
+- Supports Linux, macOS and Windows
+- Send session log data to S3 or CloudWatch Logs
+
+### Systems Manager - Run Command
+
+- Execute a document(= scrypt) or just run a command
+- Run command across multiple instances(using resource groups)
+- No need for SSH
+- Command Output can be shown in the AWS Console, sent to S3 bucket or CloudWatch Logs
+- Send notifications to SNS about command status (In progress, Success, Failed...)
+- Integrated with IAM & CloudTrail
+- Can be invoked using EventBridge
+
+### Systems Manager - Patch Manager
+
+- Automates the process of patching managed instances
+- OS updates. applications updates, security updates
+- Supports EC2 instances, and on-premises servers
+- Support Linux, macOS and Windows
+- Patch on-demand or on a schedule using Maintenance Windows
+- Scan instances and generate patch compliance report (missing patches)
+
+### Systmes Manager - Maintenance Windows
+
+- Defines a schedule for when to perform actions on your instances
+- Example: OS patching, updating drivers, installing software...
+- Maintenance Window contains
+    - Schedule
+    - Duration
+    - Set of registered instances
+    - Set of registered tasks
+
+### Systems Manager - Automation
+
+- Simplifies common maintenance and deployment tasks of EC2 instances and other AWS resources
+- Examples: restart instances, create an AMI, EBS snapshot
+- Automation Runbook - SSM Documents to define actions performed on your EC2 instances or AWS resources (pre-defined or
+  custom)
+- Can be triggered using:
+    - Manually using AWS Console, AWS CLI or SDK
+    - Amazon EventBridge
+    - On a schedule using Maintenance Windows
+    - By AWS Config for rules remediation
+
+### AWS Cost Explorer
+
+- Visualize, understand, and manage your AWS costs and usage over time
+- Create custom reports that analyze costs and usage data
+- Analyze your data ata high level: total costs and usage across all accounts
+- Or Monthly, hourly, resource level granularity
+- Choose an optimal Savings Plan (to lower prices on your bill)
+- Forecast usage up to 12 months based on previous usage
+
+### Amazon Elastic Transcoder
+
+- Used to convert media files stored in S3 into media files in the formats required by consumer playback devices (phones
+  etc...)
+- Benefits:
+    - Easy to use
+    - Highly scalable - can handle large volumes of media files and large file sizes
+    - Cost effective - duration-based pricing model
+    - Fully managed & secure, pay for what you use
+
+### AWS Batch
+
+- Fully managed batch processing at any scale
+- Efficiently run 100,000s of computing batch jobs on AWS
+- A "batch" job is a job with a start and an end (opposed to continuous)
+- Batch will dynamically launch EC2 instances or Spot Instances
+- AWS Batch provisions the right amount of compute/memory
+- You submit or schedule batch jobs and AWS Batch does the rest
+- Batch jobs are defined as Docker images and run on ECS
+- Helpful for cost optimizations and focusing less on the infrastructure
+- Batch vs Lambda
+    - Lambda
+        - Time limit
+        - Limited runtimes
+        - Limited temporary dish space
+        - Serverless
+    - Batch
+        - No time limit
+        - Any runtime as long as it's packaged as a Docker image
+        - Rely on EBS/Instance store for disk space
+        - Relies on EC2 (can be managed by AWS)
+
+### Amazon AppFlow
+
+- Fully managed integration service that enables you to securely transfer data between Software-as-a-Service(SaaS)
+  applications and AWS
+- Sources: Salesforce, SAP, Zendesk, Slack and ServiceNow
+- DestinationsL AWS Services like Amazon S3, Amazon Redshift or non-AWS such as SnowFlake and Salesforce
+- Frequency: on a schedule, in response to events or on demand
+- Data transformation capabilities like filtering and validation
+- Encrypted over the public internet or privately over AWS PrivateLink
+- Don't spend time writing the integrations and leverage APIs immediately
+
+### AWS Amplify - web and mobile applications
+
+- A set of tools and services that helps you develop and deploy scalable full stack web and mobile applications
+- Authentication, Storage, API (REST, GraphQL), CI/CD, PubSub, Analytics, AI/ML Predictions, Monitoring...
+- Connect your source code from GitHub, AWS CodeCommit, Bitbucket, GitLab, or upload directly
+- Configure backend using Amplify CLI -> Connect frontend to backend using Amplify Frontend Libraries -> build using
+  Amplify Console & deploy
+
 ### AWS RDS
 
 - Relational Database Service
