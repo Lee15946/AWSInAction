@@ -4653,6 +4653,320 @@ EC2 instance metadata is data about your instance that you can use to manage the
       Load Balancer, but all managed by AWS)
     - Send logs of rule matched to Amazon S3, CloudWatch Logs, Kinesis Data Firehose
 
+## Disaster Recovery & Migrations
+
+### Disaster Recovery Overview
+
+- Any event that has a negative impact on a company's business continuity of finances is a disaster
+- Disaster recovery (DR) is about preparing for and recovering from a disaster
+- What kind of disaster recovery?
+    - On-premise => On-premiseL traditional DR, and very expensive
+    - On-premise => AWS Cloud: hybrid recovery
+    - AWS Cloud Region A => AWS Cloud Region B
+- Need to define two terms
+    - RPO: Recovery Point Objective
+    - RTO: Recovery Time Objective
+- Disaster Recovery Strategies
+    - Backup and Restore
+    - Pilot Light
+        - A small version of the app is always running in the cloud
+        - Useful for the critical core (pilot light)
+        - Very similar to Backup and Restore
+        - Faster than Backup and Restore as critical systems are already up
+    - Warm Standby
+        - Fully system is up and running, but a minimum size
+        - Upon disaster, we can scale to production load
+    - Hot Site / Multi Site Approach
+        - Very low RTO (minutes or seconds) - very expensive
+        - Full Production Scale is running AWS and On Premise
+- Disaster Recover Tips
+    - Backup:
+        - EBS Snapshots, RDS automated backups/ Snapshots, etc...
+        - Regular pushes to S3/S3 IA/Glacier, Lifecycle Policy, Cross Region Replication
+        - From On-Premise: Snowball or Storage Gateway
+    - High Availability
+        - Use Route53 to migrate DNS over from Region to Region
+        - RDS Multi-AZ, ElastiCache Multi-AZ, EFS, S3
+        - Site to Site VPN as recovery from Direct Connect
+    - Replication
+        - RDS Replication (Cross Region), AWS Aurora + Global Databases
+        - Database replication from on-premise to RDS
+        - Storage Gateway
+    - Automation
+        - CloudFormation/Elastic Beanstalk to re-create a whole new environment
+        - Recover/Reboot EC2 instances with CloudWatch if alarms fail
+        - AWS Lambda functions for customized automations
+    - Chaos
+        - Netflix has a "simian-army" randomly terminating EC2
+
+### Database Migration Service (DMS)
+
+- Quickly and securely migrate databases to AWS, resilient, self healing
+- The source database remains available during the migration
+- Supports
+    - Homogeneous migrations: ex Oracle to Oracle
+    - Heterogeneous migration: ex Microsoft SQL Server to Aurora
+- Continuous Data Replication using Change Data Capture (CDC)
+- You must create an EC2 instance to perform the replication tasks
+- DMS Sources and Targets
+    - Sources
+        - On-Premises and Ec2 instances databases: Oracle, MS SQL Server, MySQL, MariaDB, PostgreSQL, MongoDB, SAP, DB2
+        - Azure: Azure SQL Database
+        - Amazon RDS: all including Aurora
+        - Amazon S3
+        - DocumentDB
+    - Targets
+        - On-Premises and EC2 instances databases: Oracle, MS SQL Server, MySQL, MariaDB, PostgreSQL, SAP
+        - Amazon RDS
+        - Redshift, DynamoDB, S3
+        - OpenSearch Service
+        - Kinesis Data Streams
+        - Apache Kafka
+        - DocumentDB & Amazon Neptune
+        - Redis & Babelfish
+- AWS Schema Conversion Tool (SCT)
+    - Convert your Database's Schema from one engine to another
+    - Example OLTP: (SQL Server or Oracle) to MySQL, PostgreSQL, Aurora
+    - Example OLAP: (Teradata or Oracle) to Amazon Redshift
+    - You do not need to use SCT if you migrating the same DB engine
+        - Ex: On-Premise PostgreSQL => RDS PostgreSQL
+        - The DB engine is till PostgreSQL (RDS is the platform)
+- DMS - Continuous Replication
+- AWS DMS -Multi-AZ Deployment
+    - When Multi-AZ Enabled, DMS provisions and maintains a synchronously stand replica in different AZ
+    - Advantages:
+        - Provide Data Redundancy
+        - Eliminates I/O freezes
+        - Minimize latency spikes
+
+### RDS & Aurora Migrations
+
+- RDS & Aurora MySQL Migrations
+    - RDS MySQL to Aurora MySQL
+        - Option 1: DB Snapshots from RDS MySQL restored as MySQL Aurora DB
+        - Options 2: Create an Aurora Read Replica from your RDS MySQL, and when the replication lag is 0, promote it as
+          its own DB cluster (can take time and cost $)
+    - External MySQL to Aurora MySQL
+        - Option 1:
+            - Use Percona XtraBackup to create a file backup in Amazon S3
+            - Create an Aurora MySQL DB from Amazon S3
+        - Option 2:
+            - Create an Aurora MySQL DB
+            - Use the mysqldumb utility to migrate MySQL into Aurora (slower than S3 method)
+    - Use DMS if both databases are up and running
+- RDS & Aurora PostgreSQL Migrations
+    - RDS PostgreSQL to Aurora PostgreSQL
+        - Option 1: DB Snapshots from RDS PostgreSQL restored as PostgreSQL Aurora DB
+        - Options 2: Create an Aurora Read Replica from your RDS PostgreSQL, and when the replication lag is 0, promote
+          it as
+          its own DB cluster (can take time and cost $)
+    - External PostgreSQL to Aurora PostgreSQL
+        - Create a backup and put it in Amazon S3
+        - Import it using the aws_s3 Aurora extension
+    - Use DMS if both databases are up and running
+
+### On-Premise strategy with AWS
+
+- Ability to download Amazon Linux 2 AMI as a VM (.iso format)
+    - VMWare, KVM, VirtualBox (Oracle VM), Microsoft Hyper-V
+- VM import/Export
+    - Migrate existing applications into EC2
+    - Create a DR repository strategy for your on-premise VMs
+    - Can export back the VMs from EC2 to on-premise
+- AWS Application Discovery Service
+    - Gather information about your on-premise servers to plan a migration
+    - Server utilization and dependency mappings
+    - Track with AWS Migration Hub
+- AWS Database Migration Service (DM)
+    - Replicate On-premise => AWS, AWS => AWS, AWS => On-premise
+    - Works with various database technologies (Oracle, MySQL, DynamoDB, etc...)
+- AWS Server Migration Service (SMS)
+    - Incremental replication of on-premise live servers to AWS
+
+### AWS Backup
+
+- Fully managed service
+- Centrally manage and automate backups across AWS services
+- No need to create custom scripts and manual process
+- Supported services:
+    - Amazon EC2 / Amazon EBS
+    - Amazon S3
+    - Amazon RDS (all DBs engines) / Amazon Aurora / Amazon DynamoDB
+    - Amazon DocumentDB / Amazon Neptune
+    - Amazon EFS / Amazon FSx (Lustre & Windows File Server)
+    - AWS Storage Gateway (Volume Gateway)
+- Supports cross-region backups
+- Supports cross-account backups
+- Supports PITR for supported services
+- On-Demand and Scheduled backups
+- Tag-based backup policies
+- You create backup policies as Backup Plans
+    - Backup frequency (every 12 hours, daily, weekly, monthly, cron expression)
+    - Backup window
+    - Transition to Cold Storage (Never, Days, Weeks, Months, Years)
+    - Retention Period (Always, Days, Weeks, Months, Years)
+- AWS Backup Vault Lock
+    - Enforce a WORM (Write Once Read Many) state for all the backups that you store in your AWS Backup Vault
+    - Addtional layer of defense to protect your backups against
+        - Inadvertent or malicious delete operations
+        - Updates that shorten or alter retention periods
+    - Even the root user cannot delete backups when enabled
+
+### Application Migration Service (MGN)
+
+- AWS Application Discovery Service
+    - Plan migration projects by gathering information about on-premises data centers
+    - Server utilization data and dependency mapping are important for migrations
+    - Agentless Discovery (AWS Agentless Discovery Connector)
+        - VM inventory, configuration, and performance history such as CPU, memory and disu usage
+    - Agent-based Discovery (AWS Application Discovery Agent)
+        - System configuration, system performance, running processes, and details of the network connections between
+          systems
+    - Resulting data can be viewed within AWS Migration Hub
+- AWS Application Migration Service (MGN)
+    - The "AWS evolution" of CloudEndure Migration, replacing AWS Server Migration Service (SMS)
+    - Lift-and-shift(rehost) solution which simplify migrating applications to AWS
+    - Converts your physical, virtual and cloud-based servers to run natively on AWS
+    - Supports wide range of platforms, Operating Systems, and databases
+    - Minimal downtime, reduced costs
+
+### Transferring large amount of data into AWS
+
+- Example: transfer 200TB of data in the cloud. We have a 100 Mps internet connection
+- Over the internet / Site-to-Site VPN
+    - Immediate to setup
+    - Will take 185d
+- Over direct connect 1Gbps:
+    - Long for the one-time setup (over a month)
+    - Will take 18.5d
+- Over Snowball
+    - Will take 2 to 3 snowballs in parallel
+    - Takes about 1 week for the end-to-end transfer
+    - Can be combined with DMS
+- For on-going replication / transfer : Site-to-Site VPN or DX with DMS or DataSync
+
+### VMware Cloud on AWS
+
+- Some customer use VMware Cloud to manage their on-premises Data Center
+- They want to extend the Data Center capacity to AWS, but keep using the VMware Cloud software
+- Use cases:
+    - Migrate your VMware vSphere-based workloads to AWS
+    - Run your production workloads across VMware vSphere-based private, public and hybrid cloud environments
+    - Have a disaster recovery strategy
+
+## More Solution Architectures
+
+### Event Processing in AWS
+
+- Lambda, SNS & SQS
+    - SQS -> Try, retry -> Lambda -> SQS -> DLQ -> SQS FIFO -> Try, retry, blocking -> DLQ
+    - SNS -> asynchronous -> Lambda -> DLQ -> SQS
+- Fan Out Pattern: deliver to multiple SQS
+    - SDK -> multiple SQS
+    - SDK -> SNS -> SQS subscribe
+- S3 Event Notifications
+    - S3:ObjectCreated, S3:ObjectRemoved, S3:ObjectRestore, S3:Replication
+    - Object name filtering possible (*.jpg)
+    - Use case: generate thumbnails of images uploaded to S3
+    - Can create as many "S3 events" as desired
+    - S3 event notifications typically deliver events in seconds but can sometime take a minute or longer
+- S# Event Notifications wiht Amazon EventBridge
+    - Advanced filtering options with JSON rules (metadata, object size, name)
+    - Multiple Destinations - ex Step Functions, Kinesis Streams / Firehose
+    - EventBridge Capabilities - Archive, Replay Events, Reliable delivery
+- Amazon EventBridge - Intercept API Calls
+    - User -> DeleteTable API call -> DynamoDB -> Log API call -> CloudTrail (any API call) -> event -> Amazon
+      EventBridge -> SNS
+- API Gateway - AWS Service Integration Kinesis Data Streams example
+    - Client -> API Gateway -> Kinesis Data Streams -> Kinesis Data Firehose -> Amazon S3
+
+### Caching Strategies in AWS
+
+- Caching, TTL, Network, Computation, Cost, Latency
+
+### Blocking an IP address in AWS
+
+- Blocking an IP address
+    - NACL
+    - Security Group may not help, only have allow rule only
+- Blocking an IP address - with an ALB
+    - Application Load Balancer Connection Termination
+    - ALB can have a Security Group
+- Blocking an IP address - with an NLB
+    - Network Load Balancer Traffic goes through, No Security Group
+- Blocking an IP address - ALB + WAF
+    - WAF - IP address filtering
+- Blocking an IP address - ALB + WAF
+    - CloudFront Geo Restriction
+    - WAF IP address filtering
+    - NACL not helpful because only know CloudFront Public IPs
+
+### High Performance Computing (HPC) on AWS
+
+- High Performance Computing (HPC)
+    - The cloud is the perfect place to perform HPC
+    - You can create a very high number of resources in no time
+    - You can speed up time to results by adding more resources
+    - You can pay only for the systems you have used
+    - Perform genomics, computational chemistry, financial risk modeling, weather prediction, machine learning, deep
+      learning, autonomous driving
+- Data Management & Transfer
+    - AWS Direct Connect
+        - Move GB/s of data to the cloud, over a private secure network
+    - Snowball & Snowmobile
+        - Move PB of data to the cloud
+    - AWS DataSync
+        - Move large amount of data between on-premise and S3, EFS, FSx for Windows
+- Compute and Networking
+    - EC2 instances:
+        - CPU optimized, GPU optimized
+        - Spot Instances / Spot Fleets for cost savings + Auto Scaling
+    - EC2 Placement Groups: Cluster for good network performance
+    - EC2 Enhanced Networking (SR-IOV)
+        - Higher bandwidth, higher PPS (packet per second), lower latency
+        - Option 1: Elastic Network Adapter (ENA) up to 100 Gbps
+        - Option 2: Intel 82599VF up to 10 Gbps - LEGACY
+    - Elastic Fabric Adapter (EFA)
+        - Imporved ENA for HPC, only works for Linux
+        - Greate for inter-node communications, tightly coupled workloads
+        - Leverages Message Passing Interface (MPI) standard
+        - Bypasses the underlying Linux OS to provide low-latency, reliable transport
+- Storage
+    - Instance-attache storage
+        - EBS: scale up to 256000 IOPS with io2 Block Express
+        - Instance Store: scale to millions of IOPS, linked to EC2 instance, low latency
+    - Network storage
+        - Amazon S3: large blob, not a file system
+        - Amazon EFS: scale IOPS based on total size, or use provisioned IOPS
+        - Amazon FSx for Lustre
+            - HPC optimized distributed file system, millions of IOPS
+            - Backed by S3
+- Automation and Orchestration
+    - AWS Batch
+        - AWS Batch supports multi-node parallel jobs, which enables you to run single jobs that span multiple EC2
+          instances
+        - Easily schedule jobs and launch EC2 instances accordingly
+    - AWS ParallelCluster
+        - Open-source cluster management tool to deploy HPC on AWS
+        - Configure with text files
+        - Automate creation of VPC, Subnet, cluster type and instance types
+        - Ability to enable MFA on the cluster (improves network performance)
+
+### EC2 Instance High Availability
+
+- Creating a highly available EC2 instance
+    - Elastic IP address attach to Public EC2, and has a Standby EC2 instance
+    - CloudWatch Event (or Alarm based on metric) trigger the Lambda
+    - Lambda start the instance and attach the Elastic IP
+- Creating a highly available EC2 instance with an Auto Scaling Group
+    - ASG settings: 1 min, 1 max, 1 desired, >=2AZ
+    - EC2 user data to attach the Elastic IP
+    - EC2 instance role to Allow API calls to attach the Elastic IP
+- Creating a highly available EC2 instance with ASG + EBS
+    - EBS Snapshot on ASG Terminate lifecycle hook
+    - EBS Volume created + attached on AWS Launch lifecycle hook
+    - EC2 User Data Attachment Based on Tag
+
 ## Other AWS Services
 
 ### AWS CloudFormation
@@ -4732,7 +5046,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
 - Patch on-demand or on a schedule using Maintenance Windows
 - Scan instances and generate patch compliance report (missing patches)
 
-### Systmes Manager - Maintenance Windows
+### System Manager - Maintenance Windows
 
 - Defines a schedule for when to perform actions on your instances
 - Example: OS patching, updating drivers, installing software...
@@ -4813,6 +5127,62 @@ EC2 instance metadata is data about your instance that you can use to manage the
 - Connect your source code from GitHub, AWS CodeCommit, Bitbucket, GitLab, or upload directly
 - Configure backend using Amplify CLI -> Connect frontend to backend using Amplify Frontend Libraries -> build using
   Amplify Console & deploy
+
+## WhitePapers and Architectures
+
+### AWS Well-Architected Framework
+
+- Well Architected Framework General Guiding Principles
+    - Stop guessing your capacity needs
+    - Test systems at production scale
+    - Automate to make architectural experimentation easier
+    - Allow for evolutionary architectures
+        - Design based on changing requirements
+    - Drive architectures using data
+    - Improve through game days
+- Well Architected Framework 6 Pillars
+    - Operational Excellence
+    - Security
+    - Reliability
+    - Performance Efficiency
+    - Cost Optimization
+    - Sustainability
+    - They are not something to balance, or trade-offs, they're a synergy
+- AWS Well-Architected Tool
+    - Free tool to review your architectures against the 6 pillars Well-Architected Framework and adopt architectural
+      best practices
+    - How does it work?
+        - Select your workload and answer questions
+        - Review your answers against the 6 pillars
+        - Obtain advice: get videos and documentations, generate a report, see the results in the dashboard
+
+### AWS Trusted Advisor
+
+- No need to install anything - high level AWS account assessment
+- Analyze your AWS account and provides recommendation on 5 categories
+    - Cost optimization
+    - Performance
+    - Security
+    - Fault tolerance
+    - Service limits
+- Trusted Advisor - Support plans
+    - 7 Core checks (Basic & Developer Support Plan)
+        - S3 buckets permissions
+        - Security Group - Specific Ports Unrestricted
+        - IAM User (one IAM user minimum)
+        - RDS Public snapshots
+        - EBS Public snapshots
+        - MFA on Root Account
+        - Service Limits
+    - Full checks (Business & Enterprise Support Plan)
+        - Full checks available on the 5 categories
+        - Ability to set CloudWatch alarms when reaching limits
+        - Programmatic Access using AWS Support API
+
+### Examples of Architecture
+
+- aws.amazon.com/architecture/
+- aws.amazon.com/solutions/
 
 ### AWS RDS
 
