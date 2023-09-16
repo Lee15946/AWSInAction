@@ -429,14 +429,6 @@ EC2 instance metadata is data about your instance that you can use to manage the
     - EFS share websites files
     - Only for Linux instances
 
-### Amazon FSx
-
-3rd party high-performance file system on AWS
-
-- FSx for Lustre
-- FSx for Windows File Server
-- FSx for NetApp ONTAP
-
 ## Scalability & High Availability
 
 - Scalability
@@ -1492,7 +1484,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
 ### S3 Select & Glacier Select
 
 - Retrieve less data using SQL by performing server-side filtering
-- Can filter by rows&columns (simple SQL statements)
+- Can filter by rows&columns (wasimple SQL statements)
 - Less network transfer, less CPU cost client-side
 
 ### S3 Batch Operations
@@ -1633,18 +1625,18 @@ EC2 instance metadata is data about your instance that you can use to manage the
     - Lock the policy for future edits (can no longer be changed or deleted)
     - Helpful for compliance and data retention
 - S3 Object Lock (versioning must be enabled)
-- Adopt a WORM model
-- Block an object version deletion for a specified amount of time
-- Retention mode - Compliance
-    - Object versions can't be overwritten or deleted by any user, including the root user
-    - Objects retention modes can't be changed, and retention periods can't be shortened
-- Retention mode - Governance
-    - Most users can't overwrite or delete an object version or alter it's lock settings
-    - Some users have special permissions to change the retention or delete the object
-- Retention Period: protect the object for a fixed period, it can be extended
-- Legal Hold:
-    - Protect the object indefinitely, independent from retention period
-    - Can be freely placed and removed using the s3:PutObjectLegalHold IAM permission
+  - Adopt a WORM model
+  - Block an object version deletion for a specified amount of time
+  - Retention mode - Compliance
+      - Object versions can't be overwritten or deleted by any user, including the root user
+      - Objects retention modes can't be changed, and retention periods can't be shortened
+  - Retention mode - Governance
+      - Most users can't overwrite or delete an object version or alter it's lock settings
+      - Some users have special permissions to change the retention or delete the object
+  - Retention Period: protect the object for a fixed period, it can be extended
+  - Legal Hold:
+      - Protect the object indefinitely, independent from retention period
+      - Can be freely placed and removed using the s3:PutObjectLegalHold IAM permission
 
 ### S3 Access Points
 
@@ -1699,7 +1691,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
         - Great for dynamic content that needs to be available at low-latency in few regions
 - ALB or EC2 as an origin
     - EC2 instances or ALB must be public
-- CloudFront Get Restriction
+- CloudFront Geo Restriction
     - You can restrict who can access your distribution
         - Allowlist: Allow your users to access your content only if they're in one of the countries on a list of
           approved countries
@@ -2776,7 +2768,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
         - Import CSV, DynamoDB JSON or ION format
         - Doesn't consumer any write capacity
         - Create a new table
-        - Import errors are logged in CloudWatch Logs\
+        - Import errors are logged in CloudWatch Logs
 
 ### AWS API Gateway
 
@@ -2838,7 +2830,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
     - Create a serverless database of user for your web & mobile apps
     - Simple login: Username(or email)/ password combination
     - Password reset
-    - Email & Phone Number Verfication
+    - Email & Phone Number Verification
     - Multi-factor authentication (MFA)
     - Federated Identities: users from Facebook, Google, SAML
     - CUP integrates with API Gateway and Application Load Balancer
@@ -3115,7 +3107,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
 
 ### Amazon OpenSearch
 
-- Amazon OpenSearch is successor to Amazon ElastiCache
+- Amazon OpenSearch is successor to Amazon ElastiSearch
 - In DynamoDB, queries only exist by primary key or indexes
 - With OpenSearch, you can search any field, even partially matches
 - It's common to use OpenSearch as a complement to another database
@@ -4108,7 +4100,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
     - Shield Advanced automatic application layer DDoS mitigation automatically creates, evaluates and deploys AWS WAG
       rules to mitigate layer 7 attacks
 
-### Fire Manager
+### Fire Wall Manager
 
 - Manage rules in all accounts of an AWS Organization
 - Security policy: common set of security rules
@@ -4467,7 +4459,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
 ### Direct Connect (DX)
 
 - Provides a dedicated private connection from a remote network to your VPC
-- Dedicated connection must be setup between yur DC and AWS Direct Connect locations
+- Dedicated connection must be setup between your DC and AWS Direct Connect locations
 - You need to setup a Virtual Private Gateway on your VPC
 - Access public resources (S3) and private (EC2) on same location
 - Use cases:
@@ -4519,7 +4511,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
     - Routing strategy to allow to forward a packer over multiple best path
     - Use case: create multiple Site-to-Site VPN connections to increase the bandwidth of your connection to AWS
     - Transit Gateway - Share Direct Connect between multiple accounts
-        - You can use AWS Resource Access Manager ti share Transit Gateway with other account
+        - You can use AWS Resource Access Manager to share Transit Gateway with other account
 
 ### VPC - Traffic Mirroring
 
@@ -4865,7 +4857,7 @@ EC2 instance metadata is data about your instance that you can use to manage the
     - SDK -> multiple SQS
     - SDK -> SNS -> SQS subscribe
 - S3 Event Notifications
-    - S3:ObjectCreated, S3:ObjectRemoved, S3:ObjectRestore, S3:Replication
+    - S3:ObjectCreated, S3:ObjectRemoved, S3:ObjectResto re, S3:Replication
     - Object name filtering possible (*.jpg)
     - Use case: generate thumbnails of images uploaded to S3
     - Can create as many "S3 events" as desired
