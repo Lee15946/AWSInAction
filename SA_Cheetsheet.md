@@ -172,7 +172,7 @@
   as EC2 instances, RDS databases, Redshift clusters, and Lambda functions, into shared and centrally-managed Amazon
   Virtual Private Clouds (VPCs).
 - It is not possible to modify a launch configuration once it is created.
-- Each shard allows for 1 MB/s incoming data and 2 MB/s outgoing data
+- Kinesis Each shard allows for 1 MB/s incoming data and 2 MB/s outgoing data
 - Kinesis Data Firehose is now supported for SNS, but not Kinesis Data Streams.
 - KMS may can only rotate every one year
 - the maxsize of CIDR is 16, min size is 28
@@ -182,7 +182,7 @@
 - DynamoDB Streams enable DynamoDB to get a changelog and use that changelog to replicate data across replica tables in other AWS Regions.
 - You cannot directly integrate Cognito User Pools with CloudFront distribution as you have to create a separate Lambda@Edge function to accomplish the authentication via Cognito User Pools.
 -  If you have an existing Identity Provider (IdP), you can use an API Gateway Lambda authorizer to invoke a Lambda function to authenticate/validate a given user against your IdP. 
-- mazon RDS supports Cross-Region Automated Backups. Manual snapshots and Read Replicas are also supported across multiple Regions.
+- Amazon RDS supports Cross-Region Automated Backups. Manual snapshots and Read Replicas are also supported across multiple Regions.
 
 
 
