@@ -41,9 +41,9 @@
 
 ### CloudWatch Custom Metrics
 
-- Possiblity to define and send your own custom metrics to CloudWatch
+- Possibility to define and send your own custom metrics to CloudWatch
 - Example: memory (RAM) usage, disk space, number of logged in users...
-- Use API call `PutMetricData`
+- Use API call `PutMetricData
 - Ability to use dimensions (attributes) to segment metrics
     - Instance.id
     - Environment.name
@@ -333,12 +333,11 @@
         - This allows to have a central account for all your application tracing
 - X-Ray Sampling Rules
     - With sampling rules, you control the amount of data that you record
-    - You can modify sampling rules withour changing your code
+    - You can modify sampling rules without changing your code
     - By default, the X-Ray SDK records the first request each second, and five percent of any addtionnal requests
     - One request per second is the reservoir,which ensures that at least one trace is recorded each second as long the
       service is serving requests
     - Five percent is the rate at which additional requests beyond the reservoir size are samples
-- X-Ray Custom Sampling Rules
     - You can create your own rules with the reservoir and rate
 
 ### X-Ray APIs

@@ -2,8 +2,8 @@
 
 ### CDK Overview
 
-- Define your cloud infrstructure using a familar language
-    - JavaScript/TypeSecript, Python, Java and .NET
+- Define your cloud infrastructure using a familar language
+    - JavaScript/TypeScript, Python, Java and .NET
 - Contains high level components called c constructs
 - The code is "compiled" into a CLoudFormation template (JSON/YAML)
 - You can therefore deploy infrastructure and application runtime code together
@@ -11,8 +11,8 @@
     - Great for Docker containers in ECS/EKS
 - CDK vs SAM
     - SAM:
-        - Serverless focuesd
-        - Write your template decalratively in JSON or YAML
+        - Serverless focused
+        - Write your template decoratively in JSON or YAML
         - Great for quickly getting started with Lambda
         - Leverages CloudFormation
     - CDK:

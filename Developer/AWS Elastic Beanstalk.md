@@ -74,7 +74,7 @@
 
 - Application is running below capacity
 - Can set the bucket size
-- Application is running both versions simultaneously
+- Applicaton is running both versions simultaneously
 - No additional cost
 - Long deployment
 
@@ -109,7 +109,7 @@
 ### Elastic Beanstalk - Traffic Splitting
 
 - Canary Testing
-- New application version is deployed to a temporary ASG with the same capacity
+- New application versioyed to a temporary ASG with the same capacity
 - A small % of traffic is sent to the temporary ASG for a configurable amount of time
 - Deployment health is monitored
 - If there's a deployment failure, this triggers an automated rollback (very quick)
@@ -197,7 +197,7 @@
 - To decouple RDS
     - Create a snapshot of RDS DB (as a safeguard)
     - Go to the RDS console and protect the RDS database from deletion
-    - Create a new Elastic Beanstalk environment, withour RDS, point your application to existing EDS
+    - Create a new Elastic Beanstalk environment, without RDS, point your application to existing EDS
     - Perform a CNAME swap (blue/green) or Route53 update, confirm working
     - Terminate the old environment (RDS won't be deleted)
     - Delete CloudFormation stack (in DELETE_FAILED state)

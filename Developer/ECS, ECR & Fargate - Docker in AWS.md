@@ -181,7 +181,7 @@
         2. Identify the instances that satisfy the task placement constraints
         3. Identify the instances that satisfy the task placement strategies
         4. Select the instances for task placement
-- ECS Task Placement Strategies
+- ECS Task Placement Strategiefs
     - Binpack
         - Place tasks based on the least available amount of CPU or memory
         - This minimizes the number of instances in use (cost savings)
@@ -206,7 +206,7 @@
 - Supports image vulnerability scanning, versioning, image tags, image lifecycle...
 - Login Command
     - AWS CLI v2
-        - `aws ecr ge-login-password --region region | docker login --username AWS --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com`
+        - `aws ecr get-login-password --region region | docker login --username AWS --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com`
 - Docker Commands
     - Push
         - `docker push aws_account_id.dkr.ect.region.amazonaws.com/demo:latest`

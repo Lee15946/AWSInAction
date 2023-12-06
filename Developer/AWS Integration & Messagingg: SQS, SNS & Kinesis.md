@@ -218,7 +218,7 @@
 
 ### Kinesis Data Streams
 
-- Applications/Client/SDk,KPL/Kinesis agent as Producers
+- Applications/Client/SDK,KPL/Kinesis agent as Producers
     - Can produce Record
         - Partition Key
         - Data Blob (up to 1MB)
@@ -270,7 +270,7 @@
     - Kinesis Producer Library (KPL): C++, Java, batch, compression, retries
     - Kinesis Agent: monitor log files
 - Write throughput: 1MB/sec or 1000 records/sec per shard
-- PtRecord API
+- PutRecord API
 - Use batching with PutRecords API to reduce costs & increase throughput
 - Example:
     - Partition Key = Device Id -> Hash function -> Same partition key = Same shard
@@ -292,7 +292,7 @@
     - Custom Consumer (AWS SDK) - Classic or Enhanced Fan-Out
     - Kinesis Client Library (KCL): library to simplify reading from data stream
 - Kinesis Consumers - Custom Consumer
-    - Shared (Classic) Fna-out Consumer
+    - Shared (Classic) Fan-out Consumer
         - 2 MB/sec per shard across all consumers
         - GetRecords() API
     - Enhanced Fan-out Consumer
@@ -308,7 +308,7 @@
         - Consumer poll data from Kinesis using GetRecords API call
         - Returns up to 10 MB (then throttle for 5 seconds) or up to 1000 records
     - Enhanced Fan-out Consumer - push
-        - Multiple consuming applications for the sam stream
+        - Multiple consuming applications for the same stream
         - 2MB/sec per consumer per shard
         - Latency ~70 ms
         - Higher costs ($$$)

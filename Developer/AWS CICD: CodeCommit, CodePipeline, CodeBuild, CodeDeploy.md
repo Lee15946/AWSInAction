@@ -298,15 +298,15 @@
 
 ### AWS CodeArtifact
 
-- Software packages depned on each otehr to be build (also called code dependencies), and new ones are created
-- Sotring and retrieving these dependencies is called artifact managment
+- Software packages depend on each other to be build (also called code dependencies), and new ones are created
+- Sotring and retrieving these dependencies is called artifact management
 - Traditionally you need to setup your own artifact management system
-- CodeArtifact is a secure, scalable, and cost-effectivd artifact managment for software development
+- CodeArtifact is a secure, scalable, and cost-effective artifact managment for software development
 - Works with common dependency management tools such as Maven, Gradle, npm, yarn, twine, pip and NuGet
 - Developers and CodeBuild can then retrieve dependencies straight from CodeArtifact
 - CodeArtifact - EventBridge Intergration
     - Event is created when a Package version is created, modified, or deleted
-    - Inovke Lambda Function, active Step Functions State Machine
+    - Invoke Lambda Function, active Step Functions State Machine
     - Message to SNS, SQS
     - Start CodePipeline, Rebuild & redeploy an Application with the latest security fixes
 - CodeArtifact - Resource Policy
@@ -317,7 +317,7 @@
 
 - Upstream Repositories
     - A CodeArtifact repository can have other CodeArtifact repositories as Upstream Repositories
-    - ALlows a package manager client to access the packages that are contained in more than one repository using a
+    - Allows a package manager client to access the packages that are contained in more than one repository using a
       single repository endpoint
     - Up to 10 Upstream Repositories
     - Only one external connection
@@ -331,9 +331,9 @@
     - Configure all the other repositories with an upstream to it
     - Packages fetched from npmjs.com are cached in the Upstream Repository, rather than fetching and storing them in each Repository
 - CodeArtfiact - Retention
-  - If a requested package version is found in an Upstream Repository, a reference to it is retained and is always availbale from the Downstream Repository
+  - If a requested package version is found in an Upstream Repository, a reference to it is retained and is always available from the Downstream Repository
   - The retained package version is not affected by changes to the Upstream Repository (deleting it, update the package,...)
-  - Intermdediate repositories do not keep the package
+  - Intermediate repositories do not keep the package
   - Example - Fetching Package from npmjs.com
     - Package Manager connected to Repository A requestes the package Lodash v4.17.20
     - The pakcage version is not present in any of the three repositories
@@ -342,7 +342,7 @@
       - Repository C - has the external connection to npmjs.com
       - THa Package version will not be retained in Repository B as that is an intermediate Repository
 - CodeArtifact - Domains
-  - Dedupliacte Storage - asset only nees to be stored once in a domain, even if it's available in many repositories (only pay once for storage)
+  - Deduplicate Storage - asset only nees to be stored once in a domain, even if it's available in many repositories (only pay once for storage)
   - Fast Copying - only metadata record are upadted when you pull packages from an Upstream CodeArtifact Repository into a Downstream
   - Easy Sharing Across Repositores and Teams - all the assets and metadata in a domain are encrypted with a single AWS KMS Key
   - Apply Policy Across Multiple Repositories - domain administrator can apply policy across the domain such as:
@@ -351,7 +351,7 @@
 
 ### Amazon CodeGuru
 - An ML-pwered service for automated code reviews and application performance recommendations
-- Provides two funciontnalities:
+- Provides two functionalities:
   - CodeGuru Reviewer: automated code reviews for static code analysis (development)
   - CodeGuru Profiler: visibility/recommendations about application performance during runtime (production)
 - Amazon CodeGuru Reviewer
@@ -375,7 +375,7 @@
 
 ### Amazon CodeGuru - Agent Configuration
 - MaxStackDepth - the maximum depth of the stacks in the code that is represented in the profile
-  - Example: if CodeGuru Profiler finds a method A, which calls method B, which calls method C, which calls method D, the nthe depth is 4
+  - Example: if CodeGuru Profiler finds a method A, which calls method B, which calls method C, which calls method D, the depth is 4
   - If the MaxStackDepth is set to 2, then the profiler evaluates A and B
 - MemoryUsageLimit Percent - the  memory percentage used by the profiler
 - MinimumTimeForReportingInMilliseconds - the minimum time between sending reports (milliseconds)
@@ -385,7 +385,7 @@
 
 ### AWS Cloud9
 - Cloud-based Integrated Development Environment (IDE)
-- Code editor, debugger, terminal in a broswer
+- Code editor, debugger, terminal in a browser
 - Work on your projects from anywhere with an Internet connection
 - Prepackaged with essential tools for popular programming languages (JavaScript, Python, PHP,...)
 - Share your development environmetn with your team (pair programming)

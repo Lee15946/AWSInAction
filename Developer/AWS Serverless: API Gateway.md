@@ -261,7 +261,7 @@
     - Authentication = External | Authorization = Lambda function
 - Summary
     - IAM
-        - Great for users/ roles already within your AWS account + resource policy fir cross account
+        - Great for users/ roles already within your AWS account + resource policy for cross account
         - Handle authentication + authorization
         - Leverages Signature v4
     - Custom Authorizer:

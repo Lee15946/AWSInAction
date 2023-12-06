@@ -88,7 +88,7 @@
     - Configure how long a task can wait by setting TimeoutSeconds
     - Periodically send a heartbeat from your Activity Worker using `SendTaskHearBeat` within the time you set
       in `HeartBeatSeconds`
-- By configuring a long `TimeoutSeconds` and actively sending a hearbeat, Activity Task can wait up to 1 year
+- By configuring a long `TimeoutSeconds` and actively sending a heartbeat, Activity Task can wait up to 1 year
 
 ### Step Functions - Standard vs. Express
 

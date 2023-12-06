@@ -194,7 +194,7 @@
     - Low traffic: use batch window to accumulate records before processing
     - You can process multiple batches in parallel
         - up to 10 batches per shard
-        - in-order processing is still guaranteed for each partition ket
+        - in-order processing is still guaranteed for each partition key
 - Streams & Lambda - Error Handling
     - By default, if your function returns an error, the entire batch is reprocessed until the function succeeds, or the
       items in the batch expire
@@ -503,7 +503,7 @@
 - Pack complex dependencies, large dependencies in a container
 - Base images are available for Python, Node.js, Java, .NET, Go, Ruby
 - Can create your own image as long as it implements the Lambda Runtime API
-- Tet the containers locally using the Lambda Runtime Interface Emulator
+- Test the containers locally using the Lambda Runtime Interface Emulator
 - Unified workflow to build apps
 - Example: build from the base image provided by AWS
 
@@ -572,6 +572,44 @@ CMD [ "app.lambdaHandler" ]
     - CurrentVersion (required) - the version of the Lambda function traffic currently points to
     - TargetVersion (required) - the version of the Lambda function traffic is shift to
 
+### Lambda - Function URL
+
+- Dedicated HTTPS(S) endpoint for your Lambda function
+- A unique URL endpoint is generated for you (never changes)
+    - https://<url-id>.lambda-url.<region>.on.aws (dual-stack IPv4 & IPv6)
+- Invoke via a web browser, curl, Postman, or any HTTP client
+- Access your function URL through the public internet only
+    - Does'n support PrivateLink (Lambda functions do support)
+- Supports Resource-based Policies & CORS configurations
+- Can be applied to any function alias or to $LATEST (can't be applied to other function versions)
+- Create and configure using AWS Console or AWS API
+- Throttle your function by using Reserved Concurrency
+
+### Lambda - Function URL Security
+
+- Resource-based Policy
+    - Authorize other accounts / specific CIDR / IAM principals
+- Cross-Origin Resource Sharing (CORS)
+    - If you call your Lambda function URL from a different domain
+- AuthType NONE - allow public and unauthenticated access
+    - Resource-based Policy is always in effect (must grant public access)
+- AuthType AWS_IAM - IAM is used to authenticate and authorize requests
+    - Both Principal's Identity-based Policy & Resource-based Policy are evaluated
+    - Principal must have `lambda:InvokeFunctionUrl` permissions
+    - Same account - Identity-based Policy OR Resource-based Policy as ALLOW
+    - Cross account - Identity-based Policy AND Resource Based Policy as ALLOW
+
+### Lambda - CodeGuru Integration
+
+- Gain insights into runtime performance of your Lambda functions using CodeGuru Profiler
+- CodeGuru creates a Proiler Group for your Lambda function
+- Supported for Java and Python runtimes
+- Activate from AWS Lambda Console
+- When activated, Lambda adds:
+    - CodeGuru Profiler layer to your function
+    - Environment varaibles to your function
+    - AmazonCodeGuruProfilerAgentAccess Policy to your function
+
 ### AWS Lambda Limits to Know - per region
 
 - Execution
@@ -602,7 +640,6 @@ CMD [ "app.lambdaHandler" ]
       Proxy, Custom Engine Version
     - Near real-time events (up to 5 minutes)
     - Send notifications to SNS or subscribe to events using EventBridge
-
 
 ### AWS Serverless Solution Architecture
 

@@ -121,7 +121,7 @@
 - Default IAM roles for authenticated and guest users
 - Workflow
     - Web & Mobile Applications Login and GetToken
-    - Excahnge token for temporary AWS credentials
+    - Exchange token for temporary AWS credentials
     - Direct access to AWS
 
 ### Cognito Identity Pools - IAM Roles

@@ -1,6 +1,6 @@
 ## EC2 Instance Metadata (IMDS)
 
-- AWS EC2 Instance Metadata (IMDS) is powerful but one of the least known features to developers
+- AWS EC2 Instance Metadata (IMDS) is powerful but isione of the least known features to developers
 - It allows AWS EC2 instances to "learn about themselves" without using an IAM Role for that purpose
 - The URL is http://169.254.269.254/latest/meta-data
 - You can retrieve the IAM Role name from the metadata, but you CANNOT retrieve the IAM Poclicy

@@ -327,7 +327,7 @@
     - Only cache the data that makes sense (user profiles, blogs, etc...)
     - Quote: There are only two hard things in Computer Science: cache invalidating and naming things
 
-### AMazin MemoryDB for Redis
+### Amazon MemoryDB for Redis
 
 - Redis-compatible, durable, in-memory database service
 - Ultra-fast performance with over 160 millions requests/second

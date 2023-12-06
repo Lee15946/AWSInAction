@@ -150,7 +150,7 @@
         - Etc...
     - They allow safer control over the template
     - Use parameters when the values are really user specific
-- Fn::FindInMap Accessingg Mapping Values
+- Fn::FindInMap Accessing Mapping Values
     - We use Fn::FindInMap to return a named value from a specific key
     - `!FindInMap[ MapName, TopLevelKey, SecondLevelKey ]`
 

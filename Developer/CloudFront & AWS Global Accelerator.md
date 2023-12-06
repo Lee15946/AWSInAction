@@ -19,7 +19,7 @@
         - S3 website (must first enable the bucket as a static S3 website)
         - Any HTTP backend you want
 - CloudFront vs S3 Cross Region Replication
-    - CloudFront:
+    - CloudFront:intrinsic
         - Global Edge network
         - Files are cached for a TTL
         - Great for static content that must be available everywhere
@@ -151,7 +151,7 @@
         - Can leverage caching features
     - S3 Pre-Signed URL:
         - Issue a request as the person who pre-signed the URL
-        - USes the IAM key of the signing IAM principal
+        - Uses the IAM key of the signing IAM principal
         - Limited lifetime
 - CloudFront Signed URL Process
     - Two types of signers:

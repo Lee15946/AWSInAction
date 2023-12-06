@@ -300,7 +300,6 @@
 - Encryption using keys handled and managed by AWS KMS
 - KMS advantages: user control + audit key usage using CloudTrail
 - Object is encrypted server side
-- Must set header "x-amz-server-side-encryption":"aws:kms"
 - Limitation
     - Maybe impacted by the KMS limits
     - When upload, it calls the GenerateDataKey KMS API
