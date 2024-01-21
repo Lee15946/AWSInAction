@@ -223,7 +223,7 @@
     - OneAtATime: slowest, lowest availability impact
     - Custom: define your %
 - CodeDeploy Agent
-    - The CodeDeploy Agent must be running on the EC2 instgances as a pre-requisites
+    - The CodeDeploy Agent must be running on the EC2 instances as a pre-requisites
     - It can be installed and updated automatically if you're using Systems Manager
     - The EC2 Instances must have sufficient permissions to access Amazon S3 to get deployment bundles
 

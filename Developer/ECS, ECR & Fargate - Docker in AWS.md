@@ -181,7 +181,7 @@
         2. Identify the instances that satisfy the task placement constraints
         3. Identify the instances that satisfy the task placement strategies
         4. Select the instances for task placement
-- ECS Task Placement Strategiefs
+- ECS Task Placement Strategies
     - Binpack
         - Place tasks based on the least available amount of CPU or memory
         - This minimizes the number of instances in use (cost savings)

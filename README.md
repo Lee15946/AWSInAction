@@ -1,5 +1,5 @@
 # AWS In Action
- 
+
 ## Solution Architecture Discussions
 
 ### Stateless Web App
@@ -48,8 +48,6 @@
     - Restore from a snapshot: the database will have schemas and data ready
 - ENS Volumes:
     - Restore from a snapshot: the disk will already be formatted and have data
-
-
 
 ## AWS Storage Extras
 
@@ -322,7 +320,6 @@
 - DataSync: Schedule data sync from on-premises to AWS, or AWS to AWS
 - Snowcone/Snowball/Snowmobile: to move large amount of data to the cloud, physically
 - Database: for specific workloads, usually with indexing and querying
-
 
 ## Databases in AWS
 
@@ -1336,7 +1333,6 @@
   protect your sensitive data in AWS
 - Macie helps identify and alert you to sensitive data, such as personal identifiable information (PII)
 
-
 ## Disaster Recovery & Migrations
 
 ### Disaster Recovery Overview
@@ -1491,7 +1487,7 @@
     - Retention Period (Always, Days, Weeks, Months, Years)
 - AWS Backup Vault Lock
     - Enforce a WORM (Write Once Read Many) state for all the backups that you store in your AWS Backup Vault
-    - Addtional layer of defense to protect your backups against
+    - Additional layer of defense to protect your backups against
         - Inadvertent or malicious delete operations
         - Updates that shorten or alter retention periods
     - Even the root user cannot delete backups when enabled
@@ -1653,7 +1649,6 @@
 
 ## Other AWS Services
 
-
 ### Amazon Simple Email Service (Amazon SES)
 
 - Fully managed service to send emails securely, globally and at scale
@@ -1777,8 +1772,6 @@
 - Data transformation capabilities like filtering and validation
 - Encrypted over the public internet or privately over AWS PrivateLink
 - Don't spend time writing the integrations and leverage APIs immediately
-
-
 
 ## WhitePapers and Architectures
 
@@ -1942,10 +1935,6 @@
 - Supports
     - Homogeneous
     - Heterogeneous
-
-
-
-
 
 ## Other Compute
 

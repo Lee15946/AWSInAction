@@ -2,7 +2,7 @@
 
 ### CDK Overview
 
-- Define your cloud infrastructure using a familar language
+- Define your cloud infrastructure using a familiar language
     - JavaScript/TypeScript, Python, Java and .NET
 - Contains high level components called c constructs
 - The code is "compiled" into a CLoudFormation template (JSON/YAML)

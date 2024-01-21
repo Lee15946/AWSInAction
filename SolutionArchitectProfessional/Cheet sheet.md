@@ -1,0 +1,2 @@
+- Amazon DocumentDB clusters are deployed within an Aamzon VPC, they can be accessed directly by Amazon EC2 instances or other AWS services that are deployed in the same Amazon VPC
+- You can test the failover of your Multi-AZF file systme by modifying its throughput capacity for Amazon FSx

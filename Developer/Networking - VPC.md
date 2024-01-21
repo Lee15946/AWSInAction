@@ -441,7 +441,7 @@
         - Protocol - example: block the SMB protocol for outbound communications
         - Stateful domain list rule groups: only allow outbound traffic to *.mycorp.com or third-party software repo
         - General pattern matching using regex
-    - Traffic filtering: Allow, drop, or alert for the traffci that matches the rules
+    - Traffic filtering: Allow, drop, or alert for the traffic that matches the rules
     - Active flow inspection to protect against network threats with intrusion-prevention capabilities (like Gateway
       Load Balancer, but all managed by AWS)
     - Send logs of rule matched to Amazon S3, CloudWatch Logs, Kinesis Data Firehose

@@ -455,7 +455,7 @@
 - Cold Starts & Provisioned Concurrency
     - Cold Start:
         - New instance => code is loaded and code outside the handle run (init)
-        - If the init is large (code, dependencies, SDK...) this process can take some tiem
+        - If the init is large (code, dependencies, SDK...) this process can take some time
         - First request served by new instances has higher latency than the rest
     - Provisioned Concurrency:
         - Concurrency is allocated before the function is invoked (in advance)

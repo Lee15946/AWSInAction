@@ -74,7 +74,7 @@
 
 - Application is running below capacity
 - Can set the bucket size
-- Applicaton is running both versions simultaneously
+- Application is running both versions simultaneously
 - No additional cost
 - Long deployment
 
@@ -109,7 +109,7 @@
 ### Elastic Beanstalk - Traffic Splitting
 
 - Canary Testing
-- New application versioyed to a temporary ASG with the same capacity
+- New application versioned to a temporary ASG with the same capacity
 - A small % of traffic is sent to the temporary ASG for a configurable amount of time
 - Deployment health is monitored
 - If there's a deployment failure, this triggers an automated rollback (very quick)

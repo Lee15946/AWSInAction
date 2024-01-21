@@ -123,7 +123,7 @@
     - # of partitions = ceil(max(# of partitions by capacity, # of partitions by size))
 - WCUs and RCUs are spread evenly across partitions
 
-### DynamoDB—Throttling
+### DynamoDB — Throttling
 
 - If we exceed provisioned RCUs or WCUs, we get "ProvisionedThroughputExceededException"
 - Reasons:
