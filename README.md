@@ -935,7 +935,7 @@
     - 3rd party: Active Directory(AD), OneLoin, Okta
 - Fine-grained Permissions and Assignments
     - Multi-Account Permissions
-        - Manage access across AWS acoounts in your AWS Organization
+        - Manage access across AWS account in your AWS Organization
         - Permission Sets - a collection of one or more IAM policies assigned to users and groups to define AWS access
     - Application Assignments
         - SSO access to many SAML 2.0 business applications

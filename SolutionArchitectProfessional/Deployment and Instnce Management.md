@@ -177,7 +177,7 @@
 ### Service Catalog diagram
 
 - Admin Tasks
-    - Product (CloudFormation Templates) -> Portfolio (Collection of Products) -> Control (IAM Permissions ot Access Portfolios)
+    - Product (CloudFormation Templates) -> Portfolio (Collection of Products) -> Control (IAM Permissions or Access Portfolios)
 - User Tasks
     - Product List (Authorized by IAM) -> launch -> Provisioned Products (Ready to use Properly Configured, Properly Tagged)
 

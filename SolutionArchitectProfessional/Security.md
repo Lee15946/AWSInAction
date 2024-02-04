@@ -861,7 +861,7 @@
 
 - AWS Organization member accounts can be designated to be a GuardDuty Delegated Administrator
 - Have full permission to enable and manage GuardDuty for all accounts in the Organization
-- Can be done only using the Organzation Management Account
+- Can be done only using the Organization Management Account
 
 ## IAM Advanced Policies
 

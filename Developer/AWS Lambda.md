@@ -499,7 +499,7 @@
 
 ### Lambda Container Images
 
-- Deploy Lambda function as contianer images of up to 10GB from ECR
+- Deploy Lambda function as control images of up to 10GB from ECR
 - Pack complex dependencies, large dependencies in a container
 - Base images are available for Python, Node.js, Java, .NET, Go, Ruby
 - Can create your own image as long as it implements the Lambda Runtime API

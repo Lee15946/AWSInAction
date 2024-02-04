@@ -347,7 +347,7 @@
 
 ### Amazon ECS - Security & Networking
 
-- You can inject secrets and configurations as Environment Variables into running Dokcer containers
+- You can inject secrets and configurations as Environment Variables into running Docker containers
     - Integration with SSM Parameter Store and Secrets Manager
 - ECS Tasks Networking
     - none - no networking connectivity, no port mappings
@@ -461,12 +461,12 @@
 - Easily tun containers on Customer-managed infrastructure (on-premises, VMs, ...)
 - Allows customers to deploy native Amazon ECS tasks in any environment
 - Fully-managed Amazon ECS Control Plane
-- ECS Container Agent and SSM Agent needs to be installed
+- ECS Container Agent and SSM Agent need to be installed
 - "EXTERNAL" Launch Type
 - Must have a stable connection to the AWS Region
 - Use cases:
     - Meet compliance, regulatory, and latency requirement
-    - Run apps outsde AWS Regions and closer to their other services
+    - Run apps outside AWS Regions and closer to their other services
     - On-premises ML, vide processing, data processing
 
 ### Amazon EKS Anywhere
@@ -475,7 +475,7 @@
 - Leverage the Amazon EKS Distro (AWS' bundled release of Kubernetes)
 - Reduce support costs and avoid maintaining redundant 3rd party tools
 - Install using the EKS Anywhere Installer
-- Optinally use the EKS Connector to connect the EKS Anywhere clusters to AWS
+- Optionally use the EKS Connector to connect the EKS Anywhere clusters to AWS
     - Fully Connected & Partially Disconnected: you can connect to Amazon EKS Anywhere clusters to AWS, and leverage the
       EKS console
     - Fully Disconnected: must install the EKS Distro and leverage open-sourcce tools to manage your clusters

@@ -339,7 +339,7 @@
 
 ### Direct Connect - Link Aggregation Groups
 
-- Get increased speed and failover by summing up exisitng DX connections into a logical one
+- Get increased speed and failover by summing up existing DX connections into a logical one
 - Can aggregate up to 4 connections (active-active mode)
 - Can add connections over time to the LAG
 - All connections in the LAG
@@ -409,7 +409,7 @@
 ### VPC Flow Logs - with NAT Gateway
 
 - My Virtual Private Cloud (VPC) flow logs show Action - ACCEPT for inbound traffic coming from public IP addresses. However, my understanding of network address tranlation (NAT) gateways was that they don't accept traffics from the internet. Is my NAT gateway acception inbound traffic from the internet?
-- Inboud traffic is permitted by SG or NACLs
+- Inbound traffic is permitted by SG or NACLs
     - Traffics isn't permitted by the NAT Gateway, its' dropped
     - To confirm, run the folloiwng query in CloudWatch Log Group
         - `filter (disAddr like 'xxx.xxx' and srcAddr like 'public IP' \ stats sum (bytes) as bytesTransferred by srcAddr, dstAddr | limit 10`

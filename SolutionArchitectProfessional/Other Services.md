@@ -146,7 +146,7 @@
 
 - Desktop Application Streaming Service
 - Deliver to any computer, without acquiring, provisioning infrastructure
-- The application is delivered from witnin a web browser
+- The application is delivered from within a web browser
 
 ### Amazon AppStream 2.0 vs WorkSpaces
 
